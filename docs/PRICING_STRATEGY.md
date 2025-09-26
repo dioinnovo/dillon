@@ -1,4 +1,4 @@
-# Stellar Intelligence Platform - Pricing Strategy
+# SCC Intelligence Platform - Pricing Strategy
 ## AI-Powered Home Inspection Software for Public Adjusters
 
 *Document Version: 1.0*
@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-The Stellar Intelligence Platform represents a transformative opportunity in the insurance claim inspection market. By leveraging advanced AI capabilities including GPT-4o, Azure vector search, and intelligent report generation, we can reduce inspection report creation time from 3-4 hours to just 15 minutes while potentially increasing settlement values.
+The SCC Intelligence Platform represents a transformative opportunity in the insurance claim inspection market. By leveraging advanced AI capabilities including GPT-4o, Azure vector search, and intelligent report generation, we can reduce inspection report creation time from 3-4 hours to just 15 minutes while potentially increasing settlement values.
 
 ### Key Value Propositions
 - **90% Time Reduction**: From hours to minutes for report generation
@@ -397,7 +397,7 @@ To achieve 40% profit margin:
 
 ## Conclusion
 
-The Stellar Intelligence Platform represents a significant opportunity to revolutionize the public adjusting industry while building a highly profitable SaaS business. With proper pricing at $3,499/month for the core professional tier, we can achieve:
+The SCC Intelligence Platform represents a significant opportunity to revolutionize the public adjusting industry while building a highly profitable SaaS business. With proper pricing at $3,499/month for the core professional tier, we can achieve:
 
 - **For Stellar Public Adjusters**: 12,000%+ ROI through time savings and increased settlements
 - **For Our Company**: 40-60% profit margins at scale with predictable recurring revenue

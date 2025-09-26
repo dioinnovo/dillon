@@ -14,7 +14,7 @@ function DashboardLayoutContent({
   const { isCollapsed, setIsCollapsed } = useSidebar()
 
   return (
-    <div className="flex h-screen bg-white md:bg-slate-100 md:p-2 sm:gap-2 lg:gap-4">
+    <div className="flex h-screen bg-white dark:bg-gray-900 md:bg-slate-100 dark:md:bg-gray-900 md:p-2 sm:gap-2 lg:gap-4">
       {/* Semantic aside for sidebar navigation - Hidden only on phones, visible on tablets and desktop */}
       <aside
         className={`
@@ -35,9 +35,9 @@ function DashboardLayoutContent({
       <main
         className="
           flex-1
-          sm:pb-0
           transition-all duration-300
           min-w-0
+          overflow-hidden
         "
         id="main-content"
         tabIndex={-1}
@@ -45,9 +45,10 @@ function DashboardLayoutContent({
         <div className={`
           h-full
           ${pathname === '/dashboard/assistant' ? 'p-0 sm:p-2' : 'p-4 lg:p-6'}
-          bg-white
-          md:rounded-2xl md:border md:border-gray-200 md:shadow-sm
+          bg-white dark:bg-gray-900
+          md:rounded-2xl md:border md:border-gray-200 md:dark:border-gray-700 md:shadow-sm md:dark:shadow-gray-800/20
           ${pathname === '/dashboard/assistant' ? 'overflow-hidden' : 'overflow-y-auto overlay-scroll'}
+          pb-24 sm:pb-0
         `}>
           {children}
         </div>

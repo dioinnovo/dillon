@@ -1,9 +1,9 @@
-# Stellar Intelligence Platform
+# SCC Intelligence Platform
 ## Deployment & Scaling Guide
 
 ### Enterprise Production Deployment
 
-This guide provides comprehensive deployment and scaling strategies for the Stellar Intelligence Platform across different environments and scale requirements.
+This guide provides comprehensive deployment and scaling strategies for the SCC Intelligence Platform across different environments and scale requirements.
 
 ---
 
@@ -731,7 +731,7 @@ data:
 ```json
 {
   "dashboard": {
-    "title": "Stellar Intelligence Platform - Production",
+    "title": "SCC Intelligence Platform - Production",
     "panels": [
       {
         "title": "API Request Rate",
@@ -1238,7 +1238,7 @@ validate_recovery() {
 
 ---
 
-This comprehensive deployment and scaling guide provides enterprise-grade infrastructure patterns for the Stellar Intelligence Platform. The configuration supports high availability, auto-scaling, monitoring, security, and disaster recovery requirements for production environments.
+This comprehensive deployment and scaling guide provides enterprise-grade infrastructure patterns for the SCC Intelligence Platform. The configuration supports high availability, auto-scaling, monitoring, security, and disaster recovery requirements for production environments.
 
 **Implementation Timeline:**
 - **Week 1-2**: Infrastructure setup and basic deployment

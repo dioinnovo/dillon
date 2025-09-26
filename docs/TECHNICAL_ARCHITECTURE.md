@@ -1,9 +1,9 @@
-# Stellar Intelligence Platform
+# SCC Intelligence Platform
 ## Technical Architecture & Implementation Guide
 
 ### Architecture Overview
 
-The Stellar Intelligence Platform is built on a modern, cloud-native microservices architecture designed for high availability, scalability, and real-time processing. The system processes property inspection data through multiple AI pipelines to generate comprehensive damage assessments and claims intelligence.
+The SCC Intelligence Platform is built on a modern, cloud-native microservices architecture designed for high availability, scalability, and real-time processing. The system processes property inspection data through multiple AI pipelines to generate comprehensive damage assessments and claims intelligence.
 
 ---
 
@@ -663,6 +663,6 @@ jobs:
 
 ---
 
-This technical architecture provides a comprehensive foundation for the Stellar Intelligence Platform, designed for enterprise-scale operations with high availability, security, and performance requirements.
+This technical architecture provides a comprehensive foundation for the SCC Intelligence Platform, designed for enterprise-scale operations with high availability, security, and performance requirements.
 
 For API integration details and deployment guides, see the additional documentation sections.

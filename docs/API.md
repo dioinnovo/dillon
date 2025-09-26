@@ -1,4 +1,4 @@
-# Stellar Intelligence Platform - API Documentation
+# SCC Intelligence Platform - API Documentation
 
 ## Base URL
 ```
@@ -352,7 +352,7 @@ Import the following collection:
 ```json
 {
   "info": {
-    "name": "Stellar Intelligence API",
+    "name": "SCC Intelligence API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [

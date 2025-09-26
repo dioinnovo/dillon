@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Stellar Intelligence Platform is a Next.js 15.5.2 application for AI-powered insurance claim intelligence. It demonstrates how AI can find overlooked insurance coverage and accelerate claim processing.
+SCC Intelligence Platform is a Next.js 15.5.2 application for AI-powered insurance claim intelligence. It demonstrates how AI can find overlooked insurance coverage and accelerate claim processing.
 
 ## Development Commands
 

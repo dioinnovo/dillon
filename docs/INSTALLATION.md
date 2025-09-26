@@ -1,4 +1,4 @@
-# 🔧 Stellar Intelligence Platform - Complete Installation Guide
+# 🔧 SCC Intelligence Platform - Complete Installation Guide
 
 ## Table of Contents
 - [System Requirements](#system-requirements)
@@ -272,7 +272,7 @@ SENDGRID_API_KEY=SG.your-key-here
 Navigate to: `http://localhost:3002`
 
 ✅ **You should see:**
-- Stellar Intelligence dashboard loads
+- SCC Intelligence dashboard loads
 - No console errors in browser developer tools
 - Navigation works between sections
 
@@ -492,4 +492,4 @@ If you encounter issues not covered in this guide:
 
 ---
 
-✅ **Installation Complete!** Your Stellar Intelligence Platform should now be running successfully.
+✅ **Installation Complete!** Your SCC Intelligence Platform should now be running successfully.

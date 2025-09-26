@@ -1,5 +1,5 @@
 /**
- * Web Search Service for Stellar AI Copilot
+ * Web Search Service for Scott AI Copilot
  * Enables real-time research and information gathering
  */
 

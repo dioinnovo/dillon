@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 const config: Config = {
   darkMode: "class",
@@ -58,10 +59,39 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        stellar: {
-          orange: "#E74C3C",
-          dark: "#2C3E50",
+        // SCC Brand Colors - Strategic Color Usage
+        scc: {
+          // Brand Colors (Use Sparingly - Logo & Primary CTA only)
+          red: "#9A2824", // SCC Deep Red
+          "red-hover": "#7A1F1C", // Darker Red for hover states
+
+          // UI Foundation Colors (Primary Usage)
+          "ui-primary": "#2B2B2B", // Dark Gray - main buttons, headers
+          gray: "#707070", // Professional Gray - secondary actions
+          "gray-dark": "#2B2B2B", // Dark Gray Text
+          "gray-light": "#F5F5F5", // Light Gray Background
+
+          // Gray Scale
+          "gray-900": "#1A1A1A",
+          "gray-800": "#2B2B2B",
+          "gray-700": "#404040",
+          "gray-600": "#525252",
+          "gray-500": "#707070",
+          "gray-400": "#A0A0A0",
+          "gray-300": "#D0D0D0",
+          "gray-200": "#E0E0E0",
+          "gray-100": "#F5F5F5",
+          "gray-50": "#F9FAFB",
+
+          // Semantic Colors
+          success: "#00A651", // Green for positive metrics
+          warning: "#F59E0B", // Amber for warnings
+          error: "#DC2626", // True Red for errors (not brand red)
+          info: "#3B82F6" // Blue for information
         },
+      },
+      fontFamily: {
+        sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
       },
       borderRadius: {
         lg: "var(--radius)",

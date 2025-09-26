@@ -144,7 +144,7 @@ export function AIProcessingOverlay({ isVisible, onComplete }: AIProcessingOverl
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ type: "spring", duration: 0.5 }}
-            className="bg-white rounded-2xl p-8 max-w-lg w-full shadow-2xl"
+            className="bg-white dark:bg-gray-900 rounded-2xl p-8 max-w-lg w-full shadow-2xl"
           >
             {/* Main Icon Animation */}
             <div className="relative mb-6">
@@ -160,15 +160,15 @@ export function AIProcessingOverlay({ isVisible, onComplete }: AIProcessingOverl
                   }}
                   className="relative"
                 >
-                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-stellar-orange/20 to-purple-500/20 flex items-center justify-center">
-                    <CurrentIcon className="w-12 h-12 text-stellar-orange" />
+                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-scc-red/20 to-purple-500/20 flex items-center justify-center">
+                    <CurrentIcon className="w-12 h-12 text-scc-red" />
                   </div>
 
                   {/* Orbiting particles */}
                   {[0, 1, 2].map((i) => (
                     <motion.div
                       key={i}
-                      className="absolute w-2 h-2 bg-stellar-orange rounded-full"
+                      className="absolute w-2 h-2 bg-scc-red rounded-full"
                       style={{
                         top: '50%',
                         left: '50%',
@@ -183,7 +183,7 @@ export function AIProcessingOverlay({ isVisible, onComplete }: AIProcessingOverl
                         delay: i * 0.4
                       }}
                     >
-                      <div className="w-2 h-2 bg-stellar-orange rounded-full -translate-x-12 -translate-y-1" />
+                      <div className="w-2 h-2 bg-scc-red rounded-full -translate-x-12 -translate-y-1" />
                     </motion.div>
                   ))}
                 </motion.div>
@@ -198,23 +198,23 @@ export function AIProcessingOverlay({ isVisible, onComplete }: AIProcessingOverl
               exit={{ opacity: 0, y: -20 }}
               className="text-center mb-6"
             >
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
                 {processingStages[currentStage]?.title}
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-gray-400">
                 {processingStages[currentStage]?.subtitle}
               </p>
             </motion.div>
 
             {/* Progress Bar */}
             <div className="mb-6">
-              <div className="flex justify-between text-sm text-gray-600 mb-2">
+              <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-2">
                 <span>Processing</span>
                 <span>{Math.round(progress)}%</span>
               </div>
-              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                 <motion.div
-                  className="h-full bg-gradient-to-r from-stellar-orange to-purple-500"
+                  className="h-full bg-gradient-to-r from-scc-red to-purple-500"
                   initial={{ width: 0 }}
                   animate={{ width: `${progress}%` }}
                   transition={{ duration: 0.3 }}
@@ -229,7 +229,7 @@ export function AIProcessingOverlay({ isVisible, onComplete }: AIProcessingOverl
                   key={stage.id}
                   className={`w-2 h-2 rounded-full transition-all ${
                     index === currentStage
-                      ? 'w-8 bg-stellar-orange'
+                      ? 'w-8 bg-scc-red'
                       : index < currentStage
                       ? 'bg-green-500'
                       : 'bg-gray-300'
@@ -240,7 +240,7 @@ export function AIProcessingOverlay({ isVisible, onComplete }: AIProcessingOverl
 
             {/* AI Feature Showcase */}
             <motion.div
-              className="bg-gray-50 rounded-lg p-4 border border-gray-200"
+              className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 border border-gray-200"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
@@ -254,7 +254,7 @@ export function AIProcessingOverlay({ isVisible, onComplete }: AIProcessingOverl
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
-                className="text-sm text-gray-700"
+                className="text-sm text-gray-700 dark:text-gray-300"
               >
                 {aiFeatures[currentFeature]}
               </motion.p>
@@ -262,8 +262,8 @@ export function AIProcessingOverlay({ isVisible, onComplete }: AIProcessingOverl
 
             {/* Additional Info */}
             <div className="mt-6 text-center">
-              <p className="text-xs text-gray-500">
-                Stellar Intelligence is processing your inspection data
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                SCC Intelligence is processing your inspection data
               </p>
             </div>
           </motion.div>

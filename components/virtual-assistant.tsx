@@ -22,10 +22,10 @@ interface VirtualAssistantConfig {
 }
 
 const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
-  apiEndpoint = process.env.NEXT_PUBLIC_AI_API_ENDPOINT || "/api/stella-leads/chat",
+  apiEndpoint = process.env.NEXT_PUBLIC_AI_API_ENDPOINT || "/api/scott-leads/chat",
   apiKey = process.env.NEXT_PUBLIC_AI_API_KEY,
   model = process.env.NEXT_PUBLIC_AI_MODEL || "gpt-4o-mini",
-  systemPrompt = "You are Stella, the elite Lead Generation Specialist for Stellar Adjusting. Your PRIMARY mission is to identify property owners who have been lowballed, denied, or delayed by their insurance company and convert them into clients. You work for a company that fights insurance companies to get people every dollar they deserve. Always focus on: 1) Identifying if they have an active claim, 2) Uncovering how their insurance company is screwing them, 3) Creating urgency around getting professional help, 4) Scheduling a free claim review. You only get paid when clients get more money - NO WIN, NO FEE. Be empathetic but results-focused, and always position Stellar as the solution to insurance company abuse.",
+  systemPrompt = "You are Scott, the elite Lead Generation Specialist for Scott Adjusting. Your PRIMARY mission is to identify property owners who have been lowballed, denied, or delayed by their insurance company and convert them into clients. You work for a company that fights insurance companies to get people every dollar they deserve. Always focus on: 1) Identifying if they have an active claim, 2) Uncovering how their insurance company is screwing them, 3) Creating urgency around getting professional help, 4) Scheduling a free claim review. You only get paid when clients get more money - NO WIN, NO FEE. Be empathetic but results-focused, and always position Scott as the solution to insurance company abuse.",
   useCallbackAgent = false
 }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -178,7 +178,7 @@ const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
         setTimeout(() => {
           setShowTypingIndicator(false)
           setMessages([{
-            text: "Hi! I'm Stella from Stellar Adjusting. I help property owners who are getting lowballed, delayed, or denied by their insurance companies. If you have an active claim or recent property damage, I can tell you right now if your insurance company is trying to screw you over. What's going on with your claim?",
+            text: "Hi! I'm Scott from Scott Adjusting. I help property owners who are getting lowballed, delayed, or denied by their insurance companies. If you have an active claim or recent property damage, I can tell you right now if your insurance company is trying to screw you over. What's going on with your claim?",
             isUser: false,
             timestamp: new Date()
           }])
@@ -626,9 +626,9 @@ const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
                 <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 border border-gray-200 dark:border-gray-700">
                   <div className="flex items-center gap-3 mb-4">
                     {showTextInput === 'email' ? (
-                      <Mail className="w-6 h-6 text-[#E74C3C] dark:text-[#EF6B68]" />
+                      <Mail className="w-6 h-6 text-[#9A2824] dark:text-[#B83E39]" />
                     ) : (
-                      <Smartphone className="w-6 h-6 text-[#E74C3C] dark:text-[#EF6B68]" />
+                      <Smartphone className="w-6 h-6 text-[#9A2824] dark:text-[#B83E39]" />
                     )}
                     <h3 className="text-lg font-medium text-gray-900 dark:text-white">
                       Please type your {showTextInput === 'email' ? 'email address' : 'phone number'}
@@ -652,7 +652,7 @@ const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
                         }
                       }}
                       placeholder={showTextInput === 'email' ? 'your@email.com' : '(555) 123-4567'}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#E74C3C] dark:focus:ring-[#EF6B68]"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#9A2824] dark:focus:ring-[#B83E39]"
                       autoFocus
                     />
                     <button
@@ -661,7 +661,7 @@ const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
                       className={cn(
                         "w-full px-6 py-3 rounded-xl font-medium transition-all duration-200",
                         textInputValue.trim()
-                          ? "bg-[#E74C3C] hover:bg-[#D13328] text-white shadow-lg hover:shadow-xl"
+                          ? "bg-[#9A2824] hover:bg-[#7A1F1B] text-white shadow-lg hover:shadow-xl"
                           : "bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed"
                       )}
                     >
@@ -700,7 +700,7 @@ const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
             />
             <div>
               <h3 className="font-semibold text-gray-900 dark:text-white">
-                Stellar Assistant
+                Scott Assistant
               </h3>
               <div className="flex items-center gap-2">
                 <div className="relative flex items-center">
@@ -719,8 +719,8 @@ const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
               <div className="mt-1">
                 <span className={cn(
                   "text-[10px] px-1.5 py-0.5 rounded-full",
-                  apiEndpoint?.includes('orchestrate') ? "bg-[#E74C3C]/10 text-[#E74C3C] dark:bg-[#E74C3C]/20 dark:text-[#EF6B68]" :
-                  apiEndpoint?.includes('n8n') ? "bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300" :
+                  apiEndpoint?.includes('orchestrate') ? "bg-[#9A2824]/10 text-[#9A2824] dark:bg-[#9A2824]/20 dark:text-[#B83E39]" :
+                  apiEndpoint?.includes('n8n') ? "bg-red-100 text-scc-red-dark dark:bg-red-900 dark:text-red-300" :
                   "bg-gray-100 text-gray-700 dark:bg-gray-900 dark:text-gray-300"
                 )}>
                   {apiEndpoint?.includes('orchestrate') ? "🚀 LangGraph" :
@@ -805,7 +805,7 @@ const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
                       "max-w-[80%] px-4 py-2.5 rounded-2xl",
                       "transition-all duration-300",
                       message.isUser
-                        ? "bg-gradient-to-br from-[#E74C3C] to-[#EF6B68] text-white shadow-[0_2px_8px_rgba(231,76,60,0.25)]"
+                        ? "bg-gradient-to-br from-[#9A2824] to-[#B83E39] text-white shadow-[0_2px_8px_rgba(231,76,60,0.25)]"
                         : "bg-gradient-to-br from-[#F9FAFB] to-[#F3F4F6] dark:from-[#34495e] dark:to-[#2C3E50] text-gray-900 dark:text-white border border-gray-200/50 dark:border-[#1a252f]/50"
                     )}
                   >
@@ -873,7 +873,7 @@ const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
                             }
                           }}
                           disabled={isLoading}
-                          className="px-3 py-1.5 bg-white dark:bg-[#34495e] border border-stellar-orange/30 text-stellar-orange dark:text-stellar-orange rounded-full text-xs font-medium hover:bg-stellar-orange hover:text-white hover:border-stellar-orange transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="px-3 py-1.5 bg-white dark:bg-[#34495e] border border-scc-red/30 text-scc-red dark:text-scc-red rounded-full text-xs font-medium hover:bg-scc-red hover:text-white hover:border-scc-red transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {action}
                         </button>
@@ -944,10 +944,10 @@ const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
                 "group p-2.5 rounded-full transition-all duration-300",
                 isCallActive
                   ? "bg-gradient-to-br from-[#DC2626] to-[#EF4444] animate-pulse shadow-[0_0_20px_rgba(220,38,38,0.4)]"
-                  : "bg-gradient-to-br from-[#E74C3C] to-[#EF6B68] hover:shadow-[0_0_12px_rgba(231,76,60,0.3)]",
+                  : "bg-gradient-to-br from-[#9A2824] to-[#B83E39] hover:shadow-[0_0_12px_rgba(231,76,60,0.3)]",
                 "hover:scale-105",
                 "border",
-                isCallActive ? "border-[#DC2626]/30" : "border-[#E74C3C]/20",
+                isCallActive ? "border-[#DC2626]/30" : "border-[#9A2824]/20",
                 (isLoading || isVoiceConnecting) && "opacity-50 cursor-not-allowed"
               )}
               aria-label={isCallActive ? "End voice call" : "Start voice call"}
@@ -976,7 +976,7 @@ const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
                 placeholder={isLoading ? "Processing your request..." : (hasEngaged ? "Ask about your claim..." : "How can I help with your insurance claim?")}
                 disabled={isLoading}
                 rows={1}
-                className="w-full pl-5 pr-14 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl text-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-300 disabled:opacity-50 focus:bg-white dark:focus:bg-gray-700 focus:border-stellar-orange dark:focus:border-stellar-orange focus:outline-none focus:ring-1 focus:ring-stellar-orange/20 resize-none overflow-hidden"
+                className="w-full pl-5 pr-14 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl text-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-300 disabled:opacity-50 focus:bg-white dark:focus:bg-gray-700 focus:border-scc-red dark:focus:border-scc-red focus:outline-none focus:ring-1 focus:ring-scc-red/20 resize-none overflow-hidden"
                 style={{ 
                   minHeight: '44px', 
                   maxHeight: '120px'
@@ -988,7 +988,7 @@ const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
                 className={cn(
                   "absolute right-2 p-2 rounded-full transition-all duration-300",
                   inputValue.trim() 
-                    ? "bg-[#E74C3C] hover:bg-[#D13328] text-white"
+                    ? "bg-[#9A2824] hover:bg-[#7A1F1B] text-white"
                     : isListening
                       ? "bg-gradient-to-br from-[#DC2626] to-[#EF4444] text-white shadow-[0_0_8px_rgba(220,38,38,0.3)]"
                       : "text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700",

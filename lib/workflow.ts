@@ -232,7 +232,7 @@ export class WorkflowEngine {
       data: {
         type: 'CLAIM_SUBMITTED',
         recipient: claim.insuredEmail,
-        subject: `Claim ${claim.claimNumber} Received - Stellar Intelligence`,
+        subject: `Claim ${claim.claimNumber} Received - SCC Intelligence`,
         content: `
           <h2>Your claim has been received</h2>
           <p>Dear ${claim.insuredName},</p>

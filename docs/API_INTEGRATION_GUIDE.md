@@ -1,9 +1,9 @@
-# Stellar Intelligence Platform
+# SCC Intelligence Platform
 ## API Integration Guide
 
 ### Quick Start Integration
 
-The Stellar Intelligence Platform provides a comprehensive RESTful API and real-time WebSocket connections for seamless integration with existing workflows and systems.
+The SCC Intelligence Platform provides a comprehensive RESTful API and real-time WebSocket connections for seamless integration with existing workflows and systems.
 
 ---
 
@@ -773,7 +773,7 @@ const makeAPICall = async (url: string, options: RequestInit) => {
 
 ---
 
-This integration guide provides comprehensive examples for integrating with the Stellar Intelligence Platform. For additional support and advanced integration patterns, contact our technical support team.
+This integration guide provides comprehensive examples for integrating with the SCC Intelligence Platform. For additional support and advanced integration patterns, contact our technical support team.
 
 **Next Steps:**
 1. Sign up for API credentials at https://dashboard.stellar.ai

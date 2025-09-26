@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
   :root {
@@ -8,19 +10,19 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 7 71% 56%; /* Stellar Orange */
+    --primary: 3 60% 37%; /* SCC Strategic Red #9A2824 */
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 0 0% 44%; /* SCC Gray */
+    --secondary-foreground: 210 40% 98%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 0 0% 96%; /* Light gray for hover states */
+    --accent-foreground: 0 0% 9%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 7 71% 56%;
+    --ring: 3 60% 37%; /* SCC Strategic Red #9A2824 */
     --radius: 0.65rem;
   }
 
@@ -31,19 +33,19 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 7 71% 56%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
+    --primary: 3 60% 37%; /* SCC Strategic Red #9A2824 */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 0 0% 44%; /* SCC Gray */
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 217.2 32.6% 17.5%; /* Dark gray for hover states in dark mode */
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 7 71% 56%;
+    --ring: 3 60% 37%; /* SCC Strategic Red #9A2824 */
   }
 }
 
@@ -63,6 +65,8 @@
     scrollbar-width: thin;
     scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
     scrollbar-gutter: stable;
+    /* Enable smooth scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
   }
 
   /* Webkit - thin scrollbar positioned in padding area */
@@ -86,39 +90,7 @@
 }
 
 @layer utilities {
-  .text-stellar-orange {
-    color: rgb(231 76 60);
-  }
-  
-  .text-stellar-dark {
-    color: rgb(44 62 80);
-  }
-  
-  .bg-stellar-orange {
-    background-color: rgb(231 76 60);
-  }
-  
-  .bg-stellar-dark {
-    background-color: rgb(44 62 80);
-  }
-  
-  .border-stellar-orange {
-    border-color: rgb(231 76 60);
-  }
-  
-  .border-stellar-dark {
-    border-color: rgb(44 62 80);
-  }
-  
-  .hover\:bg-stellar-orange:hover {
-    background-color: rgb(231 76 60);
-  }
-  
-  .hover\:text-stellar-orange:hover {
-    color: rgb(231 76 60);
-  }
-  
-  /* Hide scrollbar but keep functionality - only utility we keep */
+  /* Hide scrollbar but keep functionality */
   .scrollbar-hide {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */

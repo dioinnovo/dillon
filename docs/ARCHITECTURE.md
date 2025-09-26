@@ -1,4 +1,4 @@
-# Stellar Intelligence Platform - Architecture Documentation
+# SCC Intelligence Platform - Architecture Documentation
 
 ## System Architecture Overview
 

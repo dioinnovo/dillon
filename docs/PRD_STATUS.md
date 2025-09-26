@@ -1,7 +1,7 @@
 # PRD Implementation Status
 
 ## Executive Summary
-The Stellar Intelligence Platform demo has been successfully built with core workflow automation functionality. The system can receive claims, trigger automated workflows, classify damage using AI, generate estimates, send notifications, and create CRM leads.
+The SCC Intelligence Platform demo has been successfully built with core workflow automation functionality. The system can receive claims, trigger automated workflows, classify damage using AI, generate estimates, send notifications, and create CRM leads.
 
 ## Completed Features ✅
 

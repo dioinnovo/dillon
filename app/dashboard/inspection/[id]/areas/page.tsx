@@ -106,8 +106,8 @@ export default function PropertyInspectionAreasPage() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-stellar-orange mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading inspection areas...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-scc-red mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">Loading inspection areas...</p>
         </div>
       </div>
     )
@@ -120,7 +120,7 @@ export default function PropertyInspectionAreasPage() {
           <p className="text-red-600 mb-4">{error || 'Failed to load inspection data'}</p>
           <button
             onClick={() => router.push('/dashboard/inspection')}
-            className="px-4 py-2 bg-stellar-orange text-white rounded-lg hover:bg-orange-600"
+            className="px-4 py-2 bg-scc-red text-white rounded-lg hover:bg-scc-red-dark"
           >
             Back to Inspections
           </button>

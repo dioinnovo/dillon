@@ -1,9 +1,9 @@
-# Stellar Intelligence Platform
+# SCC Intelligence Platform
 ## Executive Overview & Business Impact
 
 ### Executive Summary
 
-The **Stellar Intelligence Platform** is a revolutionary AI-powered property inspection and insurance claims optimization system that transforms the traditional property damage assessment process. By leveraging advanced computer vision, predictive analytics, and comprehensive claims intelligence, Stellar increases claim recoveries by an average of **42%** while reducing processing time by **67%**.
+The **SCC Intelligence Platform** is a revolutionary AI-powered property inspection and insurance claims optimization system that transforms the traditional property damage assessment process. By leveraging advanced computer vision, predictive analytics, and comprehensive claims intelligence, Stellar increases claim recoveries by an average of **42%** while reducing processing time by **67%**.
 
 ---
 

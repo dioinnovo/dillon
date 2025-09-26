@@ -24,9 +24,10 @@ const SiriOrb: React.FC<SiriOrbProps> = ({
 }) => {
   const defaultColors = {
     bg: "transparent",
-    c1: "#E74C3C",  // Stellar Orange (primary)
-    c2: "#FF9A76",  // Peach (harmonious)
-    c3: "#FFC5BF",  // Soft Rose (gentle accent)
+    c1: "#003F7F",  // Sotheby's Navy Blue (premium & authoritative)
+    c2: "#2563EB",  // Rich Blue (confident & reliable)
+    c3: "#0891B2",  // Deep Cyan (intelligent & modern)
+    c4: "#0E7490",  // Dark Teal (sophisticated & trustworthy)
   }
 
   const finalColors = { ...defaultColors, ...colors }
@@ -49,6 +50,7 @@ const SiriOrb: React.FC<SiriOrbProps> = ({
           "--c1": finalColors.c1,
           "--c2": finalColors.c2,
           "--c3": finalColors.c3,
+          "--c4": finalColors.c4,
           "--animation-duration": `${animationDuration}s`,
           "--blur-amount": `${blurAmount}px`,
           "--contrast-amount": contrastAmount,
@@ -60,14 +62,14 @@ const SiriOrb: React.FC<SiriOrbProps> = ({
         style={{
           gridArea: "stack",
           background: `
-            conic-gradient(from calc(var(--angle, 0deg) * 1.2) at 30% 65%, var(--c3) 0deg, transparent 45deg 315deg, var(--c3) 360deg),
-            conic-gradient(from calc(var(--angle, 0deg) * 0.8) at 70% 35%, var(--c2) 0deg, transparent 60deg 300deg, var(--c2) 360deg),
-            conic-gradient(from calc(var(--angle, 0deg) * -1.5) at 65% 75%, var(--c1) 0deg, transparent 90deg 270deg, var(--c1) 360deg),
-            conic-gradient(from calc(var(--angle, 0deg) * 2.1) at 25% 25%, var(--c2) 0deg, transparent 30deg 330deg, var(--c2) 360deg),
-            conic-gradient(from calc(var(--angle, 0deg) * -0.7) at 80% 80%, var(--c1) 0deg, transparent 45deg 315deg, var(--c1) 360deg),
-            radial-gradient(ellipse 120% 80% at 40% 60%, var(--c3) 0%, transparent 50%)
+            conic-gradient(from calc(var(--angle, 0deg) * 1.2) at 30% 65%, var(--c3) 0deg, var(--c4) 25deg, transparent 65deg 295deg, var(--c3) 360deg),
+            conic-gradient(from calc(var(--angle, 0deg) * 0.8) at 70% 35%, var(--c2) 0deg, var(--c1) 35deg, transparent 80deg 280deg, var(--c2) 360deg),
+            conic-gradient(from calc(var(--angle, 0deg) * -1.5) at 65% 75%, var(--c1) 0deg, var(--c3) 50deg, transparent 110deg 250deg, var(--c1) 360deg),
+            conic-gradient(from calc(var(--angle, 0deg) * 2.1) at 25% 25%, var(--c4) 0deg, var(--c2) 20deg, transparent 50deg 310deg, var(--c4) 360deg),
+            conic-gradient(from calc(var(--angle, 0deg) * -0.7) at 80% 80%, var(--c1) 0deg, var(--c4) 30deg, transparent 70deg 290deg, var(--c1) 360deg),
+            radial-gradient(ellipse 120% 80% at 40% 60%, var(--c3) 0%, var(--c2) 30%, transparent 60%)
           `,
-          filter: `blur(${blurAmount}px) contrast(${contrastAmount}) saturate(1.5) brightness(1.1)`,
+          filter: `blur(${blurAmount}px) contrast(${contrastAmount}) saturate(1.8) brightness(1.2)`,
           animation: isActive ? `siriOrbRotate ${animationDuration}s linear infinite` : "none",
           transform: "translateZ(0)",
           willChange: "transform",
@@ -77,7 +79,7 @@ const SiriOrb: React.FC<SiriOrbProps> = ({
         className="absolute inset-0 rounded-full"
         style={{
           gridArea: "stack",
-          background: `radial-gradient(circle at 45% 55%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 30%, transparent 60%)`,
+          background: `radial-gradient(circle at 45% 55%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 30%, transparent 70%)`,
           mixBlendMode: "overlay",
         }}
       />

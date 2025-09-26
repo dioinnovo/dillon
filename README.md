@@ -1,4 +1,4 @@
-# 🏠 Stellar Intelligence Platform - AI Home Inspection System
+# 🏠 SCC Intelligence Platform - AI Home Inspection System
 
 > **Quick Start**: Deploy and run the complete AI-powered home inspection platform in under 10 minutes
 
@@ -356,4 +356,4 @@ npm run lint           # Check code quality
 git pull              # Update from repository
 ```
 
-**🚀 Ready to deploy? Just run the Quick Deploy commands above and you'll have the full Stellar Intelligence Platform running in minutes!**
+**🚀 Ready to deploy? Just run the Quick Deploy commands above and you'll have the full SCC Intelligence Platform running in minutes!**

@@ -189,7 +189,7 @@ export default function InspectionPage() {
         body: JSON.stringify({
           type: formData.propertyType,
           propertyAddress: `${formData.propertyAddress}, ${formData.propertyCity}, ${formData.propertyState} ${formData.propertyZip}`,
-          propertyType: formData.propertyType === 'commercial' ? 'Commercial Building' : 'Single Family Home',
+          propertyType: formData.propertyType === 'commercial' ? 'Commercial Building' : 'Commercial Property',
           policyNumber: formData.policyNumber,
           damageType: formData.damageType.join(', '),
           damageDescription: formData.damageDescription,
@@ -223,29 +223,29 @@ export default function InspectionPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-200">
+      <nav className="fixed top-0 w-full bg-white dark:bg-gray-900/80 backdrop-blur-md z-50 border-b border-gray-200">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center space-x-2">
               <Image 
-                src="/images/stellar_logo.png" 
-                alt="Stellar" 
+                src="/images/scc_logo.png" 
+                alt="SCC" 
                 width={150} 
                 height={40}
                 className="h-10 w-auto object-contain"
               />
-              <span className="text-xl font-bold text-stellar-dark">Home Inspection</span>
+              <span className="text-xl font-bold text-scc-gray-dark">Property Inspection</span>
             </Link>
             <div className="flex items-center gap-4">
               <button
                 onClick={handleSave}
                 disabled={isSaving}
-                className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-stellar-orange transition"
+                className="flex items-center gap-2 px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-scc-red transition"
               >
                 <Save size={18} />
                 {isSaving ? 'Saving...' : 'Save Draft'}
               </button>
-              <Link href="/admin" className="text-gray-700 hover:text-stellar-orange transition">
+              <Link href="/admin" className="text-gray-700 dark:text-gray-300 hover:text-scc-red transition">
                 Dashboard
               </Link>
             </div>
@@ -260,12 +260,12 @@ export default function InspectionPage() {
             <div className="flex items-center justify-between mb-4">
               {steps.map((step, index) => (
                 <div key={step.number} className="flex items-center">
-                  <div className={`flex items-center gap-2 ${currentStep >= step.number ? 'text-stellar-orange' : 'text-gray-400'}`}>
+                  <div className={`flex items-center gap-2 ${currentStep >= step.number ? 'text-scc-red' : 'text-gray-400'}`}>
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 ${
                       currentStep > step.number 
-                        ? 'bg-stellar-orange border-stellar-orange text-white'
+                        ? 'bg-scc-red border-scc-red text-white'
                         : currentStep === step.number
-                        ? 'border-stellar-orange text-stellar-orange'
+                        ? 'border-scc-red text-scc-red'
                         : 'border-gray-300 text-gray-400'
                     }`}>
                       {currentStep > step.number ? <Check size={20} /> : step.number}
@@ -274,22 +274,22 @@ export default function InspectionPage() {
                   </div>
                   {index < steps.length - 1 && (
                     <div className={`w-12 md:w-24 h-1 mx-2 ${
-                      currentStep > step.number ? 'bg-stellar-orange' : 'bg-gray-200'
+                      currentStep > step.number ? 'bg-scc-red' : 'bg-gray-200'
                     }`} />
                   )}
                 </div>
               ))}
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
+            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
               <div 
-                className="bg-stellar-orange h-2 rounded-full transition-all duration-300"
+                className="bg-scc-red h-2 rounded-full transition-all duration-300"
                 style={{ width: `${(currentStep / 4) * 100}%` }}
               />
             </div>
           </div>
 
           {/* Form Content */}
-          <div className="bg-white rounded-2xl shadow-xl p-8">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentStep}
@@ -301,27 +301,27 @@ export default function InspectionPage() {
                 {/* Step 1: Property Information */}
                 {currentStep === 1 && (
                   <div>
-                    <h2 className="text-2xl font-bold text-stellar-dark mb-6">Property Information</h2>
+                    <h2 className="text-2xl font-bold text-scc-gray-dark mb-6">Property Information</h2>
                     
                     <div className="mb-6">
-                      <label className="block text-gray-700 font-medium mb-2">Property Type</label>
+                      <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Property Type</label>
                       <div className="flex gap-4">
                         <button
                           onClick={() => updateFormData('propertyType', 'residential')}
                           className={`flex items-center gap-2 px-6 py-3 rounded-lg border-2 transition ${
                             formData.propertyType === 'residential'
-                              ? 'border-stellar-orange bg-orange-50 text-stellar-orange'
+                              ? 'border-scc-red bg-red-50 text-scc-red'
                               : 'border-gray-300 hover:border-gray-400'
                           }`}
                         >
                           <Home size={20} />
-                          Residential
+                          Commercial Property
                         </button>
                         <button
                           onClick={() => updateFormData('propertyType', 'commercial')}
                           className={`flex items-center gap-2 px-6 py-3 rounded-lg border-2 transition ${
                             formData.propertyType === 'commercial'
-                              ? 'border-stellar-orange bg-orange-50 text-stellar-orange'
+                              ? 'border-scc-red bg-red-50 text-scc-red'
                               : 'border-gray-300 hover:border-gray-400'
                           }`}
                         >
@@ -333,80 +333,80 @@ export default function InspectionPage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-gray-700 font-medium mb-2">Street Address</label>
+                        <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Street Address</label>
                         <input
                           type="text"
                           value={formData.propertyAddress}
                           onChange={(e) => updateFormData('propertyAddress', e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stellar-orange"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-scc-red"
                           placeholder="123 Main Street"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-gray-700 font-medium mb-2">City</label>
+                        <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">City</label>
                         <input
                           type="text"
                           value={formData.propertyCity}
                           onChange={(e) => updateFormData('propertyCity', e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stellar-orange"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-scc-red"
                           placeholder="Dallas"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-gray-700 font-medium mb-2">State</label>
+                        <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">State</label>
                         <input
                           type="text"
                           value={formData.propertyState}
                           onChange={(e) => updateFormData('propertyState', e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stellar-orange"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-scc-red"
                           placeholder="TX"
                           maxLength={2}
                         />
                       </div>
 
                       <div>
-                        <label className="block text-gray-700 font-medium mb-2">ZIP Code</label>
+                        <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">ZIP Code</label>
                         <input
                           type="text"
                           value={formData.propertyZip}
                           onChange={(e) => updateFormData('propertyZip', e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stellar-orange"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-scc-red"
                           placeholder="75201"
                           maxLength={5}
                         />
                       </div>
 
                       <div>
-                        <label className="block text-gray-700 font-medium mb-2">Year Built</label>
+                        <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Year Built</label>
                         <input
                           type="text"
                           value={formData.yearBuilt}
                           onChange={(e) => updateFormData('yearBuilt', e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stellar-orange"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-scc-red"
                           placeholder="2010"
                           maxLength={4}
                         />
                       </div>
 
                       <div>
-                        <label className="block text-gray-700 font-medium mb-2">Square Footage</label>
+                        <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Square Footage</label>
                         <input
                           type="text"
                           value={formData.squareFootage}
                           onChange={(e) => updateFormData('squareFootage', e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stellar-orange"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-scc-red"
                           placeholder="2500"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-gray-700 font-medium mb-2">Number of Stories</label>
+                        <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Number of Stories</label>
                         <select
                           value={formData.numberOfStories}
                           onChange={(e) => updateFormData('numberOfStories', e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stellar-orange"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-scc-red"
                         >
                           <option value="1">1 Story</option>
                           <option value="2">2 Stories</option>
@@ -421,60 +421,60 @@ export default function InspectionPage() {
                 {/* Step 2: Owner Information */}
                 {currentStep === 2 && (
                   <div>
-                    <h2 className="text-2xl font-bold text-stellar-dark mb-6">Owner Information</h2>
+                    <h2 className="text-2xl font-bold text-scc-gray-dark mb-6">Owner Information</h2>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="md:col-span-2">
-                        <label className="block text-gray-700 font-medium mb-2">Full Name</label>
+                        <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Full Name</label>
                         <input
                           type="text"
                           value={formData.ownerName}
                           onChange={(e) => updateFormData('ownerName', e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stellar-orange"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-scc-red"
                           placeholder="John Doe"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-gray-700 font-medium mb-2">Email Address</label>
+                        <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Email Address</label>
                         <input
                           type="email"
                           value={formData.ownerEmail}
                           onChange={(e) => updateFormData('ownerEmail', e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stellar-orange"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-scc-red"
                           placeholder="john@example.com"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-gray-700 font-medium mb-2">Phone Number</label>
+                        <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Phone Number</label>
                         <input
                           type="tel"
                           value={formData.ownerPhone}
                           onChange={(e) => updateFormData('ownerPhone', e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stellar-orange"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-scc-red"
                           placeholder="(555) 123-4567"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-gray-700 font-medium mb-2">Policy Number</label>
+                        <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Policy Number</label>
                         <input
                           type="text"
                           value={formData.policyNumber}
                           onChange={(e) => updateFormData('policyNumber', e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stellar-orange"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-scc-red"
                           placeholder="HO-2024-12345"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-gray-700 font-medium mb-2">Insurance Company</label>
+                        <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Insurance Company</label>
                         <input
                           type="text"
                           value={formData.insuranceCompany}
                           onChange={(e) => updateFormData('insuranceCompany', e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stellar-orange"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-scc-red"
                           placeholder="State Farm"
                         />
                       </div>
@@ -485,10 +485,10 @@ export default function InspectionPage() {
                 {/* Step 3: Damage Assessment */}
                 {currentStep === 3 && (
                   <div>
-                    <h2 className="text-2xl font-bold text-stellar-dark mb-6">Damage Assessment</h2>
+                    <h2 className="text-2xl font-bold text-scc-gray-dark mb-6">Damage Assessment</h2>
                     
                     <div className="mb-6">
-                      <label className="block text-gray-700 font-medium mb-3">Type of Damage (Select all that apply)</label>
+                      <label className="block text-gray-700 dark:text-gray-300 font-medium mb-3">Type of Damage (Select all that apply)</label>
                       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                         {DAMAGE_TYPES.map((type) => (
                           <button
@@ -496,7 +496,7 @@ export default function InspectionPage() {
                             onClick={() => toggleDamageType(type.id)}
                             className={`flex items-center gap-2 px-4 py-3 rounded-lg border-2 transition ${
                               formData.damageType.includes(type.id)
-                                ? 'border-stellar-orange bg-orange-50 text-stellar-orange'
+                                ? 'border-scc-red bg-red-50 text-scc-red'
                                 : 'border-gray-300 hover:border-gray-400'
                             }`}
                           >
@@ -509,21 +509,21 @@ export default function InspectionPage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-gray-700 font-medium mb-2">Date of Damage</label>
+                        <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Date of Damage</label>
                         <input
                           type="date"
                           value={formData.damageDate}
                           onChange={(e) => updateFormData('damageDate', e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stellar-orange"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-scc-red"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-gray-700 font-medium mb-2">Severity Level</label>
+                        <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Severity Level</label>
                         <select
                           value={formData.severityLevel}
                           onChange={(e) => updateFormData('severityLevel', e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stellar-orange"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-scc-red"
                         >
                           <option value="minor">Minor - Cosmetic damage only</option>
                           <option value="moderate">Moderate - Some functionality impaired</option>
@@ -533,12 +533,12 @@ export default function InspectionPage() {
                       </div>
 
                       <div className="md:col-span-2">
-                        <label className="block text-gray-700 font-medium mb-2">Damage Description</label>
+                        <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Damage Description</label>
                         <textarea
                           value={formData.damageDescription}
                           onChange={(e) => updateFormData('damageDescription', e.target.value)}
                           rows={4}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stellar-orange"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-scc-red"
                           placeholder="Describe the damage in detail..."
                         />
                       </div>
@@ -550,9 +550,9 @@ export default function InspectionPage() {
                           type="checkbox"
                           checked={formData.emergencyRepairs}
                           onChange={(e) => updateFormData('emergencyRepairs', e.target.checked)}
-                          className="w-5 h-5 text-stellar-orange rounded focus:ring-stellar-orange"
+                          className="w-5 h-5 text-scc-red rounded focus:ring-scc-red"
                         />
-                        <span className="text-gray-700">Emergency repairs completed</span>
+                        <span className="text-gray-700 dark:text-gray-300">Emergency repairs completed</span>
                       </label>
 
                       <label className="flex items-center gap-3">
@@ -560,9 +560,9 @@ export default function InspectionPage() {
                           type="checkbox"
                           checked={formData.waterDamage}
                           onChange={(e) => updateFormData('waterDamage', e.target.checked)}
-                          className="w-5 h-5 text-stellar-orange rounded focus:ring-stellar-orange"
+                          className="w-5 h-5 text-scc-red rounded focus:ring-scc-red"
                         />
-                        <span className="text-gray-700">Water damage present</span>
+                        <span className="text-gray-700 dark:text-gray-300">Water damage present</span>
                       </label>
 
                       <label className="flex items-center gap-3">
@@ -570,9 +570,9 @@ export default function InspectionPage() {
                           type="checkbox"
                           checked={formData.structuralDamage}
                           onChange={(e) => updateFormData('structuralDamage', e.target.checked)}
-                          className="w-5 h-5 text-stellar-orange rounded focus:ring-stellar-orange"
+                          className="w-5 h-5 text-scc-red rounded focus:ring-scc-red"
                         />
-                        <span className="text-gray-700">Structural damage suspected</span>
+                        <span className="text-gray-700 dark:text-gray-300">Structural damage suspected</span>
                       </label>
                     </div>
 
@@ -599,14 +599,14 @@ export default function InspectionPage() {
                 {/* Step 4: Documentation */}
                 {currentStep === 4 && (
                   <div>
-                    <h2 className="text-2xl font-bold text-stellar-dark mb-6">Documentation</h2>
+                    <h2 className="text-2xl font-bold text-scc-gray-dark mb-6">Documentation</h2>
                     
                     <div className="mb-6">
-                      <label className="block text-gray-700 font-medium mb-2">Upload Photos</label>
-                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-stellar-orange transition">
+                      <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Upload Photos</label>
+                      <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8 text-center hover:border-scc-red transition">
                         <Camera className="mx-auto text-gray-400 mb-3" size={48} />
-                        <p className="text-gray-700 font-medium">Click to upload photos</p>
-                        <p className="text-sm text-gray-500 mt-1">or drag and drop</p>
+                        <p className="text-gray-700 dark:text-gray-300 font-medium">Click to upload photos</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">or drag and drop</p>
                         <p className="text-xs text-gray-400 mt-2">PNG, JPG up to 10MB each</p>
                         <input
                           type="file"
@@ -621,18 +621,18 @@ export default function InspectionPage() {
                         />
                       </div>
                       {formData.photos.length > 0 && (
-                        <div className="mt-3 text-sm text-gray-600">
+                        <div className="mt-3 text-sm text-gray-600 dark:text-gray-400">
                           {formData.photos.length} photo(s) selected
                         </div>
                       )}
                     </div>
 
                     <div className="mb-6">
-                      <label className="block text-gray-700 font-medium mb-2">Upload Documents</label>
-                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-stellar-orange transition">
+                      <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Upload Documents</label>
+                      <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8 text-center hover:border-scc-red transition">
                         <FileText className="mx-auto text-gray-400 mb-3" size={48} />
-                        <p className="text-gray-700 font-medium">Click to upload documents</p>
-                        <p className="text-sm text-gray-500 mt-1">PDF, DOC, DOCX up to 25MB each</p>
+                        <p className="text-gray-700 dark:text-gray-300 font-medium">Click to upload documents</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">PDF, DOC, DOCX up to 25MB each</p>
                         <input
                           type="file"
                           multiple
@@ -646,19 +646,19 @@ export default function InspectionPage() {
                         />
                       </div>
                       {formData.documents.length > 0 && (
-                        <div className="mt-3 text-sm text-gray-600">
+                        <div className="mt-3 text-sm text-gray-600 dark:text-gray-400">
                           {formData.documents.length} document(s) selected
                         </div>
                       )}
                     </div>
 
                     <div>
-                      <label className="block text-gray-700 font-medium mb-2">Additional Notes</label>
+                      <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Additional Notes</label>
                       <textarea
                         value={formData.additionalNotes}
                         onChange={(e) => updateFormData('additionalNotes', e.target.value)}
                         rows={4}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stellar-orange"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-scc-red"
                         placeholder="Any additional information that might be helpful..."
                       />
                     </div>
@@ -699,7 +699,7 @@ export default function InspectionPage() {
                 {currentStep < 4 ? (
                   <button
                     onClick={handleNext}
-                    className="flex items-center gap-2 px-6 py-3 bg-stellar-orange text-white rounded-lg font-medium hover:bg-red-600 transition"
+                    className="flex items-center gap-2 px-6 py-3 bg-scc-red text-white rounded-lg font-medium hover:bg-red-600 transition"
                   >
                     Next
                     <ChevronRight size={20} />
@@ -708,7 +708,7 @@ export default function InspectionPage() {
                   <button
                     onClick={handleSubmit}
                     disabled={isSubmitting}
-                    className="flex items-center gap-2 px-8 py-3 bg-stellar-orange text-white rounded-lg font-medium hover:bg-red-600 transition disabled:opacity-50"
+                    className="flex items-center gap-2 px-8 py-3 bg-scc-red text-white rounded-lg font-medium hover:bg-red-600 transition disabled:opacity-50"
                   >
                     {isSubmitting ? (
                       <>

@@ -1,9 +1,9 @@
-# Stellar Intelligence Platform: Executive Summary
+# SCC Intelligence Platform: Executive Summary
 ## Lead Qualification & Automation System
 
 ### Executive Overview
 
-The Stellar Intelligence Platform revolutionizes how we qualify, process, and convert insurance claim leads through an AI-powered automation system that delivers immediate value to both policyholders and our operations team. This document outlines how our technology foundation positions Stellar Public Adjusting as the industry leader in the emerging "agentic era" of insurance claims processing.
+The SCC Intelligence Platform revolutionizes how we qualify, process, and convert insurance claim leads through an AI-powered automation system that delivers immediate value to both policyholders and our operations team. This document outlines how our technology foundation positions Stellar Public Adjusting as the industry leader in the emerging "agentic era" of insurance claims processing.
 
 ## The Business Challenge
 
@@ -176,7 +176,7 @@ Our AI learns from every settlement, continuously improving accuracy and uncover
 
 ## Conclusion
 
-The Stellar Intelligence Platform represents a fundamental shift in how public adjusting operates. By automating lead qualification and claim assessment, we achieve:
+The SCC Intelligence Platform represents a fundamental shift in how public adjusting operates. By automating lead qualification and claim assessment, we achieve:
 
 1. **93.6% reduction in operational costs**
 2. **89% improvement in conversion rates**

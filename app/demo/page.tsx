@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Upload, FileText, TrendingUp, Download, CheckCircle, Camera, DollarSign, Clock, ArrowRight, Brain, Zap, Shield, Eye, FileCheck, AlertCircle, Users, Home, Building2, FileImage, X, AlertTriangle, Banknote, UserCheck } from 'lucide-react'
+import { SCC_CASES, SCC_STATISTICS, formatCurrency } from '@/lib/data/scc-cases'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -26,50 +27,60 @@ export default function DemoPage() {
   })
   const fileInputRef = useRef<HTMLInputElement>(null)
 
+  // Get real SCC cases for demo
+  const sccCinnamonShore = SCC_CASES.find(c => c.id === 'cinnamon-shore')!
+  const sccShrimpBoat = SCC_CASES.find(c => c.id === 'shrimp-boat')!
+
   const claimTypes = {
-    commercial: {
+    'cinnamon-shore': {
       icon: Building2,
-      title: 'Commercial Property Claim',
-      claimNumber: 'CP-2024-94782',
-      date: 'March 15, 2024',
+      title: `${sccCinnamonShore.clientName} - ${sccCinnamonShore.propertyType}`,
+      claimNumber: 'CP-2017-HAR001',
+      date: new Date(sccCinnamonShore.damage.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
       damages: [
-        { type: 'Hurricane Wind Damage', severity: 'Major', confidence: 94 },
-        { type: 'Storefront Window Damage', severity: 'Replace', confidence: 97 },
-        { type: 'Roof Structural Damage', severity: 'Major', confidence: 91 },
-        { type: 'Water Intrusion', severity: 'Moderate', confidence: 88 },
-        { type: 'HVAC System Damage', severity: 'Replace', confidence: 85 },
+        { type: `${sccCinnamonShore.damage.event} Damage`, severity: 'Major', confidence: 94 },
+        { type: 'Resort Facilities Damage', severity: 'Replace', confidence: 97 },
+        { type: 'Structural Water Damage', severity: 'Major', confidence: 91 },
+        { type: 'Amenity Destruction', severity: 'Replace', confidence: 88 },
+        { type: 'Infrastructure Damage', severity: 'Replace', confidence: 85 },
       ],
-      estimate: '$285,450',
+      estimate: formatCurrency(sccCinnamonShore.settlement.initialOffer),
+      finalSettlement: formatCurrency(sccCinnamonShore.settlement.finalSettlement),
+      sccResult: `${Math.round((sccCinnamonShore.settlement.finalSettlement! / sccCinnamonShore.settlement.initialOffer!) - 1)}x increase`,
+      location: `${sccCinnamonShore.location.city}, ${sccCinnamonShore.location.state}`,
       images: [
-        { id: 1, name: 'storefront_damage_01.jpg', status: 'pending' },
-        { id: 2, name: 'roof_damage_02.jpg', status: 'pending' },
-        { id: 3, name: 'interior_water_03.jpg', status: 'pending' },
-        { id: 4, name: 'hvac_damage_04.jpg', status: 'pending' },
+        { id: 1, name: 'cinnamon_shore_damage_01.jpg', status: 'pending' },
+        { id: 2, name: 'resort_flood_damage_02.jpg', status: 'pending' },
+        { id: 3, name: 'amenity_destruction_03.jpg', status: 'pending' },
+        { id: 4, name: 'infrastructure_damage_04.jpg', status: 'pending' },
       ]
     },
-    residential: {
-      icon: Home,
-      title: 'Residential Property Claim',
-      claimNumber: 'RP-2024-78432',
-      date: 'March 14, 2024',
+    'shrimp-boat': {
+      icon: Building2,
+      title: `${sccShrimpBoat.clientName} - ${sccShrimpBoat.propertyType}`,
+      claimNumber: 'CP-2018-MIC001',
+      date: new Date(sccShrimpBoat.damage.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
       damages: [
-        { type: 'Roof Shingle Damage', severity: 'Moderate', confidence: 92 },
-        { type: 'Siding Damage', severity: 'Moderate', confidence: 89 },
-        { type: 'Fence Damage', severity: 'Replace', confidence: 95 },
-        { type: 'Pool Screen Enclosure', severity: 'Replace', confidence: 93 },
-        { type: 'Garage Door Damage', severity: 'Minor', confidence: 85 },
+        { type: `${sccShrimpBoat.damage.event} ${sccShrimpBoat.damage.category} Damage`, severity: 'Total Loss', confidence: 95 },
+        { type: 'Structural Collapse', severity: 'Replace', confidence: 98 },
+        { type: 'Equipment Destruction', severity: 'Replace', confidence: 92 },
+        { type: 'Business Interruption', severity: 'Major', confidence: 89 },
+        { type: 'Contents Loss', severity: 'Total', confidence: 94 },
       ],
-      estimate: '$45,170',
+      estimate: formatCurrency(sccShrimpBoat.settlement.initialOffer),
+      finalSettlement: formatCurrency(sccShrimpBoat.settlement.finalSettlement),
+      sccResult: `${Math.round((sccShrimpBoat.settlement.finalSettlement! / sccShrimpBoat.settlement.initialOffer!) - 1)}x increase`,
+      location: `${sccShrimpBoat.location.city}, ${sccShrimpBoat.location.state}`,
       images: [
-        { id: 1, name: 'roof_damage_01.jpg', status: 'pending' },
-        { id: 2, name: 'siding_damage_02.jpg', status: 'pending' },
-        { id: 3, name: 'fence_damage_03.jpg', status: 'pending' },
-        { id: 4, name: 'pool_screen_04.jpg', status: 'pending' },
+        { id: 1, name: 'shrimp_boat_destruction_01.jpg', status: 'pending' },
+        { id: 2, name: 'restaurant_collapse_02.jpg', status: 'pending' },
+        { id: 3, name: 'equipment_damage_03.jpg', status: 'pending' },
+        { id: 4, name: 'site_total_loss_04.jpg', status: 'pending' },
       ]
     }
   }
 
-  const currentClaim = claimTypes[selectedClaim as keyof typeof claimTypes]
+  const currentClaim = claimTypes[selectedClaim as keyof typeof claimTypes] || claimTypes['cinnamon-shore']
 
   const processImages = async () => {
     setIsProcessing(true)
@@ -84,7 +95,7 @@ export default function DemoPage() {
           body: JSON.stringify({
             type: selectedClaim,
             propertyAddress: formData.propertyAddress,
-            propertyType: selectedClaim === 'commercial' ? 'Commercial Building' : 'Single Family Home',
+            propertyType: selectedClaim === 'commercial' ? 'Commercial Building' : 'Commercial Property',
             policyNumber: formData.policyNumber,
             damageType: currentClaim.damages[0]?.type || 'Wind Damage',
             damageDescription: formData.damageDescription,
@@ -152,23 +163,23 @@ export default function DemoPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-200">
+      <nav className="fixed top-0 w-full bg-white dark:bg-gray-900/80 backdrop-blur-md z-50 border-b border-gray-200">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center space-x-2">
               <Image 
-                src="/images/stellar_logo.png" 
-                alt="Stellar" 
+                src="/images/scc_logo.png" 
+                alt="SCC" 
                 width={150} 
                 height={40}
                 className="h-10 w-auto object-contain"
               />
-              <span className="text-xl font-bold text-stellar-dark">Your AI Claims Assistant</span>
+              <span className="text-xl font-bold text-scc-gray-dark">Your AI Claims Assistant</span>
             </Link>
             <div className="flex items-center gap-4">
               <Link 
                 href="/"
-                className="text-gray-700 hover:text-stellar-orange transition"
+                className="text-gray-700 dark:text-gray-300 hover:text-scc-red transition"
               >
                 Back to Overview
               </Link>
@@ -181,10 +192,10 @@ export default function DemoPage() {
         <div className="container mx-auto max-w-7xl">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-stellar-dark mb-4">
+            <h1 className="text-4xl font-bold text-scc-gray-dark mb-4">
               Your AI Claims Assistant in Action
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
               Experience how AI will enhance your claims operations with instant classification, 
               automated estimates, and intelligent fraud detection
             </p>
@@ -198,7 +209,7 @@ export default function DemoPage() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition ${
                   activeTab === tab.id
-                    ? 'bg-stellar-orange text-white'
+                    ? 'bg-scc-red text-white'
                     : 'bg-white text-gray-700 hover:bg-gray-100'
                 }`}
               >
@@ -219,12 +230,12 @@ export default function DemoPage() {
             >
               {/* Claims Intelligence Tab - Initial Assessment & Triage */}
               {activeTab === 'claims-intelligence' && (
-                <div className="bg-white rounded-2xl shadow-xl p-8">
+                <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8">
                   <div className="max-w-5xl mx-auto">
-                    <h2 className="text-2xl font-bold text-stellar-dark mb-4">
+                    <h2 className="text-2xl font-bold text-scc-gray-dark mb-4">
                       Comprehensive Claims Intelligence
                     </h2>
-                    <p className="text-gray-600 mb-8">
+                    <p className="text-gray-600 dark:text-gray-400 mb-8">
                       Upload photos for instant AI-powered classification, detailed damage assessment, 
                       and settlement recommendations - all in one seamless workflow.
                     </p>
@@ -232,26 +243,26 @@ export default function DemoPage() {
                     {/* Property Type Selector - At the top for better workflow */}
                     <div className="mb-6 flex gap-4">
                       <button
-                        onClick={() => setSelectedClaim('commercial')}
+                        onClick={() => setSelectedClaim('cinnamon-shore')}
                         className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition ${
-                          selectedClaim === 'commercial'
-                            ? 'bg-stellar-orange text-white'
+                          selectedClaim === 'cinnamon-shore'
+                            ? 'bg-scc-red text-white'
                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                         }`}
                       >
                         <Building2 size={20} />
-                        Commercial Property
+                        Cinnamon Shore Resort
                       </button>
                       <button
-                        onClick={() => setSelectedClaim('residential')}
+                        onClick={() => setSelectedClaim('shrimp-boat')}
                         className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition ${
-                          selectedClaim === 'residential'
-                            ? 'bg-stellar-orange text-white'
+                          selectedClaim === 'shrimp-boat'
+                            ? 'bg-scc-red text-white'
                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                         }`}
                       >
-                        <Home size={20} />
-                        Residential Property
+                        <Building2 size={20} />
+                        Shrimp Boat Restaurant
                       </button>
                     </div>
 
@@ -267,8 +278,8 @@ export default function DemoPage() {
                             </div>
                           </div>
                           <div className="text-right">
-                            <p className="text-sm text-gray-600">Preliminary Estimate</p>
-                            <p className="text-xl font-bold text-stellar-orange">{currentClaim.estimate}</p>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">Preliminary Estimate</p>
+                            <p className="text-xl font-bold text-scc-red">{currentClaim.estimate}</p>
                           </div>
                         </div>
                       </div>
@@ -277,8 +288,8 @@ export default function DemoPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                       {/* Left: Upload Section */}
                       <div>
-                        <div className="bg-gray-50 rounded-lg p-6 mb-6">
-                          <h3 className="font-semibold text-gray-800 mb-4">Upload Claim Photos</h3>
+                        <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-6 mb-6">
+                          <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-4">Upload Claim Photos</h3>
                           
                           {/* Upload Section */}
                           <input
@@ -291,12 +302,12 @@ export default function DemoPage() {
                           />
                           <button
                             onClick={() => fileInputRef.current?.click()}
-                            className="w-full border-2 border-dashed border-gray-300 rounded-lg p-8 hover:border-stellar-orange transition flex flex-col items-center gap-3"
+                            className="w-full border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8 hover:border-scc-red transition flex flex-col items-center gap-3"
                           >
                             <Camera className="text-gray-400" size={48} />
                             <div className="text-center">
-                              <p className="text-gray-700 font-medium">Upload Claim Photos</p>
-                              <p className="text-sm text-gray-500 mt-1">Drag and drop or click to browse</p>
+                              <p className="text-gray-700 dark:text-gray-300 font-medium">Upload Claim Photos</p>
+                              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Drag and drop or click to browse</p>
                             </div>
                           </button>
                         </div>
@@ -304,13 +315,13 @@ export default function DemoPage() {
                         {/* Uploaded Files Display */}
                         {uploadedFiles.length > 0 && (
                           <div className="mb-6">
-                            <h4 className="font-medium text-gray-800 mb-3">Uploaded Files</h4>
+                            <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-3">Uploaded Files</h4>
                             <div className="space-y-2">
                               {uploadedFiles.map((file) => (
-                                <div key={file.id} className="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-3">
+                                <div key={file.id} className="flex items-center justify-between bg-white dark:bg-gray-900 border border-gray-200 rounded-lg p-3">
                                   <div className="flex items-center gap-2">
-                                    <FileImage className="text-gray-500" size={20} />
-                                    <span className="text-sm text-gray-700">{file.name}</span>
+                                    <FileImage className="text-gray-500 dark:text-gray-400" size={20} />
+                                    <span className="text-sm text-gray-700 dark:text-gray-300">{file.name}</span>
                                   </div>
                                   <button
                                     onClick={() => removeFile(file.id)}
@@ -327,14 +338,14 @@ export default function DemoPage() {
                         {/* Use Sample Images Option */}
                         {uploadedFiles.length === 0 && (
                           <div className="text-center mb-4">
-                            <p className="text-sm text-gray-500">Or use sample {selectedClaim} property images</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">Or use sample {selectedClaim} property images</p>
                           </div>
                         )}
 
                         <button
                           onClick={processImages}
                           disabled={isProcessing}
-                          className="w-full mt-6 bg-stellar-orange text-white py-3 rounded-lg font-semibold hover:bg-red-600 transition disabled:opacity-50 flex items-center justify-center gap-2"
+                          className="w-full mt-6 bg-scc-red text-white py-3 rounded-lg font-semibold hover:bg-red-600 transition disabled:opacity-50 flex items-center justify-center gap-2"
                         >
                           {isProcessing ? (
                             <>
@@ -352,7 +363,7 @@ export default function DemoPage() {
 
                       {/* Right: Progressive AI Analysis Results */}
                       <div>
-                        <h3 className="text-xl font-bold text-stellar-dark mb-4">
+                        <h3 className="text-xl font-bold text-scc-gray-dark mb-4">
                           AI Analysis Results
                         </h3>
 
@@ -372,19 +383,19 @@ export default function DemoPage() {
                                 
                                 <div className="space-y-3">
                                   <div className="flex justify-between items-center">
-                                    <span className="text-gray-700">Classification:</span>
+                                    <span className="text-gray-700 dark:text-gray-300">Classification:</span>
                                     <span className="font-bold text-green-700">REPAIRABLE</span>
                                   </div>
                                   <div className="flex justify-between items-center">
-                                    <span className="text-gray-700">Settlement Type:</span>
+                                    <span className="text-gray-700 dark:text-gray-300">Settlement Type:</span>
                                     <span className="font-bold text-blue-700">CASH ELIGIBLE</span>
                                   </div>
                                   <div className="flex justify-between items-center">
-                                    <span className="text-gray-700">Severity:</span>
-                                    <span className="font-bold text-orange-700">MODERATE</span>
+                                    <span className="text-gray-700 dark:text-gray-300">Severity:</span>
+                                    <span className="font-bold text-scc-red-dark">MODERATE</span>
                                   </div>
                                   <div className="flex justify-between items-center">
-                                    <span className="text-gray-700">Confidence:</span>
+                                    <span className="text-gray-700 dark:text-gray-300">Confidence:</span>
                                     <span className="font-bold text-green-700">{confidenceScore.toFixed(1)}%</span>
                                   </div>
                                 </div>
@@ -396,9 +407,9 @@ export default function DemoPage() {
                               <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className="bg-white border border-gray-200 rounded-lg p-6"
+                                className="bg-white dark:bg-gray-900 border border-gray-200 rounded-lg p-6"
                               >
-                                <h4 className="font-semibold text-gray-900 mb-4">Detected Damages</h4>
+                                <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">Detected Damages</h4>
                                 <div className="space-y-2">
                                   {currentClaim.damages.map((damage, index) => (
                                     <motion.div
@@ -406,13 +417,13 @@ export default function DemoPage() {
                                       initial={{ opacity: 0, x: -20 }}
                                       animate={{ opacity: 1, x: 0 }}
                                       transition={{ delay: index * 0.1 }}
-                                      className="flex justify-between items-center p-3 bg-gray-50 rounded-lg"
+                                      className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-900 rounded-lg"
                                     >
                                       <div>
-                                        <p className="font-medium text-gray-800">{damage.type}</p>
+                                        <p className="font-medium text-gray-800 dark:text-gray-200">{damage.type}</p>
                                         <p className={`text-sm ${
                                           damage.severity === 'Major' ? 'text-red-600' :
-                                          damage.severity === 'Moderate' ? 'text-orange-600' :
+                                          damage.severity === 'Moderate' ? 'text-scc-red' :
                                           damage.severity === 'Minor' ? 'text-yellow-600' :
                                           damage.severity === 'Replace' ? 'text-purple-600' :
                                           'text-blue-600'
@@ -421,8 +432,8 @@ export default function DemoPage() {
                                         </p>
                                       </div>
                                       <div className="text-right">
-                                        <span className="text-sm font-medium text-gray-700">{damage.confidence}%</span>
-                                        <p className="text-xs text-gray-500">confidence</p>
+                                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{damage.confidence}%</span>
+                                        <p className="text-xs text-gray-500 dark:text-gray-400">confidence</p>
                                       </div>
                                     </motion.div>
                                   ))}
@@ -446,7 +457,7 @@ export default function DemoPage() {
                                   <p className="text-2xl font-bold text-blue-700 mb-3">
                                     {currentClaim.estimate}
                                   </p>
-                                  <p className="text-sm text-gray-600 mb-4">
+                                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
                                     Customer can accept immediate payment or proceed with detailed estimate
                                   </p>
                                   <div className="grid grid-cols-2 gap-3">
@@ -455,7 +466,7 @@ export default function DemoPage() {
                                     </button>
                                     <button 
                                       onClick={() => setActiveTab('estimation')}
-                                      className="bg-white text-blue-600 py-2 rounded-lg text-sm font-medium border border-blue-300 hover:bg-blue-50 transition"
+                                      className="bg-white dark:bg-gray-900 text-blue-600 py-2 rounded-lg text-sm font-medium border border-blue-300 hover:bg-blue-50 transition"
                                     >
                                       Detailed Estimate
                                     </button>
@@ -477,7 +488,7 @@ export default function DemoPage() {
                                     ].map((step, index) => (
                                       <div key={index} className="flex items-center gap-2">
                                         <CheckCircle className="text-purple-500" size={16} />
-                                        <span className="text-sm text-gray-700">{step}</span>
+                                        <span className="text-sm text-gray-700 dark:text-gray-300">{step}</span>
                                       </div>
                                     ))}
                                   </div>
@@ -486,9 +497,9 @@ export default function DemoPage() {
                             )}
                           </div>
                         ) : (
-                          <div className="bg-gray-50 rounded-lg p-8 text-center">
+                          <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-8 text-center">
                             <Brain className="mx-auto mb-4 text-gray-400" size={48} />
-                            <p className="text-gray-600">
+                            <p className="text-gray-600 dark:text-gray-400">
                               Upload photos or use sample images to see comprehensive AI analysis
                             </p>
                           </div>
@@ -498,27 +509,27 @@ export default function DemoPage() {
 
                     {/* Action Panel - Navigate to other tabs */}
                     {selectedImage && analysisPhase >= 3 && (
-                      <div className="mt-8 bg-gray-50 rounded-lg p-6">
-                        <h3 className="font-semibold text-gray-800 mb-4">Additional Analysis Options</h3>
+                      <div className="mt-8 bg-gray-50 dark:bg-gray-900 rounded-lg p-6">
+                        <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-4">Additional Analysis Options</h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <button
                             onClick={() => setActiveTab('estimation')}
-                            className="flex items-center justify-center gap-3 p-4 bg-white border-2 border-gray-200 rounded-lg hover:border-stellar-orange transition"
+                            className="flex items-center justify-center gap-3 p-4 bg-white dark:bg-gray-900 border-2 border-gray-200 rounded-lg hover:border-scc-red transition"
                           >
-                            <DollarSign className="text-stellar-orange" size={24} />
+                            <DollarSign className="text-scc-red" size={24} />
                             <div className="text-left">
-                              <p className="font-medium text-gray-900">Generate Detailed Estimate</p>
-                              <p className="text-xs text-gray-500">Create line-item breakdown</p>
+                              <p className="font-medium text-gray-900 dark:text-gray-100">Generate Detailed Estimate</p>
+                              <p className="text-xs text-gray-500 dark:text-gray-400">Create line-item breakdown</p>
                             </div>
                           </button>
                           <button
                             onClick={() => setActiveTab('coverage-analysis')}
-                            className="flex items-center justify-center gap-3 p-4 bg-white border-2 border-gray-200 rounded-lg hover:border-stellar-orange transition"
+                            className="flex items-center justify-center gap-3 p-4 bg-white dark:bg-gray-900 border-2 border-gray-200 rounded-lg hover:border-scc-red transition"
                           >
                             <Shield className="text-green-600" size={24} />
                             <div className="text-left">
-                              <p className="font-medium text-gray-900">Maximize Coverage</p>
-                              <p className="text-xs text-gray-500">Find overlooked benefits</p>
+                              <p className="font-medium text-gray-900 dark:text-gray-100">Maximize Coverage</p>
+                              <p className="text-xs text-gray-500 dark:text-gray-400">Find overlooked benefits</p>
                             </div>
                           </button>
                         </div>
@@ -530,30 +541,30 @@ export default function DemoPage() {
 
               {/* Old AI Assessment Tab - Now consolidated into Claims Intelligence */}
               {false && (
-                <div className="bg-white rounded-2xl shadow-xl p-8">
+                <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8">
                   {/* Claim Type Selector */}
                   <div className="mb-6 flex gap-4">
                     <button
-                      onClick={() => setSelectedClaim('commercial')}
+                      onClick={() => setSelectedClaim('cinnamon-shore')}
                       className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition ${
-                        selectedClaim === 'commercial'
-                          ? 'bg-stellar-orange text-white'
+                        selectedClaim === 'cinnamon-shore'
+                          ? 'bg-scc-red text-white'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
                       <Building2 size={20} />
-                      Commercial Property
+                      Cinnamon Shore Resort
                     </button>
                     <button
-                      onClick={() => setSelectedClaim('residential')}
+                      onClick={() => setSelectedClaim('shrimp-boat')}
                       className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition ${
-                        selectedClaim === 'residential'
-                          ? 'bg-stellar-orange text-white'
+                        selectedClaim === 'shrimp-boat'
+                          ? 'bg-scc-red text-white'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
-                      <Home size={20} />
-                      Residential Property
+                      <Building2 size={20} />
+                      Shrimp Boat Restaurant
                     </button>
                   </div>
 
@@ -568,8 +579,8 @@ export default function DemoPage() {
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="text-sm text-gray-600">Preliminary Estimate</p>
-                        <p className="text-xl font-bold text-stellar-orange">{currentClaim.estimate}</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Preliminary Estimate</p>
+                        <p className="text-xl font-bold text-scc-red">{currentClaim.estimate}</p>
                       </div>
                     </div>
                   </div>
@@ -577,10 +588,10 @@ export default function DemoPage() {
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {/* Left: Image Upload and Processing */}
                     <div>
-                      <h2 className="text-2xl font-bold text-stellar-dark mb-4">
+                      <h2 className="text-2xl font-bold text-scc-gray-dark mb-4">
                         Visual Damage Detection
                       </h2>
-                      <p className="text-gray-600 mb-6">
+                      <p className="text-gray-600 dark:text-gray-400 mb-6">
                         Upload claim photos or use sample images to see AI-powered damage analysis in action.
                       </p>
 
@@ -596,24 +607,24 @@ export default function DemoPage() {
                         />
                         <button
                           onClick={() => fileInputRef.current?.click()}
-                          className="w-full border-2 border-dashed border-gray-300 rounded-lg p-6 hover:border-stellar-orange transition flex flex-col items-center gap-2"
+                          className="w-full border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 hover:border-scc-red transition flex flex-col items-center gap-2"
                         >
                           <Upload className="text-gray-400" size={32} />
-                          <span className="text-gray-600 font-medium">Upload Claim Photos</span>
-                          <span className="text-sm text-gray-500">or drag and drop</span>
+                          <span className="text-gray-600 dark:text-gray-400 font-medium">Upload Claim Photos</span>
+                          <span className="text-sm text-gray-500 dark:text-gray-400">or drag and drop</span>
                         </button>
                       </div>
 
                       {/* Uploaded Files */}
                       {uploadedFiles.length > 0 && (
                         <div className="mb-6">
-                          <h3 className="font-semibold text-gray-800 mb-3">Uploaded Files</h3>
+                          <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">Uploaded Files</h3>
                           <div className="space-y-2">
                             {uploadedFiles.map((file) => (
-                              <div key={file.id} className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
+                              <div key={file.id} className="flex items-center justify-between bg-gray-50 dark:bg-gray-900 rounded-lg p-3">
                                 <div className="flex items-center gap-2">
-                                  <FileImage className="text-gray-500" size={20} />
-                                  <span className="text-sm text-gray-700">{file.name}</span>
+                                  <FileImage className="text-gray-500 dark:text-gray-400" size={20} />
+                                  <span className="text-sm text-gray-700 dark:text-gray-300">{file.name}</span>
                                 </div>
                                 <button
                                   onClick={() => removeFile(file.id)}
@@ -629,7 +640,7 @@ export default function DemoPage() {
 
                       {/* Sample Images Grid */}
                       <div className="mb-6">
-                        <h3 className="font-semibold text-gray-800 mb-3">
+                        <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">
                           {uploadedFiles.length === 0 ? 'Sample Claim Images' : 'Or Use Sample Images'}
                         </h3>
                         <div className="grid grid-cols-2 gap-4">
@@ -637,13 +648,13 @@ export default function DemoPage() {
                             <div
                               key={image.id}
                               className={`relative bg-gray-100 rounded-lg p-4 border-2 transition ${
-                                selectedImage === image.id ? 'border-stellar-orange' : 'border-gray-200'
+                                selectedImage === image.id ? 'border-scc-red' : 'border-gray-200'
                               }`}
                             >
-                              <div className="aspect-video bg-gray-200 rounded mb-2 flex items-center justify-center">
+                              <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded mb-2 flex items-center justify-center">
                                 <Camera className="text-gray-400" size={32} />
                               </div>
-                              <p className="text-sm text-gray-700">{image.name}</p>
+                              <p className="text-sm text-gray-700 dark:text-gray-300">{image.name}</p>
                               {selectedImage !== null && selectedImage >= image.id && (
                                 <div className="absolute top-2 right-2">
                                   <CheckCircle className="text-green-500" size={24} />
@@ -657,7 +668,7 @@ export default function DemoPage() {
                       <button
                         onClick={processImages}
                         disabled={isProcessing}
-                        className="w-full bg-stellar-orange text-white py-3 rounded-lg font-semibold hover:bg-red-600 transition disabled:opacity-50 flex items-center justify-center gap-2"
+                        className="w-full bg-scc-red text-white py-3 rounded-lg font-semibold hover:bg-red-600 transition disabled:opacity-50 flex items-center justify-center gap-2"
                       >
                         {isProcessing ? (
                           <>
@@ -675,21 +686,21 @@ export default function DemoPage() {
 
                     {/* Right: Results */}
                     <div>
-                      <h3 className="text-xl font-bold text-stellar-dark mb-4">
+                      <h3 className="text-xl font-bold text-scc-gray-dark mb-4">
                         AI Analysis Results
                       </h3>
 
                       {selectedImage ? (
                         <div className="space-y-4">
                           {/* Confidence Score */}
-                          <div className="bg-gray-50 rounded-lg p-4">
+                          <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
                             <div className="flex justify-between items-center mb-2">
-                              <span className="text-gray-700">Confidence Score</span>
+                              <span className="text-gray-700 dark:text-gray-300">Confidence Score</span>
                               <span className="text-2xl font-bold text-green-600">
                                 {confidenceScore.toFixed(1)}%
                               </span>
                             </div>
-                            <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                               <motion.div
                                 initial={{ width: 0 }}
                                 animate={{ width: `${confidenceScore}%` }}
@@ -700,21 +711,21 @@ export default function DemoPage() {
 
                           {/* Detected Damages */}
                           <div className="space-y-3">
-                            <h4 className="font-semibold text-gray-700">Detected Damages:</h4>
+                            <h4 className="font-semibold text-gray-700 dark:text-gray-300">Detected Damages:</h4>
                             {currentClaim.damages.map((damage, index) => (
                               <motion.div
                                 key={index}
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: index * 0.1 }}
-                                className="bg-white border border-gray-200 rounded-lg p-3"
+                                className="bg-white dark:bg-gray-900 border border-gray-200 rounded-lg p-3"
                               >
                                 <div className="flex justify-between items-start">
                                   <div>
-                                    <p className="font-medium text-gray-800">{damage.type}</p>
+                                    <p className="font-medium text-gray-800 dark:text-gray-200">{damage.type}</p>
                                     <p className={`text-sm ${
                                       damage.severity === 'Major' ? 'text-red-600' :
-                                      damage.severity === 'Moderate' ? 'text-orange-600' :
+                                      damage.severity === 'Moderate' ? 'text-scc-red' :
                                       damage.severity === 'Minor' ? 'text-yellow-600' :
                                       damage.severity === 'Replace' ? 'text-purple-600' :
                                       'text-blue-600'
@@ -722,7 +733,7 @@ export default function DemoPage() {
                                       {damage.severity}
                                     </p>
                                   </div>
-                                  <span className="text-sm text-gray-500">
+                                  <span className="text-sm text-gray-500 dark:text-gray-400">
                                     {damage.confidence}% confidence
                                   </span>
                                 </div>
@@ -756,9 +767,9 @@ export default function DemoPage() {
                           </div>
                         </div>
                       ) : (
-                        <div className="bg-gray-50 rounded-lg p-8 text-center">
+                        <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-8 text-center">
                           <Brain className="mx-auto mb-4 text-gray-400" size={48} />
-                          <p className="text-gray-600">
+                          <p className="text-gray-600 dark:text-gray-400">
                             Click "Analyze with AI" to see damage detection in action
                           </p>
                         </div>
@@ -770,31 +781,31 @@ export default function DemoPage() {
 
               {/* Coverage Analysis Tab */}
               {activeTab === 'coverage-analysis' && (
-                <div className="bg-white rounded-2xl shadow-xl p-8">
+                <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8">
                   <div className="max-w-4xl mx-auto">
-                    <h2 className="text-2xl font-bold text-stellar-dark mb-4">
+                    <h2 className="text-2xl font-bold text-scc-gray-dark mb-4">
                       Automated Policy Coverage Matching
                     </h2>
-                    <p className="text-gray-600 mb-8">
+                    <p className="text-gray-600 dark:text-gray-400 mb-8">
                       Our AI instantly matches detected damage with relevant policy provisions, 
                       ensuring no coverage is overlooked.
                     </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {/* Policy Document */}
-                      <div className="bg-gray-50 rounded-lg p-6">
+                      <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-6">
                         <div className="flex items-center justify-between mb-4">
-                          <h3 className="font-semibold text-gray-800">Policy Document</h3>
+                          <h3 className="font-semibold text-gray-800 dark:text-gray-200">Policy Document</h3>
                           <FileText className="text-gray-400" size={24} />
                         </div>
                         <div className="space-y-2">
-                          <div className="bg-white rounded p-3 text-sm">
+                          <div className="bg-white dark:bg-gray-900 rounded p-3 text-sm">
                             <p className="font-medium">Policy #: HO-2024-78432</p>
-                            <p className="text-gray-600">Homeowners Comprehensive</p>
+                            <p className="text-gray-600 dark:text-gray-400">Commercial Property Comprehensive</p>
                           </div>
-                          <div className="bg-white rounded p-3 text-sm">
+                          <div className="bg-white dark:bg-gray-900 rounded p-3 text-sm">
                             <p className="font-medium">Coverage Limit: $450,000</p>
-                            <p className="text-gray-600">Deductible: $2,500</p>
+                            <p className="text-gray-600 dark:text-gray-400">Deductible: $2,500</p>
                           </div>
                         </div>
                       </div>
@@ -802,17 +813,17 @@ export default function DemoPage() {
                       {/* Coverage Matches */}
                       <div className="bg-green-50 rounded-lg p-6">
                         <div className="flex items-center justify-between mb-4">
-                          <h3 className="font-semibold text-gray-800">Coverage Matches</h3>
+                          <h3 className="font-semibold text-gray-800 dark:text-gray-200">Coverage Matches</h3>
                           <CheckCircle className="text-green-500" size={24} />
                         </div>
                         <div className="space-y-2">
                           {[
-                            { coverage: 'Dwelling Protection', status: 'Covered', page: 'p.12' },
+                            { coverage: 'Building Protection', status: 'Covered', page: 'p.12' },
                             { coverage: 'Other Structures', status: 'Covered', page: 'p.15' },
-                            { coverage: 'Additional Living Expenses', status: 'May Apply', page: 'p.23' },
+                            { coverage: 'Extra Expense Coverage', status: 'May Apply', page: 'p.23' },
                             { coverage: 'Ordinance or Law', status: 'Available', page: 'p.31' },
                           ].map((item, index) => (
-                            <div key={index} className="bg-white rounded p-3 flex justify-between items-center">
+                            <div key={index} className="bg-white dark:bg-gray-900 rounded p-3 flex justify-between items-center">
                               <div>
                                 <p className="font-medium text-sm">{item.coverage}</p>
                                 <p className={`text-xs ${
@@ -823,7 +834,7 @@ export default function DemoPage() {
                                   {item.status}
                                 </p>
                               </div>
-                              <span className="text-xs text-gray-500">{item.page}</span>
+                              <span className="text-xs text-gray-500 dark:text-gray-400">{item.page}</span>
                             </div>
                           ))}
                         </div>
@@ -839,7 +850,7 @@ export default function DemoPage() {
                           { label: 'Documentation', status: 'Complete', icon: FileCheck },
                           { label: 'Time Limits', status: 'Within Limits', icon: Clock },
                         ].map((item, index) => (
-                          <div key={index} className="bg-white rounded-lg p-4 flex items-center gap-3">
+                          <div key={index} className="bg-white dark:bg-gray-900 rounded-lg p-4 flex items-center gap-3">
                             <item.icon className="text-blue-600" size={24} />
                             <div>
                               <p className="font-medium text-sm">{item.label}</p>
@@ -855,19 +866,19 @@ export default function DemoPage() {
 
               {/* Cost Estimation Tab */}
               {activeTab === 'estimation' && (
-                <div className="bg-white rounded-2xl shadow-xl p-8">
-                  <h2 className="text-2xl font-bold text-stellar-dark mb-4">
+                <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8">
+                  <h2 className="text-2xl font-bold text-scc-gray-dark mb-4">
                     Intelligent Cost Estimation
                   </h2>
-                  <p className="text-gray-600 mb-8">
+                  <p className="text-gray-600 dark:text-gray-400 mb-8">
                     Generate accurate repair estimates with industry-standard pricing and local market data.
                   </p>
 
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     {/* Estimate Summary */}
                     <div className="lg:col-span-2">
-                      <div className="bg-gray-50 rounded-lg p-6">
-                        <h3 className="font-semibold text-gray-800 mb-4">Repair Estimate Breakdown</h3>
+                      <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-6">
+                        <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-4">Repair Estimate Breakdown</h3>
                         <div className="space-y-3">
                           {[
                             { item: 'Roof Repair', code: 'RFG 240', quantity: '25 SQ', unit: '$285/SQ', total: '$7,125' },
@@ -876,17 +887,17 @@ export default function DemoPage() {
                             { item: 'Painting & Finishing', code: 'PNT 450', quantity: '300 SF', unit: '$4/SF', total: '$1,200' },
                             { item: 'Debris Removal', code: 'DBR 100', quantity: '1 Load', unit: '$450', total: '$450' },
                           ].map((line, index) => (
-                            <div key={index} className="bg-white rounded-lg p-3">
+                            <div key={index} className="bg-white dark:bg-gray-900 rounded-lg p-3">
                               <div className="grid grid-cols-5 gap-2 text-sm">
                                 <div>
                                   <p className="font-medium">{line.item}</p>
-                                  <p className="text-xs text-gray-500">{line.code}</p>
+                                  <p className="text-xs text-gray-500 dark:text-gray-400">{line.code}</p>
                                 </div>
                                 <div className="text-center">
-                                  <p className="text-gray-600">{line.quantity}</p>
+                                  <p className="text-gray-600 dark:text-gray-400">{line.quantity}</p>
                                 </div>
                                 <div className="text-center">
-                                  <p className="text-gray-600">{line.unit}</p>
+                                  <p className="text-gray-600 dark:text-gray-400">{line.unit}</p>
                                 </div>
                                 <div className="text-right col-span-2">
                                   <p className="font-semibold">{line.total}</p>
@@ -899,20 +910,20 @@ export default function DemoPage() {
                         <div className="mt-6 pt-6 border-t">
                           <div className="space-y-2">
                             <div className="flex justify-between">
-                              <span className="text-gray-600">Subtotal</span>
+                              <span className="text-gray-600 dark:text-gray-400">Subtotal</span>
                               <span className="font-medium">$11,815</span>
                             </div>
                             <div className="flex justify-between">
-                              <span className="text-gray-600">Overhead & Profit (20%)</span>
+                              <span className="text-gray-600 dark:text-gray-400">Overhead & Profit (20%)</span>
                               <span className="font-medium">$2,363</span>
                             </div>
                             <div className="flex justify-between">
-                              <span className="text-gray-600">Tax (7%)</span>
+                              <span className="text-gray-600 dark:text-gray-400">Tax (7%)</span>
                               <span className="font-medium">$992</span>
                             </div>
                             <div className="flex justify-between text-xl font-bold pt-2 border-t">
                               <span>Total Estimate</span>
-                              <span className="text-stellar-orange">$15,170</span>
+                              <span className="text-scc-red">$15,170</span>
                             </div>
                           </div>
                         </div>
@@ -939,18 +950,18 @@ export default function DemoPage() {
                         </div>
                       </div>
 
-                      <div className="bg-gray-50 rounded-lg p-6">
-                        <h3 className="font-semibold text-gray-800 mb-3">Export Options</h3>
+                      <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-6">
+                        <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">Export Options</h3>
                         <div className="space-y-2">
-                          <button className="w-full bg-white border border-gray-300 rounded-lg py-2 px-4 text-sm hover:bg-gray-50 transition flex items-center justify-center gap-2">
+                          <button className="w-full bg-white dark:bg-gray-900 border border-gray-300 rounded-lg py-2 px-4 text-sm hover:bg-gray-50 transition flex items-center justify-center gap-2">
                             <Download size={16} />
                             Export Estimate
                           </button>
-                          <button className="w-full bg-white border border-gray-300 rounded-lg py-2 px-4 text-sm hover:bg-gray-50 transition flex items-center justify-center gap-2">
+                          <button className="w-full bg-white dark:bg-gray-900 border border-gray-300 rounded-lg py-2 px-4 text-sm hover:bg-gray-50 transition flex items-center justify-center gap-2">
                             <FileText size={16} />
                             Generate PDF Report
                           </button>
-                          <button className="w-full bg-white border border-gray-300 rounded-lg py-2 px-4 text-sm hover:bg-gray-50 transition flex items-center justify-center gap-2">
+                          <button className="w-full bg-white dark:bg-gray-900 border border-gray-300 rounded-lg py-2 px-4 text-sm hover:bg-gray-50 transition flex items-center justify-center gap-2">
                             <Eye size={16} />
                             Share with Adjuster
                           </button>
@@ -958,16 +969,46 @@ export default function DemoPage() {
                       </div>
                     </div>
                   </div>
+
+                  {/* SCC Settlement Results */}
+                  <div className="mt-8 bg-gradient-to-r from-scc-red to-red-600 text-white rounded-xl p-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div className="text-center">
+                        <h4 className="text-lg font-semibold mb-2">Initial Insurance Offer</h4>
+                        <p className="text-3xl font-bold">{currentClaim.estimate}</p>
+                        <p className="text-sm opacity-90">Insurance company estimate</p>
+                      </div>
+                      <div className="text-center border-l border-r border-white/20 md:border-l-0 md:border-r-0">
+                        <h4 className="text-lg font-semibold mb-2">SCC Settlement</h4>
+                        <p className="text-3xl font-bold">{currentClaim.finalSettlement}</p>
+                        <p className="text-sm opacity-90">{currentClaim.location}</p>
+                      </div>
+                      <div className="text-center">
+                        <h4 className="text-lg font-semibold mb-2">SCC Result</h4>
+                        <p className="text-3xl font-bold">{currentClaim.sccResult}</p>
+                        <p className="text-sm opacity-90">Settlement increase achieved</p>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 text-center">
+                      <p className="text-lg font-medium">
+                        Based on actual SCC client victory: <span className="font-bold">{currentClaim.title.split(' - ')[0]}</span>
+                      </p>
+                      <p className="text-sm opacity-90 mt-2">
+                        Part of SCC's $2+ billion recovered for clients nationwide
+                      </p>
+                    </div>
+                  </div>
                 </div>
               )}
 
               {/* Removed Workflow Tab - now integrated into other tabs */}
               {false && (
-                <div className="bg-white rounded-2xl shadow-xl p-8">
-                  <h2 className="text-2xl font-bold text-stellar-dark mb-4">
+                <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8">
+                  <h2 className="text-2xl font-bold text-scc-gray-dark mb-4">
                     Automated Claims Workflow
                   </h2>
-                  <p className="text-gray-600 mb-8">
+                  <p className="text-gray-600 dark:text-gray-400 mb-8">
                     Streamline your entire claims process with intelligent automation and real-time tracking.
                   </p>
 
@@ -985,7 +1026,7 @@ export default function DemoPage() {
                       <div key={index} className="relative flex items-start gap-6 mb-8">
                         <div className={`w-16 h-16 rounded-full flex items-center justify-center z-10 ${
                           item.status === 'completed' ? 'bg-green-500' :
-                          item.status === 'active' ? 'bg-stellar-orange' :
+                          item.status === 'active' ? 'bg-scc-red' :
                           'bg-gray-300'
                         }`}>
                           {item.status === 'completed' ? (
@@ -1000,16 +1041,16 @@ export default function DemoPage() {
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center gap-4 mb-1">
-                            <h3 className="font-semibold text-gray-800">{item.title}</h3>
+                            <h3 className="font-semibold text-gray-800 dark:text-gray-200">{item.title}</h3>
                             <span className={`text-sm ${
                               item.status === 'completed' ? 'text-green-600' :
-                              item.status === 'active' ? 'text-stellar-orange' :
+                              item.status === 'active' ? 'text-scc-red' :
                               'text-gray-500'
                             }`}>
                               {item.time}
                             </span>
                           </div>
-                          <p className="text-gray-600">{item.description}</p>
+                          <p className="text-gray-600 dark:text-gray-400">{item.description}</p>
                         </div>
                       </div>
                     ))}
@@ -1022,10 +1063,10 @@ export default function DemoPage() {
                       { metric: '60%', label: 'Fewer Manual Touchpoints', icon: Users },
                       { metric: '99.9%', label: 'Accuracy Rate', icon: CheckCircle },
                     ].map((benefit, index) => (
-                      <div key={index} className="bg-gray-50 rounded-lg p-6 text-center">
-                        <benefit.icon className="mx-auto mb-3 text-stellar-orange" size={32} />
-                        <div className="text-3xl font-bold text-stellar-dark mb-2">{benefit.metric}</div>
-                        <p className="text-gray-600">{benefit.label}</p>
+                      <div key={index} className="bg-gray-50 dark:bg-gray-900 rounded-lg p-6 text-center">
+                        <benefit.icon className="mx-auto mb-3 text-scc-red" size={32} />
+                        <div className="text-3xl font-bold text-scc-gray-dark mb-2">{benefit.metric}</div>
+                        <p className="text-gray-600 dark:text-gray-400">{benefit.label}</p>
                       </div>
                     ))}
                   </div>

@@ -23,7 +23,7 @@ export async function sendEmail(options: EmailOptions) {
     if (resend && process.env.NODE_ENV === 'production') {
       // Send real email in production
       const result = await resend.emails.send({
-        from: 'Stellar Intelligence <noreply@stellar-ai.com>',
+        from: 'SCC Intelligence <noreply@scottr-ai.com>',
         to,
         subject,
         html,
@@ -50,7 +50,7 @@ export async function sendEmail(options: EmailOptions) {
 // Email templates
 export const emailTemplates = {
   claimSubmitted: (claimNumber: string, insuredName: string, estimate?: number) => ({
-    subject: `Claim ${claimNumber} Received - Stellar Intelligence`,
+    subject: `Claim ${claimNumber} Received - SCC Intelligence`,
     html: `
       <!DOCTYPE html>
       <html>
@@ -85,12 +85,12 @@ export const emailTemplates = {
               
               <p>Our AI-powered system is analyzing your claim and will provide updates within 24 hours. You can track your claim status at any time using the link below.</p>
               
-              <a href="https://stellar-ai.com/claims/${claimNumber}" class="button">Track Your Claim</a>
+              <a href="https://scottr-ai.com/claims/${claimNumber}" class="button">Track Your Claim</a>
               
               <p>If you have any questions, please don't hesitate to contact us.</p>
               
               <div class="footer">
-                <p>© 2025 Stellar Intelligence Platform. All rights reserved.</p>
+                <p>© 2025 SCC Intelligence Platform. All rights reserved.</p>
                 <p>This is an automated message. Please do not reply to this email.</p>
               </div>
             </div>
@@ -142,9 +142,9 @@ export const emailTemplates = {
                 <li>Schedule repairs with approved contractors</li>
               </ol>
               
-              <a href="https://stellar-ai.com/claims/${claimNumber}/estimate" class="button">View Full Estimate</a>
+              <a href="https://scottr-ai.com/claims/${claimNumber}/estimate" class="button">View Full Estimate</a>
               
-              <p>Thank you for choosing Stellar Intelligence for your insurance needs.</p>
+              <p>Thank you for choosing SCC Intelligence for your insurance needs.</p>
             </div>
           </div>
         </body>

@@ -319,8 +319,8 @@ export async function generateInspectionPDF(data: InspectionReportData): Promise
   
   // Cover Page
   inputs.push({
-    header: 'STELLAR INTELLIGENCE PLATFORM',
-    logo: '/images/stellar_logo.png',
+    header: 'SCC INTELLIGENCE PLATFORM',
+    logo: '/images/scc_logo.png',
     reportTitle: 'PROPERTY INSPECTION REPORT',
     propertyAddress: `${data.metadata.property.address}, ${data.metadata.property.city}, ${data.metadata.property.state} ${data.metadata.property.zipCode}`,
     reportDate: `Report Generated: ${new Date(data.metadata.generatedDate).toLocaleDateString()}`,

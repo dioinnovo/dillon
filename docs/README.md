@@ -1,4 +1,4 @@
-# Stellar Intelligence Platform
+# SCC Intelligence Platform
 ## Complete Documentation Suite
 
 ---
@@ -24,7 +24,7 @@
 
 ## 🌟 Platform Overview
 
-The **Stellar Intelligence Platform** revolutionizes property inspection and insurance claims processing through advanced AI technology. Our system increases claim recoveries by **42%** while reducing processing time by **67%**.
+The **SCC Intelligence Platform** revolutionizes property inspection and insurance claims processing through advanced AI technology. Our system increases claim recoveries by **42%** while reducing processing time by **67%**.
 
 ### ⚡ Key Capabilities
 - **AI-Powered Damage Detection** - Computer vision analysis with 94.3% accuracy
@@ -270,7 +270,7 @@ npm run dev
 
 ### Intellectual Property
 - **Patents Pending** - Proprietary AI algorithms and methodologies
-- **Trademarks** - Stellar Intelligence Platform and associated marks
+- **Trademarks** - SCC Intelligence Platform and associated marks
 - **Copyrights** - Software code and documentation protection
 - **Trade Secrets** - Proprietary AI training datasets and models
 
@@ -284,7 +284,7 @@ npm run dev
 
 **Ready to Transform Property Intelligence?**
 
-Contact our team today to schedule a demonstration and explore how the Stellar Intelligence Platform can revolutionize your property assessment and claims processing workflow.
+Contact our team today to schedule a demonstration and explore how the SCC Intelligence Platform can revolutionize your property assessment and claims processing workflow.
 
 📧 **Get Started**: contact@stellar.ai  
 🌐 **Learn More**: https://stellar.ai  

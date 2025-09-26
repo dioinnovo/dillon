@@ -1,5 +1,5 @@
 /**
- * Business Intelligence Service Layer for Stellar AI Copilot
+ * Business Intelligence Service Layer for Scott AI Copilot
  * Provides real-time access to claims, financial metrics, and business data
  */
 
@@ -51,7 +51,7 @@ export interface TimelineEvent {
 
 export interface NegotiationEvent {
   date: string
-  party: 'Stellar' | 'Insurance Company' | 'Client'
+  party: 'Scott' | 'Insurance Company' | 'Client'
   action: 'Initial Demand' | 'Counter-Offer' | 'Response' | 'Final Settlement'
   amount: number
   status: 'sent' | 'received' | 'accepted' | 'rejected' | 'reviewing'
@@ -381,7 +381,7 @@ export class BusinessIntelligenceService {
         negotiationHistory: [
           {
             date: '2024-03-01',
-            party: 'Stellar',
+            party: 'Scott',
             action: 'Initial Demand',
             amount: 385450,
             status: 'sent'

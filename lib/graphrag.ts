@@ -73,13 +73,13 @@ export class GraphRAG {
       try {
         // Try to get existing collection
         this.collection = await this.client.getCollection({
-          name: 'stellar-claims',
+          name: 'scottr-claims',
           embeddingFunction: this.embeddingFunction
         })
       } catch {
         // Create new collection if it doesn't exist
         this.collection = await this.client.createCollection({
-          name: 'stellar-claims',
+          name: 'scottr-claims',
           embeddingFunction: this.embeddingFunction
         })
       }

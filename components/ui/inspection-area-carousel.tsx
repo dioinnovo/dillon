@@ -144,12 +144,12 @@ export function InspectionAreaCarousel({
         className={`space-y-4 ${className}`}
       >
         {/* Expanded Header */}
-        <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6">
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm p-4 sm:p-6">
           {/* Back button and Status on same line */}
           <div className="flex items-center justify-between mb-4">
             <button
               onClick={onNavigateBack}
-              className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition"
+              className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-100 transition"
             >
               <ArrowLeft size={20} />
               <span className="text-sm">Back to Area Selection</span>
@@ -170,14 +170,14 @@ export function InspectionAreaCarousel({
                 )}
               </div>
               <div>
-                <h2 className="text-lg font-semibold text-gray-900">{expandedArea.name}</h2>
-                <p className="text-sm text-gray-500">{expandedArea.category}</p>
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{expandedArea.name}</h2>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{expandedArea.category}</p>
               </div>
             </div>
 
           {/* Area Progress Bar */}
           <div className="mb-4">
-            <div className="flex justify-between text-xs text-gray-600 mb-1">
+            <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
               <span>{expandedArea.name} Inspection Progress</span>
               <span>
                 {expandedArea.status === 'completed' ? '100%' :
@@ -185,14 +185,14 @@ export function InspectionAreaCarousel({
                  `${expandedArea.completionPercentage || 0}%`}
               </span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
+            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
               <div
                 className={cn(
                   "h-2 rounded-full transition-all",
                   expandedArea.status === 'completed' && "bg-green-500",
                   expandedArea.status === 'skipped' && "bg-yellow-500",
                   expandedArea.status === 'in_progress' && "bg-blue-500",
-                  (!expandedArea.status || expandedArea.status === 'not_started') && "bg-stellar-orange"
+                  (!expandedArea.status || expandedArea.status === 'not_started') && "bg-scc-red"
                 )}
                 style={{
                   width: expandedArea.status === 'completed' ? '100%' :
@@ -223,7 +223,7 @@ export function InspectionAreaCarousel({
         </div>
 
         {/* Expanded Content */}
-        <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6">
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm p-4 sm:p-6">
           {children}
         </div>
       </motion.div>
@@ -234,12 +234,12 @@ export function InspectionAreaCarousel({
   return (
     <div className={cn("relative flex flex-col h-full", className)}>
       {/* Header */}
-      <div className="p-4 bg-white border-b border-gray-200 flex-shrink-0">
+      <div className="p-4 bg-white dark:bg-gray-900 border-b border-gray-200 flex-shrink-0">
         <div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-stellar-dark mb-1">Property Inspection Areas</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-scc-gray-dark mb-1">Property Inspection Areas</h2>
 
           {/* Instructions */}
-          <p className="text-sm text-gray-600 mb-3">
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
             Swipe through areas and tap to document damage
           </p>
 
@@ -373,8 +373,8 @@ export function InspectionAreaCarousel({
                           )}
                         </div>
                         <div className="flex-1">
-                          <h3 className="text-sm font-semibold text-gray-900">{area.name}</h3>
-                          <p className="text-xs text-gray-600">{area.category}</p>
+                          <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">{area.name}</h3>
+                          <p className="text-xs text-gray-600 dark:text-gray-400">{area.category}</p>
                         </div>
                       </div>
                     </div>
@@ -382,7 +382,7 @@ export function InspectionAreaCarousel({
                     {/* Card Body */}
                     <div className="p-4 flex-1 flex flex-col">
                       {/* Preview Image or Placeholder */}
-                      <div className="w-full h-[180px] bg-gray-100 rounded-lg mb-2 overflow-hidden">
+                      <div className="w-full h-[180px] bg-gray-100 dark:bg-gray-800 rounded-lg mb-2 overflow-hidden">
                         {area.previewImage && !area.previewImage.startsWith('blob:') ? (
                           <img
                             src={area.previewImage}
@@ -397,7 +397,7 @@ export function InspectionAreaCarousel({
                         ) : (
                           <div className="w-full h-full flex flex-col items-center justify-center">
                             <Camera className="w-10 h-10 text-gray-400 mb-1" />
-                            <p className="text-xs text-gray-500">Tap to start inspection</p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400">Tap to start inspection</p>
                           </div>
                         )}
                       </div>
@@ -407,13 +407,13 @@ export function InspectionAreaCarousel({
                         <div className="grid grid-cols-2 gap-3 mb-3">
                           <div className="flex items-center gap-2">
                             <Camera className="w-4 h-4 text-blue-600" />
-                            <span className="text-sm font-medium text-gray-700">
+                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                               {area.photoCount || 0} Photos
                             </span>
                           </div>
                           <div className="flex items-center gap-2">
                             <FileText className="w-4 h-4 text-purple-600" />
-                            <span className="text-sm font-medium text-gray-700">
+                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                               {area.notesCount || 0} Notes
                             </span>
                           </div>
@@ -423,13 +423,13 @@ export function InspectionAreaCarousel({
                       {/* Progress Bar */}
                       {area.completionPercentage !== undefined && area.completionPercentage > 0 && (
                         <div className="mb-2">
-                          <div className="flex justify-between text-xs text-gray-600 mb-0.5">
+                          <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-0.5">
                             <span>Area Progress</span>
                             <span>{area.completionPercentage}%</span>
                           </div>
-                          <div className="w-full bg-gray-200 rounded-full h-1.5">
+                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
                             <div 
-                              className="bg-stellar-orange h-1.5 rounded-full transition-all"
+                              className="bg-scc-red h-1.5 rounded-full transition-all"
                               style={{ width: `${area.completionPercentage}%` }}
                             />
                           </div>
@@ -438,7 +438,7 @@ export function InspectionAreaCarousel({
 
                       {/* Last Modified */}
                       {area.lastModified && (
-                        <div className="flex items-center gap-1 text-xs text-gray-500">
+                        <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
                           <Clock className="w-3 h-3" />
                           <span>Last updated {formatTimeAgo(area.lastModified)}</span>
                         </div>
@@ -452,7 +452,7 @@ export function InspectionAreaCarousel({
                               e.stopPropagation()
                               onAreaSkip(area)
                             }}
-                            className="flex-1 bg-gray-100 text-gray-700 py-2 px-3 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors flex items-center justify-center gap-1"
+                            className="flex-1 bg-gray-100 dark:bg-gray-800 text-gray-700 py-2 px-3 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors flex items-center justify-center gap-1"
                           >
                             <SkipForward size={14} />
                             Skip
@@ -462,7 +462,7 @@ export function InspectionAreaCarousel({
                               e.stopPropagation()
                               onAreaSelect(area, index)
                             }}
-                            className="flex-1 bg-stellar-orange text-white py-2 px-3 rounded-lg text-sm font-medium hover:bg-orange-600 transition-colors flex items-center justify-center gap-1"
+                            className="flex-1 bg-scc-red text-white py-2 px-3 rounded-lg text-sm font-medium hover:bg-scc-red-dark transition-colors flex items-center justify-center gap-1"
                           >
                             <Camera size={14} />
                             Start
@@ -473,7 +473,7 @@ export function InspectionAreaCarousel({
                       {/* Instruction for non-active cards */}
                       {index !== activeIndex && !area.status && (
                         <div className="mt-4 text-center">
-                          <p className="text-xs text-gray-500">Click to select</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">Click to select</p>
                         </div>
                       )}
                     </div>
@@ -485,16 +485,16 @@ export function InspectionAreaCarousel({
         </Swiper>
 
         {/* Custom Navigation Buttons - Aligned to middle of cards */}
-        <button className="swiper-button-prev-custom absolute left-4 top-[50%] -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-shadow">
-          <ChevronLeft className="w-5 h-5 text-gray-700" />
+        <button className="swiper-button-prev-custom absolute left-4 top-[50%] -translate-y-1/2 z-10 p-2 bg-white dark:bg-gray-900 rounded-full shadow-lg hover:shadow-xl transition-shadow">
+          <ChevronLeft className="w-5 h-5 text-gray-700 dark:text-gray-300" />
         </button>
-        <button className="swiper-button-next-custom absolute right-4 top-[50%] -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-shadow">
-          <ChevronRight className="w-5 h-5 text-gray-700" />
+        <button className="swiper-button-next-custom absolute right-4 top-[50%] -translate-y-1/2 z-10 p-2 bg-white dark:bg-gray-900 rounded-full shadow-lg hover:shadow-xl transition-shadow">
+          <ChevronRight className="w-5 h-5 text-gray-700 dark:text-gray-300" />
         </button>
       </div>
 
       {/* Progress Dots and Current Position */}
-      <div className="px-4 py-2 bg-white border-t border-gray-200 flex-shrink-0">
+      <div className="px-4 py-2 bg-white dark:bg-gray-900 border-t border-gray-200 flex-shrink-0">
         {/* Progress Dots */}
         <div className="flex items-center justify-center gap-0.5 mb-1">
           {areas.map((area, idx) => (
@@ -508,7 +508,7 @@ export function InspectionAreaCarousel({
                 area.status === 'in_progress' && "bg-blue-500 border-blue-600",
                 area.status === 'skipped' && "bg-yellow-500 border-yellow-600",
                 !area.status && "bg-gray-400 border-gray-500",
-                idx === activeIndex && area.status !== 'completed' && "bg-stellar-orange border-orange-700 ring-1 ring-stellar-orange/30",
+                idx === activeIndex && area.status !== 'completed' && "bg-scc-red border-red-700 ring-1 ring-scc-red/30",
                 idx === activeIndex && area.status === 'completed' && "ring-1 ring-green-500/30"
               )}
               title={area.name}
@@ -517,7 +517,7 @@ export function InspectionAreaCarousel({
         </div>
 
         {/* Current Position Text */}
-        <p className="text-[10px] text-gray-600 text-center">
+        <p className="text-[10px] text-gray-600 dark:text-gray-400 text-center">
           Area {activeIndex + 1} of {areas.length}
         </p>
       </div>
@@ -529,7 +529,7 @@ export function InspectionAreaCarousel({
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 100 }}
-            className="bg-white border-t border-gray-200 px-4 pb-2 pt-0 flex-shrink-0"
+            className="bg-white dark:bg-gray-900 border-t border-gray-200 px-4 pb-2 pt-0 flex-shrink-0"
           >
             {/* Category Groups */}
             <div className="space-y-0.5">
@@ -541,7 +541,7 @@ export function InspectionAreaCarousel({
                 
                 return (
                   <div key={category}>
-                    <div className="text-[9px] font-medium text-gray-500 mb-0.5">{category}</div>
+                    <div className="text-[9px] font-medium text-gray-500 dark:text-gray-400 mb-0.5">{category}</div>
                     <div className="flex items-center gap-2 overflow-x-auto p-0.5">
                       {categoryAreas.map((area, areaIndex) => {
                         const globalIndex = areas.findIndex(a => a.id === area.id)
@@ -559,7 +559,7 @@ export function InspectionAreaCarousel({
                               area.status === 'skipped' && "bg-yellow-50",
                               area.status === 'in_progress' && "bg-blue-50",
                               !area.status && "bg-gray-50 hover:bg-gray-100",
-                              isActive && area.status !== 'completed' && area.status !== 'skipped' && "bg-stellar-orange ring-2 ring-stellar-orange/40",
+                              isActive && area.status !== 'completed' && area.status !== 'skipped' && "bg-scc-red ring-2 ring-scc-red/40",
                               isActive && area.status === 'completed' && "bg-green-50 ring-2 ring-green-500/40",
                               isActive && area.status === 'skipped' && "bg-yellow-50 ring-2 ring-yellow-500/40"
                             )}
