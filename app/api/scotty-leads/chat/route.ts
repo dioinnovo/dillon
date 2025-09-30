@@ -1,10 +1,10 @@
 /**
- * Scott Leads API - Commercial Property Lead Generation & Qualification
+ * Scotty Leads API - Commercial Property Lead Generation & Qualification
  * Public-facing endpoint for converting commercial property owners into qualified leads
  */
 
 import { NextRequest, NextResponse } from 'next/server'
-import { buildScottLeadsPrompt, getScottLeadsQuickAction } from '@/lib/ai/prompts/scott-leads-prompt'
+import { buildScottyLeadsPrompt, getScottyLeadsQuickAction } from '@/lib/ai/prompts/scotty-leads-prompt'
 
 // Azure OpenAI configuration - Optimized for conversational lead generation
 const AZURE_ENDPOINT = process.env.AZURE_OPENAI_ENDPOINT
@@ -44,12 +44,12 @@ export async function POST(request: NextRequest) {
     const context = await gatherLeadContext(userMessage)
 
     // Build lead generation focused system prompt
-    const systemPrompt = buildScottLeadsPrompt(buildLeadContextString(context))
+    const systemPrompt = buildScottyLeadsPrompt(buildLeadContextString(context))
 
     // Process quick actions if specified
     let enhancedUserMessage = userMessage
     if (quickAction) {
-      enhancedUserMessage = getScottLeadsQuickAction(quickAction, context as any)
+      enhancedUserMessage = getScottyLeadsQuickAction(quickAction, context as any)
     }
 
     // Prepare messages for Azure OpenAI
@@ -141,7 +141,7 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Scott Leads API error:', error)
+    console.error('Scotty Leads API error:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

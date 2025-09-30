@@ -182,8 +182,8 @@ export default function ClaimDetailPage() {
         time: '02:15 PM',
         type: 'analysis',
         title: 'AI Coverage Analysis Completed',
-        description: 'Scott AI identified additional coverage opportunities worth $90,000',
-        user: 'Scott AI',
+        description: 'Scotty AI identified additional coverage opportunities worth $90,000',
+        user: 'Scotty AI',
         icon: Brain,
         color: 'blue'
       },

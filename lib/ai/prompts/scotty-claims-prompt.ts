@@ -1,10 +1,10 @@
 /**
- * Scott Claims - Commercial Property Claims Operations & Technical Expert
+ * Scotty Claims - Commercial Property Claims Operations & Technical Expert
  * Strategic Claims Operations & Technical Tracker for SCC's internal team
  * Specialized in commercial property claims analysis and settlement maximization
  */
 
-export const Scott_CLAIMS_PROMPT = `You are Scott (Strategic Claims Operations & Technical Tracker), the Commercial Property Claims Expert for Strategic Claim Consultants. SCC is a premier public adjusting firm with over $2 billion in recovered settlements and 300+ years of collective experience. We specialize in commercial property claims, large-loss claims ($1M+), catastrophe (CAT) claims, and business interruption cases.
+export const Scotty_CLAIMS_PROMPT = `You are Scottyy (Strategic Claims Operations & Technical Tracker), the Commercial Property Claims Expert for Strategic Claim Consultants. SCC is a premier public adjusting firm with over $2 billion in recovered settlements and 300+ years of collective experience. We specialize in commercial property claims, large-loss claims ($1M+), catastrophe (CAT) claims, and business interruption cases.
 
 ## INITIAL INTERACTION PROTOCOL
 
@@ -380,7 +380,7 @@ When analyzing a policy, provide:
 
 Remember: You are Strategic Claim Consultants' most powerful tool for ensuring commercial property clients receive maximum settlements. With SCC's track record of $2 billion in recovered settlements, your analysis helps businesses recover from catastrophic losses. Your expertise focuses on complex commercial property and business interruption cases, ensuring maximum recovery for all commercial property owners and business entities.`
 
-export const Scott_CLAIMS_QUICK_ACTIONS = {
+export const Scotty_CLAIMS_QUICK_ACTIONS = {
   FULL_POLICY_REVIEW: "Perform a comprehensive policy review including all 50+ analysis points, coverage opportunities, exclusions, hidden benefits, and settlement maximization strategies.",
 
   COVERAGE_OPPORTUNITIES: "Identify ALL possible cash settlement opportunities in this policy. Include hidden coverages, overlooked endorsements, and all sublimits.",
@@ -422,8 +422,8 @@ export const Scott_CLAIMS_QUICK_ACTIONS = {
   STATE_SPECIFIC_REQUIREMENTS: "Review all state-specific requirements for this claim including deadlines, notices, and PA regulations."
 }
 
-export function buildScottClaimsPrompt(context?: string): string {
-  return `${Scott_CLAIMS_PROMPT}
+export function buildScottyClaimsPrompt(context?: string): string {
+  return `${Scotty_CLAIMS_PROMPT}
 
 ${context ? `
 ## CURRENT CLAIM CONTEXT
@@ -433,8 +433,8 @@ ${context}
 Remember: Your comprehensive analysis ensures public adjusters maximize recovery for their clients and never miss a coverage opportunity.`
 }
 
-export function getScottClaimsQuickAction(action: keyof typeof Scott_CLAIMS_QUICK_ACTIONS, context?: Record<string, string>): string {
-  let prompt = Scott_CLAIMS_QUICK_ACTIONS[action]
+export function getScottyClaimsQuickAction(action: keyof typeof Scotty_CLAIMS_QUICK_ACTIONS, context?: Record<string, string>): string {
+  let prompt = Scotty_CLAIMS_QUICK_ACTIONS[action]
 
   if (context) {
     Object.entries(context).forEach(([key, value]) => {

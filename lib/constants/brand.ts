@@ -10,7 +10,7 @@ export const SCC_BRAND: BrandConfig = {
     success: SCC_SUCCESS // #00A651 - Green for positive metrics
   },
   ai: {
-    name: 'Scott',
+    name: 'Scotty',
     persona: 'Strategic Claims Operations & Technical Tracker - Property claims expert for Strategic Claim Consultants, specializing in both residential and commercial properties with expertise in large-loss commercial claims ($1M+), CAT claims, and business interruption. Leverages SCC\'s $2 billion in recovered settlements.'
   }
 }

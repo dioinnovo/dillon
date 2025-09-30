@@ -29,7 +29,7 @@ export default function ROICalculator() {
     breakEvenClaims: 0
   })
 
-  // Scott platform annual cost
+  // Scotty platform annual cost
   const annualCost = 75000
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function ROICalculator() {
   }, [metrics])
 
   const calculateROI = () => {
-    // Settlement increase: 34% average with Scott
+    // Settlement increase: 34% average with Scotty
     const settlementIncrease = 0.34
     const additionalRecoveryPerClaim = metrics.averageClaimValue * (metrics.currentSettlementRate / 100) * settlementIncrease
     const totalAdditionalRecovery = additionalRecoveryPerClaim * metrics.currentClaims
@@ -178,7 +178,7 @@ export default function ROICalculator() {
             {/* Annual Investment */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Scott Annual Investment
+                Scotty Annual Investment
               </label>
               <input
                 type="text"
@@ -194,7 +194,7 @@ export default function ROICalculator() {
         <div className="space-y-4 pt-6 border-t border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
             <TrendingUp className="w-5 h-5 text-green-600" />
-            Your Projected Results with Scott
+            Your Projected Results with Scotty
           </h3>
 
           {/* Key Metrics Grid */}
@@ -261,7 +261,7 @@ export default function ROICalculator() {
 
             <div className="mt-4 pt-4 border-t border-red-400/30">
               <p className="text-sm text-red-100">
-                With just {results.breakEvenClaims} successfully maximized claims, Scott pays for itself.
+                With just {results.breakEvenClaims} successfully maximized claims, Scotty pays for itself.
                 Everything after that is pure profit.
               </p>
             </div>
@@ -284,7 +284,7 @@ export default function ROICalculator() {
                 <span className="font-bold text-green-600">{formatCurrency(results.totalROI + annualCost)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600 dark:text-gray-400">Scott Investment</span>
+                <span className="text-gray-600 dark:text-gray-400">Scotty Investment</span>
                 <span className="font-medium text-red-600">-{formatCurrency(annualCost)}</span>
               </div>
               <div className="flex justify-between pt-2 border-t border-gray-200 dark:border-gray-700">

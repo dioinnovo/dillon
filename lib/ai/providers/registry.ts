@@ -24,7 +24,7 @@ export const providers = {
 // Model to provider mapping
 const modelProviderMap: Record<ModelType, ProviderType> = {
   'quick': 'qlik',
-  'scott-pro': 'azure',
+  'scotty-pro': 'azure',
 };
 
 /**

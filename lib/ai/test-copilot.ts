@@ -1,5 +1,5 @@
 /**
- * Test Suite for Scott AI Business Copilot
+ * Test Suite for Scotty AI Business Copilot
  * Validates functionality and integration
  */
 
@@ -17,7 +17,7 @@ export class CopilotTester {
   }
 
   async runFullTest(): Promise<TestResults> {
-    console.log('🚀 Starting Scott AI Business Copilot Test Suite...\n')
+    console.log('🚀 Starting Scotty AI Business Copilot Test Suite...\n')
     
     const results: TestResults = {
       businessIntelligence: await this.testBusinessIntelligence(),

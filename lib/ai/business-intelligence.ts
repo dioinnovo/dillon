@@ -1,5 +1,5 @@
 /**
- * Business Intelligence Service Layer for Scott AI Copilot
+ * Business Intelligence Service Layer for Scotty AI Copilot
  * Provides real-time access to claims, financial metrics, and business data
  */
 
@@ -51,7 +51,7 @@ export interface TimelineEvent {
 
 export interface NegotiationEvent {
   date: string
-  party: 'Scott' | 'Insurance Company' | 'Client'
+  party: 'Scotty' | 'Insurance Company' | 'Client'
   action: 'Initial Demand' | 'Counter-Offer' | 'Response' | 'Final Settlement'
   amount: number
   status: 'sent' | 'received' | 'accepted' | 'rejected' | 'reviewing'
@@ -381,7 +381,7 @@ export class BusinessIntelligenceService {
         negotiationHistory: [
           {
             date: '2024-03-01',
-            party: 'Scott',
+            party: 'Scotty',
             action: 'Initial Demand',
             amount: 385450,
             status: 'sent'

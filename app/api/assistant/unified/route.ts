@@ -9,7 +9,7 @@ import { getProvider, resetProviderState } from '@/lib/ai/providers/registry';
 import { ModelType } from '@/lib/ai/providers/types';
 import { QlikWrapper } from '@/lib/ai/providers/qlik-wrapper';
 import { z } from 'zod';
-import { buildScottClaimsPrompt } from '@/lib/ai/prompts/scott-claims-prompt';
+import { buildScottyClaimsPrompt } from '@/lib/ai/prompts/scotty-claims-prompt';
 import {
   getQuickQuestionSuggestions,
   expandQuickQuestion,
@@ -25,7 +25,7 @@ const RequestSchema = z.object({
     role: z.enum(['user', 'assistant', 'system']),
     content: z.string(),
   })),
-  model: z.enum(['quick', 'scott-pro']).default('scott-pro'),
+  model: z.enum(['quick', 'scotty-pro']).default('scotty-pro'),
   stream: z.boolean().default(true),
   temperature: z.number().min(0).max(2).optional(),
   maxTokens: z.number().min(1).max(8000).optional(),
@@ -303,9 +303,9 @@ You can save this comprehensive analysis for your records. The report includes a
       }
     });
 
-    // Add system prompt for Scott Pro (Azure) - policy analysis expertise
-    if (model === 'scott-pro' && !messages.some(m => m.role === 'system')) {
-      const systemPrompt = buildScottClaimsPrompt('');
+    // Add system prompt for Scotty Pro (Azure) - policy analysis expertise
+    if (model === 'scotty-pro' && !messages.some(m => m.role === 'system')) {
+      const systemPrompt = buildScottyClaimsPrompt('');
       coreMessages.unshift({
         role: 'system',
         content: systemPrompt,
@@ -316,7 +316,7 @@ You can save this comprehensive analysis for your records. The report includes a
     const commonOptions = {
       model: provider,
       messages: coreMessages,
-      temperature: temperature ?? (model === 'scott-pro' ? 0.5 : 0.7),
+      temperature: temperature ?? (model === 'scotty-pro' ? 0.5 : 0.7),
     };
 
     // Handle streaming response
@@ -463,8 +463,8 @@ function generateSuggestions(model: ModelType, response: string, messages: any[]
     return getQuickQuestionSuggestions().slice(0, 4);
   }
 
-  // Scott Pro suggestions (expert analysis)
-  if (model === 'scott-pro') {
+  // Scotty Pro suggestions (expert analysis)
+  if (model === 'scotty-pro') {
     if (!messages.some(m => m.content.toLowerCase().includes('policy'))) {
       return [
         'Upload my insurance policy',
@@ -492,7 +492,7 @@ function generateSuggestions(model: ModelType, response: string, messages: any[]
       ];
     }
 
-    // Default Scott Pro suggestions
+    // Default Scotty Pro suggestions
     return [
       'Analyze coverage gaps',
       'Review deductibles',
@@ -662,7 +662,7 @@ async function handleQlikRequest(
       console.log('Falling back to Azure provider');
 
       try {
-        const provider = getProvider('scott-pro');
+        const provider = getProvider('scotty-pro');
         const coreMessages = messages.map(msg => ({
           role: msg.role,
           content: msg.content
@@ -675,7 +675,7 @@ async function handleQlikRequest(
 
         return NextResponse.json({
           response: result.text,
-          suggestions: generateSuggestions('scott-pro', result.text, messages),
+          suggestions: generateSuggestions('scotty-pro', result.text, messages),
           provider: 'azure-fallback',
         });
       } catch (fallbackError) {

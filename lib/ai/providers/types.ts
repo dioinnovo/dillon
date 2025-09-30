@@ -7,7 +7,7 @@ import { CoreMessage, LanguageModel } from 'ai';
 
 export type ProviderType = 'qlik' | 'azure';
 
-export type ModelType = 'quick' | 'scott-pro';
+export type ModelType = 'quick' | 'scotty-pro';
 
 export interface ProviderConfig {
   apiKey: string;

@@ -1,5 +1,5 @@
 /**
- * Specialized API endpoint for Scott AI Business Copilot
+ * Specialized API endpoint for Scotty AI Business Copilot
  * Provides intelligent responses with business context and real-time data access
  */
 

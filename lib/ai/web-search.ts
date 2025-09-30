@@ -1,5 +1,5 @@
 /**
- * Web Search Service for Scott AI Copilot
+ * Web Search Service for Scotty AI Copilot
  * Enables real-time research and information gathering
  */
 

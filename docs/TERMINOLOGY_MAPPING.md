@@ -25,14 +25,14 @@
 - **stellar-brand** → **scc-brand**
 
 ### API Routes
-- **/api/stella-claims** → **/api/scott-claims**
-- **/api/stella-leads** → **/api/scott-leads**
+- **/api/stella-claims** → **/api/scotty-claims**
+- **/api/stella-leads** → **/api/scotty-leads**
 
 ### Function Names
-- **buildStellaClaimsPrompt** → **buildScottClaimsPrompt**
-- **getStellaClaimsQuickAction** → **getScottClaimsQuickAction**
-- **buildStellaLeadsPrompt** → **buildScottLeadsPrompt**
-- **getStellaLeadsQuickAction** → **getScottLeadsQuickAction**
+- **buildStellaClaimsPrompt** → **buildScottyClaimsPrompt**
+- **getStellaClaimsQuickAction** → **getScottyClaimsQuickAction**
+- **buildStellaLeadsPrompt** → **buildScottyLeadsPrompt**
+- **getStellaLeadsQuickAction** → **getScottyLeadsQuickAction**
 
 ### Constants & Variables
 - **STELLA_CLAIMS_PROMPT** → **SCOTT_CLAIMS_PROMPT**
@@ -55,8 +55,8 @@
 ### Documentation Files
 - **STELLA_DEMO_SCRIPT.md** → **SCOTT_DEMO_SCRIPT.md**
 - **STELLA_AGENTS_LIBRARY.md** → **SCOTT_AGENTS_LIBRARY.md**
-- **stella-claims-prompt.ts** → **scott-claims-prompt.ts**
-- **stella-leads-prompt.ts** → **scott-leads-prompt.ts**
+- **stella-claims-prompt.ts** → **scotty-claims-prompt.ts**
+- **stella-leads-prompt.ts** → **scotty-leads-prompt.ts**
 
 ## Marketing & Messaging
 

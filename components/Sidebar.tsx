@@ -55,7 +55,7 @@ export default function Sidebar({ isCollapsed = false, onToggle }: SidebarProps)
       description: 'All claims & details'
     },
     {
-      title: 'Scott',
+      title: 'Scotty',
       icon: Brain,
       href: '/dashboard/assistant',
       description: 'AI-powered commercial claims expert'
@@ -175,7 +175,7 @@ export default function Sidebar({ isCollapsed = false, onToggle }: SidebarProps)
           <div className="text-xs text-gray-500 dark:text-gray-400">
             <p className="font-semibold mb-1">NO RECOVERY, NO FEE</p>
             <p>Maximizing settlements with AI</p>
-            <p className="mt-2">© 2025 Scott Adjusting</p>
+            <p className="mt-2">© 2025 Scotty Adjusting</p>
           </div>
         ) : (
           <div className="text-center text-xs text-gray-500 dark:text-gray-400">

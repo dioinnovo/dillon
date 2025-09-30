@@ -291,7 +291,7 @@ export default function ClaimAssessmentPage() {
             <Link href="/" className="flex items-center">
               <Image 
                 src="/images/scc_logo.png" 
-                alt="Scott Adjusting" 
+                alt="Scotty Adjusting" 
                 width={120} 
                 height={34}
                 priority

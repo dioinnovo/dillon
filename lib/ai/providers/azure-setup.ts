@@ -20,7 +20,7 @@ export const azureModels = {
   'gpt-4o-mini-realtime': () => azureProvider('gpt-4o-mini-realtime-preview'),
 } as const;
 
-// Get the default model for Scott Pro (expert analysis)
+// Get the default model for Scotty Pro (expert analysis)
 export function getAzureModel(deploymentName?: string): LanguageModel {
   const deployment = deploymentName || process.env.AZURE_OPENAI_DEPLOYMENT || 'gpt-4o-mini';
 

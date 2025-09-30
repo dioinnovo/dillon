@@ -33,7 +33,7 @@ export default function LandingPage() {
       name: "Sarah Johnson",
       role: "Senior Adjuster",
       company: "Premier Claims Services",
-      content: "Scott has transformed our workflow. We're processing 3x more claims with better accuracy.",
+      content: "Scotty has transformed our workflow. We're processing 3x more claims with better accuracy.",
       rating: 5
     },
     {

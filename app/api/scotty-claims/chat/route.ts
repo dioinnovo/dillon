@@ -1,11 +1,11 @@
 /**
- * Scott Claims API - Commercial Property Policy Intelligence & Claims Analysis
+ * Scotty Claims API - Commercial Property Policy Intelligence & Claims Analysis
  * Internal endpoint for adjusters to analyze commercial property policies comprehensively
  */
 
 import { NextRequest, NextResponse } from 'next/server'
 import { BusinessIntelligenceService } from '@/lib/ai/business-intelligence'
-import { buildScottClaimsPrompt, getScottClaimsQuickAction } from '@/lib/ai/prompts/scott-claims-prompt'
+import { buildScottyClaimsPrompt, getScottyClaimsQuickAction } from '@/lib/ai/prompts/scotty-claims-prompt'
 import { WebSearch, SearchResultProcessor } from '@/lib/ai/web-search'
 
 // Azure OpenAI configuration - Using more capable model for policy analysis
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     const hasNoPolicyDocument = !policyDocument && !context.policyData?.documentProvided
 
     // Build enhanced system prompt with policy analysis focus
-    const systemPrompt = buildScottClaimsPrompt(await buildPolicyContextString(context))
+    const systemPrompt = buildScottyClaimsPrompt(await buildPolicyContextString(context))
 
     // Process quick actions if specified
     let enhancedUserMessage = userMessage
@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
         ...(claimId && { claimId }),
         ...(policyNumber && { policyNumber })
       }
-      enhancedUserMessage = getScottClaimsQuickAction(quickAction, contextParams)
+      enhancedUserMessage = getScottyClaimsQuickAction(quickAction, contextParams)
     }
 
     // Prepare messages for Azure OpenAI
@@ -153,7 +153,7 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Scott Claims API error:', error)
+    console.error('Scotty Claims API error:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

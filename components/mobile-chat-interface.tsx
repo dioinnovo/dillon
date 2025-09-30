@@ -151,7 +151,7 @@ export default function MobileChatInterface({ className }: MobileChatInterfacePr
   // Model options with provider indicators
   const modelOptions = [
     { value: 'quick', label: 'Quick', description: 'Qlik Answers - Fast responses' },
-    { value: 'scott-pro', label: 'Scott Pro', description: 'Azure AI - Commercial property expert' }
+    { value: 'scotty-pro', label: 'Scotty Pro', description: 'Azure AI - Commercial property expert' }
   ]
 
   useEffect(() => {
@@ -198,7 +198,7 @@ export default function MobileChatInterface({ className }: MobileChatInterfacePr
         (chat.title !== 'New Chat' && !chat.title.endsWith('...'))) return
 
     try {
-      const response = await fetch('/api/scott-claims/chat', {
+      const response = await fetch('/api/scotty-claims/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -296,7 +296,7 @@ export default function MobileChatInterface({ className }: MobileChatInterfacePr
             role: msg.role,
             content: msg.content
           })),
-          model: selectedModel, // 'quick' for Qlik, 'scott-pro' for Azure
+          model: selectedModel, // 'quick' for Qlik, 'scotty-pro' for Azure
           stream: false, // Start with non-streaming for simplicity
           generateTitle: messages.length === 0, // Generate title for first message
           resetThread: messages.length === 0, // Reset thread for new conversations
@@ -486,7 +486,7 @@ export default function MobileChatInterface({ className }: MobileChatInterfacePr
               
               <div className="space-y-2">
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  Hi! I'm Scott
+                  Hi! I'm Scottyy
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400 max-w-sm">
                   I analyze insurance policies comprehensively to uncover every coverage opportunity and maximize settlements for your clients. Upload a policy or select from recently added clients.
@@ -683,7 +683,7 @@ export default function MobileChatInterface({ className }: MobileChatInterfacePr
                   handleSend()
                 }
               }}
-              placeholder="Message Scott"
+              placeholder="Message Scotty"
               disabled={isTyping}
               className="w-full px-3 py-2 bg-transparent text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none resize-none transition-all disabled:opacity-50"
               style={{

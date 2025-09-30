@@ -27,7 +27,7 @@ export default function MobileBottomNav() {
       href: '/dashboard/claims',
     },
     {
-      title: 'Scott',
+      title: 'Scotty',
       icon: Brain,
       href: '/dashboard/assistant',
     },

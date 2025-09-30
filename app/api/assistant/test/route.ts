@@ -46,10 +46,10 @@ export async function GET(request: NextRequest) {
         }
       }
 
-      case 'scott-pro': {
+      case 'scotty-pro': {
         // Test Azure provider
         try {
-          const provider = getProvider('scott-pro');
+          const provider = getProvider('scotty-pro');
           const result = await generateText({
             model: provider,
             messages: [{ role: 'user', content: 'What is a deductible?' }]
@@ -94,7 +94,7 @@ export async function GET(request: NextRequest) {
 
         // Test Azure
         try {
-          const azureProvider = getProvider('scott-pro');
+          const azureProvider = getProvider('scotty-pro');
           const azureResult = await generateText({
             model: azureProvider,
             messages: [{ role: 'user', content: 'Hello' }]
@@ -116,7 +116,7 @@ export async function GET(request: NextRequest) {
 
       default:
         return NextResponse.json({
-          error: 'Invalid test type. Use: health, quick, scott-pro, or both',
+          error: 'Invalid test type. Use: health, quick, scotty-pro, or both',
         }, { status: 400 });
     }
   } catch (error) {

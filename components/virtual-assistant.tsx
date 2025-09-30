@@ -22,10 +22,10 @@ interface VirtualAssistantConfig {
 }
 
 const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
-  apiEndpoint = process.env.NEXT_PUBLIC_AI_API_ENDPOINT || "/api/scott-leads/chat",
+  apiEndpoint = process.env.NEXT_PUBLIC_AI_API_ENDPOINT || "/api/scotty-leads/chat",
   apiKey = process.env.NEXT_PUBLIC_AI_API_KEY,
   model = process.env.NEXT_PUBLIC_AI_MODEL || "gpt-4o-mini",
-  systemPrompt = "You are Scott, the elite Lead Generation Specialist for Scott Adjusting. Your PRIMARY mission is to identify property owners who have been lowballed, denied, or delayed by their insurance company and convert them into clients. You work for a company that fights insurance companies to get people every dollar they deserve. Always focus on: 1) Identifying if they have an active claim, 2) Uncovering how their insurance company is screwing them, 3) Creating urgency around getting professional help, 4) Scheduling a free claim review. You only get paid when clients get more money - NO WIN, NO FEE. Be empathetic but results-focused, and always position Scott as the solution to insurance company abuse.",
+  systemPrompt = "You are Scottyy, the elite Lead Generation Specialist for Scotty Adjusting. Your PRIMARY mission is to identify property owners who have been lowballed, denied, or delayed by their insurance company and convert them into clients. You work for a company that fights insurance companies to get people every dollar they deserve. Always focus on: 1) Identifying if they have an active claim, 2) Uncovering how their insurance company is screwing them, 3) Creating urgency around getting professional help, 4) Scheduling a free claim review. You only get paid when clients get more money - NO WIN, NO FEE. Be empathetic but results-focused, and always position Scotty as the solution to insurance company abuse.",
   useCallbackAgent = false
 }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -178,7 +178,7 @@ const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
         setTimeout(() => {
           setShowTypingIndicator(false)
           setMessages([{
-            text: "Hi! I'm Scott from Scott Adjusting. I help property owners who are getting lowballed, delayed, or denied by their insurance companies. If you have an active claim or recent property damage, I can tell you right now if your insurance company is trying to screw you over. What's going on with your claim?",
+            text: "Hi! I'm Scottyyy from Scotty Adjusting. I help property owners who are getting lowballed, delayed, or denied by their insurance companies. If you have an active claim or recent property damage, I can tell you right now if your insurance company is trying to screw you over. What's going on with your claim?",
             isUser: false,
             timestamp: new Date()
           }])
@@ -700,7 +700,7 @@ const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
             />
             <div>
               <h3 className="font-semibold text-gray-900 dark:text-white">
-                Scott Assistant
+                Scotty Assistant
               </h3>
               <div className="flex items-center gap-2">
                 <div className="relative flex items-center">

@@ -188,7 +188,7 @@ async function main() {
     if (knowledgeBases.length === 0) {
       console.log('📋 No knowledge bases found. Creating default knowledge base...\n');
       selectedKnowledgeBase = await createKnowledgeBase(
-        'Scott Insurance Knowledge Base',
+        'Scotty Insurance Knowledge Base',
         'Knowledge base for insurance policy analysis and claims processing'
       );
     } else {
@@ -197,7 +197,7 @@ async function main() {
 
     // Create assistant with knowledge base
     selectedAssistant = await createAssistant(
-      'Scott Policy Assistant',
+      'Scotty Policy Assistant',
       'AI assistant for insurance policy analysis and claims support',
       selectedKnowledgeBase ? selectedKnowledgeBase.id : null
     );
