@@ -528,15 +528,15 @@ export default function MobileChatInterface({ className }: MobileChatInterfacePr
                           ? 'bg-scc-red text-white' 
                           : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 shadow-sm'
                       }`}>
-                        {message.isPolicyAnalysis ? (
+                        {message.role === 'user' ? (
+                          <p className="whitespace-pre-wrap text-sm">{message.content}</p>
+                        ) : (
                           <TypewriterMessage
                             content={message.content}
-                            speed={1.5}
+                            speed={message.isPolicyAnalysis ? 1.5 : 3}
                             isPolicy={true}
                             onComplete={createOnCompleteCallback(message.id)}
                           />
-                        ) : (
-                          <p className="whitespace-pre-wrap text-sm">{message.content}</p>
                         )}
                       </div>
                       

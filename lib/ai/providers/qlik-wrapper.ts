@@ -73,7 +73,11 @@ export class QlikWrapper {
           method: 'POST',
           headers: this.headers,
           body: JSON.stringify({
-            prompt: message,
+            input: {
+              prompt: message,
+              promptType: 'thread',
+              includeText: true,
+            },
           }),
         }
       );
@@ -266,7 +270,11 @@ export class QlikWrapper {
         method: 'POST',
         headers: this.headers,
         body: JSON.stringify({
-          prompt: message,
+          input: {
+            prompt: message,
+            promptType: 'thread',
+            includeText: true,
+          },
         }),
       }
     );
