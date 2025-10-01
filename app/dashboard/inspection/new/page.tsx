@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
@@ -63,7 +63,7 @@ const URGENCY_LEVELS = [
   }
 ]
 
-export default function NewInspectionPage() {
+function NewInspectionPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [isSaving, setIsSaving] = useState(false)
@@ -526,5 +526,17 @@ export default function NewInspectionPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function NewInspectionPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-2 border-[#E74C3C] border-t-transparent" />
+      </div>
+    }>
+      <NewInspectionPageContent />
+    </Suspense>
   )
 }
