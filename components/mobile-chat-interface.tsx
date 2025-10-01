@@ -486,7 +486,7 @@ export default function MobileChatInterface({ className }: MobileChatInterfacePr
               
               <div className="space-y-2">
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  Hi! I'm Scottyy
+                  Hi! I'm Scotty
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400 max-w-sm">
                   I analyze insurance policies comprehensively to uncover every coverage opportunity and maximize settlements for your clients. Upload a policy or select from recently added clients.

@@ -157,8 +157,9 @@ export default function InspectionReportPage() {
   const [isDownloading, setIsDownloading] = useState(false)
   const [isApproved, setIsApproved] = useState<boolean | null>(null)
   const [storedReportData, setStoredReportData] = useState<any>(null)
+  const [claimId, setClaimId] = useState<string | null>(null)
 
-  // Check if report is approved on mount
+  // Check if report is approved on mount and load claimId
   useEffect(() => {
     // First check if there's a specific report for this inspection
     const reports = JSON.parse(sessionStorage.getItem('inspection_reports') || '[]')
@@ -178,6 +179,9 @@ export default function InspectionReportPage() {
           const fullReport = JSON.parse(sessionStorage.getItem(fullReportKey) || '{}')
           if (fullReport.status === 'approved' || fullReport.status === 'sent') {
             setStoredReportData(fullReport)
+            if (fullReport.claimId) {
+              setClaimId(fullReport.claimId)
+            }
           }
         }
       } else if (report.status === 'pending_approval' || report.status === 'in_review') {
@@ -192,6 +196,26 @@ export default function InspectionReportPage() {
       // This is because the mock data in the reports page has approved reports
       // but they might not be in sessionStorage
       setIsApproved(true)
+    }
+
+    // Also try to load claimId from localStorage report data
+    const localReportData = localStorage.getItem(`inspection-report-${inspectionId}`)
+    if (localReportData) {
+      const parsedData = JSON.parse(localReportData)
+      if (parsedData.claimId) {
+        setClaimId(parsedData.claimId)
+      }
+    }
+
+    // Fallback: load from inspection data
+    if (!claimId) {
+      const inspectionData = localStorage.getItem(`inspection-${inspectionId}-data`)
+      if (inspectionData) {
+        const parsedInspection = JSON.parse(inspectionData)
+        if (parsedInspection.claimId) {
+          setClaimId(parsedInspection.claimId)
+        }
+      }
     }
   }, [inspectionId])
 
@@ -639,62 +663,56 @@ export default function InspectionReportPage() {
       {/* Header - Non-printable */}
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 print:hidden">
         <div className="max-w-7xl mx-auto px-4 py-3 sm:py-4">
-          <div>
+          <div className="flex flex-col gap-3">
+            {/* Back Navigation */}
             <Link
-              href={`/dashboard/inspection/${inspectionId}/review`}
-              className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-100 transition-colors mb-3"
+              href={claimId ? `/dashboard/claims/${claimId}` : `/dashboard/inspection/${inspectionId}/review`}
+              className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-100 transition-colors w-fit"
             >
               <ArrowLeft size={20} />
-              <span>Back to Review</span>
+              <span>{claimId ? 'Back to Claim' : 'Back to Review'}</span>
             </Link>
-            <div>
-              <h1 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 dark:text-gray-100 break-words">
-                <span className="block sm:inline">Inspection Report</span>
-                <span className="block sm:inline sm:ml-1">- {reportData?.metadata?.reportId || `RPT-${inspectionId}`}</span>
-              </h1>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">
-                Generated {reportData?.metadata?.generatedDate || new Date().toLocaleDateString()}
-              </p>
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
-                <button
-                  onClick={handleDownloadPDF}
-                  disabled={isDownloading}
-                  className={`flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 rounded-lg transform transition-all duration-200 text-sm sm:text-base w-full sm:w-auto ${
-                    isDownloading
-                      ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                      : 'bg-black border border-black text-white hover:bg-gray-800 hover:shadow-sm hover:scale-[1.02] cursor-pointer'
-                  }`}
-                >
-                  <Download size={18} className={isDownloading ? 'animate-pulse' : ''} />
-                  <span>{isDownloading ? 'Downloading...' : 'Download PDF'}</span>
-                </button>
-                <button
-                  onClick={handleSendReport}
-                  disabled={isSending || reportSent}
-                  className={`px-4 sm:px-6 py-2.5 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto ${
-                    reportSent
-                      ? 'bg-green-600 text-white'
-                      : 'bg-blue-600 text-white hover:bg-blue-700 cursor-pointer disabled:opacity-50'
-                  }`}
-                >
-                  {isSending ? (
-                    <>
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
-                      <span>Sending...</span>
-                    </>
-                  ) : reportSent ? (
-                    <>
-                      <CheckCircle size={18} />
-                      <span>Sent</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send size={18} />
-                      <span>Send to Client</span>
-                    </>
-                  )}
-                </button>
-              </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
+              <button
+                onClick={handleDownloadPDF}
+                disabled={isDownloading}
+                className={`flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 rounded-lg transform transition-all duration-200 text-sm sm:text-base w-full sm:w-auto ${
+                  isDownloading
+                    ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                    : 'bg-black border border-black text-white hover:bg-gray-800 hover:shadow-sm hover:scale-[1.02] cursor-pointer'
+                }`}
+              >
+                <Download size={18} className={isDownloading ? 'animate-pulse' : ''} />
+                <span>{isDownloading ? 'Downloading...' : 'Download PDF'}</span>
+              </button>
+              <button
+                onClick={handleSendReport}
+                disabled={isSending || reportSent}
+                className={`px-4 sm:px-6 py-2.5 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto ${
+                  reportSent
+                    ? 'bg-green-600 text-white'
+                    : 'bg-blue-600 text-white hover:bg-blue-700 cursor-pointer disabled:opacity-50'
+                }`}
+              >
+                {isSending ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
+                    <span>Sending...</span>
+                  </>
+                ) : reportSent ? (
+                  <>
+                    <CheckCircle size={18} />
+                    <span>Sent</span>
+                  </>
+                ) : (
+                  <>
+                    <Send size={18} />
+                    <span>Send to Client</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
         </div>

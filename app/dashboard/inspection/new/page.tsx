@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { 
-  ArrowLeft, Home, Building2, MapPin, 
-  Calendar, Camera, AlertCircle, Check, Clock, 
+import {
+  ArrowLeft, Home, Building2, MapPin,
+  Calendar, Camera, AlertCircle, Check, Clock,
   DollarSign, Zap, AlertTriangle, Shield
 } from 'lucide-react'
 
@@ -65,9 +65,19 @@ const URGENCY_LEVELS = [
 
 export default function NewInspectionPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [isSaving, setIsSaving] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
-  
+  const [claimId, setClaimId] = useState<string | null>(null)
+
+  // Capture claimId from URL parameter
+  useEffect(() => {
+    const claimIdParam = searchParams.get('claimId')
+    if (claimIdParam) {
+      setClaimId(claimIdParam)
+    }
+  }, [searchParams])
+
   const [formData, setFormData] = useState<QuickInspectionData>({
     property: {
       address: '',
@@ -155,12 +165,13 @@ export default function NewInspectionPage() {
       },
       incident: {
         ...formData.incident,
-        estimatedValue: formData.incident.estimatedValue 
+        estimatedValue: formData.incident.estimatedValue
           ? formData.incident.estimatedValue.replace(/,/g, '')
           : ''
       },
       inspection: formData.inspection,
       inspectionId,
+      claimId: claimId || undefined, // Link to parent claim
       createdAt: new Date().toISOString(),
       status: 'draft'
     }
@@ -191,6 +202,7 @@ export default function NewInspectionPage() {
 
     const inspectionData = {
       id: inspectionId,
+      claimId: claimId || undefined, // Link to parent claim
       property: {
         address: formData.property.address,
         type: formData.property.type || 'residential',

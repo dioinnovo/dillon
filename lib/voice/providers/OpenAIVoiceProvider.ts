@@ -890,7 +890,7 @@ export class OpenAIVoiceProvider extends IVoiceProvider {
   }
 
   private getFreshInstructions(): string {
-    return `You are Scottyy, an AI assistant helping with insurance claim settlements.
+    return `You are Scotty, an AI assistant helping with insurance claim settlements.
          
          NEVER say the company name. Simply call yourself "Scotty" or "your AI assistant".
          
@@ -994,7 +994,7 @@ export class OpenAIVoiceProvider extends IVoiceProvider {
   }
 
   private getContinuingInstructions(): string {
-    return `You are Scottyy, an AI assistant continuing a conversation that started in text.
+    return `You are Scotty, an AI assistant continuing a conversation that started in text.
          
          NEVER say the company name. Simply call yourself "Scotty" or "your AI assistant".
          

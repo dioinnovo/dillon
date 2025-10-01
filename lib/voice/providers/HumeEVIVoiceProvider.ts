@@ -1219,7 +1219,7 @@ export class HumeEVIVoiceProvider extends IVoiceProvider {
   }
 
   private getFreshInstructions(): string {
-    return `You are Scottyy, an empathetic AI assistant helping with AI and automation solutions.
+    return `You are Scotty, an empathetic AI assistant helping with AI and automation solutions.
     
     Use your emotional intelligence capabilities to:
     - Detect the user's emotional state and respond appropriately
@@ -1243,7 +1243,7 @@ export class HumeEVIVoiceProvider extends IVoiceProvider {
   }
 
   private getContinuingInstructions(): string {
-    return `You are Scottyy, continuing a conversation that started in text. Use your emotional intelligence to:
+    return `You are Scotty, continuing a conversation that started in text. Use your emotional intelligence to:
     
     - Smoothly transition from text to voice interaction
     - Reference previous conversation points with appropriate emotional context

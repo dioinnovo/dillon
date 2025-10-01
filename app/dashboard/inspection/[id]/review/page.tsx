@@ -301,6 +301,7 @@ export default function InspectionReviewPage() {
   const [selectedTab, setSelectedTab] = useState('overview')
   const [autoSaveStatus, setAutoSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle')
   const [inspectionData, setInspectionData] = useState<InspectionSummary | null>(null)
+  const [claimId, setClaimId] = useState<string | null>(null)
 
   // Load inspection data from localStorage and set up auto-save
   useEffect(() => {
@@ -311,6 +312,20 @@ export default function InspectionReviewPage() {
     } else {
       // Use default data if no saved data exists
       setInspectionData(defaultInspectionSummary)
+    }
+
+    // Load claimId from inspection data
+    const inspectionDataRaw = localStorage.getItem(`inspection-${inspectionId}-data`)
+    if (inspectionDataRaw) {
+      const parsedData = JSON.parse(inspectionDataRaw)
+      if (parsedData.claimId) {
+        setClaimId(parsedData.claimId)
+      }
+    }
+
+    // Demo: Set default claimId for INS-002 for seamless demo workflow
+    if (inspectionId === 'INS-002' && !claimId) {
+      setClaimId('CLM-2024-002')
     }
   }, [inspectionId])
 
@@ -455,6 +470,7 @@ export default function InspectionReviewPage() {
     const reportData = {
       reportId: `RPT-${inspectionId}`,
       generatedDate: new Date().toISOString(),
+      claimId: claimId || undefined, // Include claim linkage
       property: inspectionSummary.propertyDetails,
       inspection: {
         id: inspectionId,
@@ -497,6 +513,7 @@ export default function InspectionReviewPage() {
       reportId: `RPT-${inspectionId}`,
       generatedDate: new Date().toISOString(),
       status: 'approved',
+      claimId: claimId || undefined, // Include claim linkage
       property: inspectionSummary.propertyDetails,
       inspection: {
         id: inspectionId,
