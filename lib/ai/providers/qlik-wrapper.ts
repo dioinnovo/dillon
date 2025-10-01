@@ -366,8 +366,9 @@ export class QlikWrapper {
     // Remove any remaining non-printable characters
     cleaned = cleaned.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
 
-    // Fix multiple spaces
-    cleaned = cleaned.replace(/\s+/g, ' ');
+    // Fix multiple spaces but preserve newlines and formatting
+    // Only collapse multiple consecutive spaces, not newlines or tabs
+    cleaned = cleaned.replace(/ {2,}/g, ' ');
 
     return cleaned.trim();
   }
