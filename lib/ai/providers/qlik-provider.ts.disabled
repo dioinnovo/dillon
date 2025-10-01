@@ -105,62 +105,59 @@ export class QlikProvider implements LanguageModelV2 {
   async doGenerate(
     options: LanguageModelV2CallOptions
   ): Promise<{
-    text: string;
+    content: Array<{ type: 'text'; text: string }>;
     usage: {
-      promptTokens: number;
-      completionTokens: number;
+      inputTokens: number;
+      outputTokens: number;
+      totalTokens: number;
     };
     finishReason: LanguageModelV2FinishReason;
-    rawCall: { rawPrompt: unknown; rawSettings: Record<string, unknown> };
-    rawResponse?: { headers?: Record<string, string> };
-    warnings?: LanguageModelV2CallWarning[];
+    request?: { body?: string };
+    response?: { id?: string; timestamp?: Date; headers?: Record<string, string> };
+    warnings: LanguageModelV2CallWarning[];
   }> {
     const threadId = await this.ensureThread();
 
     // Convert messages to Qlik format
-    const prompt = this.messagesToPrompt(options.messages);
+    const prompt = this.messagesToPrompt(options.prompt);
 
-    const { responseBody, response } = await postJsonToApi({
-      url: `${this.baseUrl}/assistants/${this.config.assistantId}/threads/${threadId}/actions/invoke`,
+    const url = `${this.baseUrl}/assistants/${this.config.assistantId}/threads/${threadId}/actions/invoke`;
+
+    const { value, responseHeaders } = await postJsonToApi({
+      url,
       headers: this.headers,
       body: {
         query: prompt,
         temperature: options.temperature,
-        maxTokens: options.maxTokens,
+        maxTokens: options.maxOutputTokens,
       },
-      failedResponseHandler: createJsonResponseHandler({
-        errorSchema: z.object({
-          error: z.string(),
-          message: z.string().optional(),
-        }),
-        errorToMessage: (error) => error.message || error.error,
-      }),
-      successfulResponseHandler: createJsonResponseHandler({
-        schema: QlikMessageSchema,
-      }),
+      failedResponseHandler: async ({ response }) => {
+        const errorText = await response.text();
+        throw new Error(`Qlik API error: ${response.status} ${errorText}`);
+      },
+      successfulResponseHandler: createJsonResponseHandler(QlikMessageSchema),
       abortSignal: options.abortSignal,
-      fetch: this.config.fetch,
     });
 
-    const qlikResponse = responseBody as z.infer<typeof QlikMessageSchema>;
+    const qlikResponse = value as z.infer<typeof QlikMessageSchema>;
 
     return {
-      text: qlikResponse.answer,
+      content: [{ type: 'text', text: qlikResponse.answer }],
       usage: {
-        promptTokens: 0, // Qlik doesn't provide token counts
-        completionTokens: 0,
+        inputTokens: 0, // Qlik doesn't provide token counts
+        outputTokens: 0,
+        totalTokens: 0,
       },
       finishReason: 'stop',
-      rawCall: {
-        rawPrompt: prompt,
-        rawSettings: {
-          temperature: options.temperature,
-          maxTokens: options.maxTokens,
-        },
+      request: {
+        body: JSON.stringify({ query: prompt }),
       },
-      rawResponse: {
-        headers: Object.fromEntries(response.headers.entries()),
+      response: {
+        id: threadId,
+        timestamp: new Date(),
+        headers: responseHeaders,
       },
+      warnings: [],
     };
   }
 
@@ -168,7 +165,7 @@ export class QlikProvider implements LanguageModelV2 {
     options: LanguageModelV2CallOptions
   ): AsyncGenerator<LanguageModelV2StreamPart> {
     const threadId = await this.ensureThread();
-    const prompt = this.messagesToPrompt(options.messages);
+    const prompt = this.messagesToPrompt(options.prompt);
 
     const response = await fetch(
       `${this.baseUrl}/assistants/${this.config.assistantId}/threads/${threadId}/actions/stream`,
@@ -178,7 +175,7 @@ export class QlikProvider implements LanguageModelV2 {
         body: JSON.stringify({
           query: prompt,
           temperature: options.temperature,
-          maxTokens: options.maxTokens,
+          maxTokens: options.maxOutputTokens,
         }),
         signal: options.abortSignal,
       }
@@ -217,8 +214,9 @@ export class QlikProvider implements LanguageModelV2 {
                 type: 'finish',
                 finishReason: 'stop',
                 usage: {
-                  promptTokens: 0,
-                  completionTokens: 0,
+                  inputTokens: 0,
+                  outputTokens: 0,
+                  totalTokens: 0,
                 },
               };
               return;
@@ -243,7 +241,7 @@ export class QlikProvider implements LanguageModelV2 {
     }
   }
 
-  private messagesToPrompt(messages: LanguageModelV2CallOptions['messages']): string {
+  private messagesToPrompt(messages: LanguageModelV2CallOptions['prompt']): string {
     // Convert AI SDK messages to a single prompt for Qlik
     return messages
       .map((msg) => {
@@ -251,10 +249,20 @@ export class QlikProvider implements LanguageModelV2 {
           return `Context: ${msg.content}`;
         }
         if (msg.role === 'user') {
-          return `User: ${msg.content}`;
+          // User content is an array of parts
+          const textContent = msg.content
+            .filter(part => part.type === 'text')
+            .map(part => part.text)
+            .join(' ');
+          return `User: ${textContent}`;
         }
         if (msg.role === 'assistant') {
-          return `Assistant: ${msg.content}`;
+          // Assistant content is an array of parts
+          const textContent = msg.content
+            .filter(part => part.type === 'text')
+            .map(part => part.text)
+            .join(' ');
+          return `Assistant: ${textContent}`;
         }
         return '';
       })
