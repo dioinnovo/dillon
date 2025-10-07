@@ -13,34 +13,34 @@ import { SCC_CASES } from '@/lib/data/scc-cases'
 
 export default function DashboardPage() {
   const [stats, setStats] = useState({
-    activeClaims: 47,
-    totalRecovered: 3250000,
-    avgSettlement: 125000,
-    clientSatisfaction: 98,
-    processingTime: 3.2,
-    successRate: 94
+    activeProjects: 47,
+    contractValue: 12500000,
+    avgProjectValue: 265000,
+    clientSatisfaction: 96,
+    avgCycleTime: 45,
+    onTimeDelivery: 94
   })
 
   const [recentActivity, setRecentActivity] = useState([
-    { id: 1, type: 'claim_submitted', title: `New Hurricane Claim - ${SCC_CASES[0].clientName}`, time: '5 minutes ago', status: 'new' },
-    { id: 2, type: 'settlement_reached', title: `Settlement Reached - $${(SCC_CASES[1].settlement.finalSettlement! / 1000000).toFixed(1)}M (Cinnamon Shore)`, time: '1 hour ago', status: 'success' },
-    { id: 3, type: 'inspection_complete', title: `Property Inspection Complete - ${SCC_CASES[2].location.city}`, time: '2 hours ago', status: 'info' },
-    { id: 4, type: 'negotiation_update', title: `Counter-offer Received - Land's End Tower`, time: '3 hours ago', status: 'warning' },
-    { id: 5, type: 'document_uploaded', title: '15 New Documents Added - Ocean Towers Case', time: '4 hours ago', status: 'info' }
+    { id: 1, type: 'project_initiated', title: 'New Phase II ESA - Industrial Site, Cambridge ON', time: '5 minutes ago', status: 'new' },
+    { id: 2, type: 'report_delivered', title: 'ESA Report Complete - Former Gas Station, Guelph', time: '1 hour ago', status: 'success' },
+    { id: 3, type: 'assessment_complete', title: 'Site Assessment Complete - Former Manufacturing Facility', time: '2 hours ago', status: 'info' },
+    { id: 4, type: 'field_work_update', title: 'Field Sampling in Progress - Contaminated Site, Hamilton', time: '3 hours ago', status: 'warning' },
+    { id: 5, type: 'document_uploaded', title: 'Laboratory Results Received - Phase II ESA Project', time: '4 hours ago', status: 'info' }
   ])
 
-  const scheduledInspections = [
-    { id: 1, property: 'Marina Bay Resort - Pensacola', time: 'Today 2:00 PM', type: 'Hurricane Damage', status: 'confirmed' },
-    { id: 2, property: 'Gulf Towers Commercial Complex', time: 'Today 3:30 PM', type: 'Wind/Water Damage', status: 'confirmed' },
-    { id: 3, property: 'Beachfront Hotel - Panama City', time: 'Tomorrow 10:00 AM', type: 'Structural Damage', status: 'pending' },
-    { id: 4, property: 'Retail Center - Port Aransas', time: 'Tomorrow 2:00 PM', type: 'Roof Damage', status: 'confirmed' }
+  const scheduledAssessments = [
+    { id: 1, site: 'Industrial Property - Cambridge, ON', time: 'Today 2:00 PM', type: 'Phase II ESA - Field Sampling', status: 'confirmed' },
+    { id: 2, site: 'Grand River Bridge - Waterloo Region', time: 'Today 3:30 PM', type: 'Structural Condition Assessment', status: 'confirmed' },
+    { id: 3, site: 'Former Gas Station - Guelph, ON', time: 'Tomorrow 10:00 AM', type: 'Phase I ESA Site Visit', status: 'pending' },
+    { id: 4, site: 'Municipal Infrastructure - Kitchener', time: 'Tomorrow 2:00 PM', type: 'Geotechnical Investigation', status: 'confirmed' }
   ]
 
   const kpiCards = [
     {
-      title: 'Active Claims',
-      value: stats.activeClaims,
-      change: '+12%',
+      title: 'Active Projects',
+      value: stats.activeProjects,
+      change: '+8%',
       trend: 'up',
       icon: FileText,
       color: 'bg-blue-500',
@@ -48,9 +48,9 @@ export default function DashboardPage() {
       textColor: 'text-blue-600'
     },
     {
-      title: 'Total Recovered',
-      value: `$${(stats.totalRecovered / 1000000).toFixed(1)}M`,
-      change: '+47%',
+      title: 'Contract Value',
+      value: `$${(stats.contractValue / 1000000).toFixed(1)}M`,
+      change: '+15%',
       trend: 'up',
       icon: DollarSign,
       color: 'bg-green-500',
@@ -58,9 +58,9 @@ export default function DashboardPage() {
       textColor: 'text-green-600'
     },
     {
-      title: 'Avg Settlement',
-      value: `$${(stats.avgSettlement / 1000).toFixed(0)}K`,
-      change: '+23%',
+      title: 'Avg Project Value',
+      value: `$${(stats.avgProjectValue / 1000).toFixed(0)}K`,
+      change: '+12%',
       trend: 'up',
       icon: TrendingUp,
       color: 'bg-purple-500',
@@ -68,14 +68,14 @@ export default function DashboardPage() {
       textColor: 'text-purple-600'
     },
     {
-      title: 'Success Rate',
-      value: `${stats.successRate}%`,
-      change: '+5%',
+      title: 'On-Time Delivery',
+      value: `${stats.onTimeDelivery}%`,
+      change: '+3%',
       trend: 'up',
       icon: Target,
-      color: 'bg-red-500',
-      lightColor: 'bg-red-50',
-      textColor: 'text-scc-red'
+      color: 'bg-dillon-green',
+      lightColor: 'bg-green-50',
+      textColor: 'text-dillon-green'
     }
   ]
 
@@ -84,7 +84,7 @@ export default function DashboardPage() {
       {/* Header */}
       <PageHeader
         title="Dashboard Overview"
-        description="Welcome back! Here's your claims processing summary."
+        description="Welcome back! Here's your project portfolio summary."
       />
 
       {/* KPI Cards */}
@@ -118,36 +118,36 @@ export default function DashboardPage() {
         ))}
       </div>
 
-      {/* Scheduled Inspections */}
+      {/* Scheduled Site Assessments */}
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100">Scheduled Inspections</h2>
-          <Link href="/dashboard/inspection" className="text-scc-red text-sm hover:underline">
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100">Scheduled Site Assessments</h2>
+          <Link href="/dashboard/inspection" className="text-dillon-green text-sm hover:underline">
             View All
           </Link>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
-          {scheduledInspections.map((inspection) => (
-            <div key={inspection.id} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-scc-red transition bg-white dark:bg-gray-800 hover:shadow-md">
+          {scheduledAssessments.map((assessment) => (
+            <div key={assessment.id} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-dillon-green transition bg-white dark:bg-gray-800 hover:shadow-md">
               <div className="space-y-3">
                 <div>
-                  <h3 className="font-semibold text-sm text-gray-900 dark:text-gray-100 leading-tight mb-1">{inspection.property}</h3>
+                  <h3 className="font-semibold text-sm text-gray-900 dark:text-gray-100 leading-tight mb-1">{assessment.site}</h3>
                   <span className={`inline-block px-2 py-0.5 text-xs font-medium rounded-full ${
-                    inspection.status === 'confirmed' ? 'bg-green-100 text-green-600' :
+                    assessment.status === 'confirmed' ? 'bg-green-100 text-green-600' :
                     'bg-yellow-100 text-yellow-600'
                   }`}>
-                    {inspection.status}
+                    {assessment.status}
                   </span>
                 </div>
                 <div className="space-y-2 pt-2 border-t border-gray-100 dark:border-gray-800">
                   <div className="flex items-center gap-2">
                     <Calendar size={14} className="text-gray-400 flex-shrink-0" />
-                    <span className="text-xs text-gray-600 dark:text-gray-400">{inspection.time}</span>
+                    <span className="text-xs text-gray-600 dark:text-gray-400">{assessment.time}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-3.5 h-3.5 rounded-full bg-red-400 flex-shrink-0" />
-                    <span className="text-xs text-gray-700 dark:text-gray-300 font-medium">{inspection.type}</span>
+                    <div className="w-3.5 h-3.5 rounded-full bg-dillon-green flex-shrink-0" />
+                    <span className="text-xs text-gray-700 dark:text-gray-300 font-medium">{assessment.type}</span>
                   </div>
                 </div>
               </div>

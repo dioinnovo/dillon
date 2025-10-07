@@ -10,9 +10,9 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 3 60% 37%; /* SCC Strategic Red #9A2824 */
+    --primary: 192 75% 14%; /* Dillon Green #08353F */
     --primary-foreground: 210 40% 98%;
-    --secondary: 0 0% 44%; /* SCC Gray */
+    --secondary: 0 0% 44%; /* Professional Gray */
     --secondary-foreground: 210 40% 98%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -22,7 +22,7 @@
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 3 60% 37%; /* SCC Strategic Red #9A2824 */
+    --ring: 192 75% 14%; /* Dillon Green #08353F */
     --radius: 0.65rem;
   }
 
@@ -33,9 +33,9 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 3 60% 37%; /* SCC Strategic Red #9A2824 */
+    --primary: 192 75% 14%; /* Dillon Green #08353F */
     --primary-foreground: 210 40% 98%;
-    --secondary: 0 0% 44%; /* SCC Gray */
+    --secondary: 0 0% 44%; /* Professional Gray */
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
@@ -45,7 +45,7 @@
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 3 60% 37%; /* SCC Strategic Red #9A2824 */
+    --ring: 192 75% 14%; /* Dillon Green #08353F */
   }
 }
 

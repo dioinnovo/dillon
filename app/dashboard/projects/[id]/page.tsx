@@ -6,7 +6,7 @@ import {
   ArrowLeft, User, Phone, Mail, MapPin, Calendar, Building2, Home,
   FileText, Camera, History, Shield, CheckCircle, Clock, AlertTriangle,
   DollarSign, Download, Edit, Save, X, Plus, Upload, Eye, Send,
-  TrendingUp, AlertCircle, FileSearch, Briefcase, Star, CalendarCheck,
+  TrendingUp, TrendingDown, AlertCircle, FileSearch, Briefcase, Star, CalendarCheck,
   Droplets, Check, Target, Zap, Brain, Calculator, ChevronDown,
   CloudRain, Image, XCircle
 } from 'lucide-react'
@@ -16,7 +16,7 @@ import { FileUploadModal } from '@/components/ui/file-upload-modal'
 import { Button } from '@/components/ui/button'
 import { SectionHeader } from '@/components/ui/section-header'
 
-export default function ClaimDetailPage() {
+export default function ProjectDetailPage() {
   const params = useParams()
   const router = useRouter()
   const [activeTab, setActiveTab] = useState('overview')
@@ -26,188 +26,219 @@ export default function ClaimDetailPage() {
 
 
   // Mock data - in real app, fetch based on params.id
-  const claim = {
+  const project = {
     id: params.id,
-    status: 'Active',
-    phase: 'Documentation',
-    createdDate: '2024-03-15',
+    projectNumber: 'DL-2024-ENV-001',
+    projectType: 'Phase II ESA',
+    status: 'Field Work',
+    phase: 'Sample Collection',
+    createdDate: '2024-01-15',
     lastUpdated: '2024-03-18',
-    estimatedValue: 285000,
-    currentOffer: 195000,
+    contractValue: 145000,
+    spentToDate: 94250,
     
     // Client Information
     client: {
-      name: 'Johnson Properties LLC',
-      contact: 'Michael Johnson',
-      phone: '(305) 555-0123',
-      email: 'mjohnson@properties.com',
-      preferredContact: 'Phone',
+      name: 'City of Cambridge',
+      organization: 'Public Works Department',
+      contact: 'John Smith, P.Eng',
+      phone: '(519) 555-0123',
+      email: 'jsmith@cambridge.ca',
+      preferredContact: 'Email',
       relationshipScore: 4.8
     },
-    
-    // Property Details
-    property: {
-      address: '1234 Ocean Drive, Miami Beach, FL 33139',
-      type: 'Commercial',
-      yearBuilt: 2010,
-      squareFeet: 12500,
-      stories: 3,
-      construction: 'Concrete Block',
-      roofType: 'Flat/Built-up',
-      lastRenovation: '2019',
-      imageUrl: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop&q=80'
+
+    // Site Details
+    site: {
+      address: '425 Industrial Drive, Cambridge, ON N1R 7H6',
+      type: 'Former Manufacturing Facility',
+      siteArea: '2.5 hectares',
+      historicalUse: 'Metal Fabrication (1965-2010)',
+      currentZoning: 'Industrial - Brownfield Redevelopment',
+      yearBuilt: 1965,
+      lastActive: 2010,
+      environmentalConcerns: ['Petroleum Hydrocarbons', 'Heavy Metals (Lead, Arsenic)', 'Volatile Organic Compounds'],
+      imageUrl: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&h=600&fit=crop&q=80'
     },
-    
-    // Damage Assessment
-    damage: {
-      type: 'Hurricane',
-      date: '2024-03-10',
-      severity: 'Major',
-      affectedAreas: ['Roof', 'Windows', 'HVAC', 'Interior Water Damage'],
-      initialEstimate: 285000,
-      adjustedEstimate: 347000
+
+    // Scope & Objectives
+    scope: {
+      objectives: [
+        'Assess soil and groundwater contamination levels',
+        'Identify environmental liabilities for brownfield redevelopment',
+        'Support Record of Site Condition (RSC) application',
+        'Evaluate remediation requirements and options'
+      ],
+      deliverables: [
+        'Sampling & Analysis Plan (SAP)',
+        'Field Investigation Report',
+        'Laboratory Analysis Results',
+        'Risk Assessment Report',
+        'Remedial Options Assessment'
+      ]
     },
-    
-    // Insurance Details
-    insurance: {
-      carrier: 'State Farm',
-      policyNumber: 'SF-COM-789456',
-      coverageLimit: 2000000,
-      deductible: 10000,
-      adjuster: 'Sarah Thompson',
-      adjusterPhone: '(305) 555-9876'
+
+    // Regulatory Details
+    regulatory: {
+      primaryAgency: 'Ministry of Environment, Conservation and Parks (MECP)',
+      permits: ['O. Reg. 153/04 Compliance', 'Excess Soil Management'],
+      standards: ['MECP Table 3 (Industrial/Commercial)', 'CCME Soil Quality Guidelines'],
+      rsc: 'Required for Site Redevelopment',
+      complianceStatus: 'In Progress'
     },
-    
-    // Inspection Status
-    inspection: {
+
+    // Field Work Status
+    fieldWork: {
       scheduled: '2024-03-20',
-      inspector: 'James Rodriguez',
-      status: 'Scheduled',
-      type: 'Comprehensive',
-      duration: '4 hours',
-      requirements: ['Access to all areas', 'Property manager present']
+      fieldTechnician: 'Michael Torres, C.E.T.',
+      status: 'In Progress',
+      progress: 65,
+      sampleLocations: 24,
+      samplesCollected: 18,
+      samplesAnalyzed: 12,
+      requirements: ['Site access secured', 'MECP notification complete', 'Lab contracted (ALS Environmental)']
     },
     
-    // Property History
-    history: [
-      { date: '2023-06-15', type: 'Water Damage', amount: 45000, status: 'Settled' },
-      { date: '2022-09-20', type: 'Wind Damage', amount: 28000, status: 'Settled' },
-      { date: '2021-08-10', type: 'Roof Leak', amount: 12000, status: 'Settled' }
-    ],
-    
+    // Project Team
+    team: {
+      projectManager: { name: 'Sarah Chen, P.Eng', role: 'Project Manager', phone: '(519) 555-1001' },
+      fieldTechnician: { name: 'Michael Torres, C.E.T.', role: 'Field Technician', phone: '(519) 555-1002' },
+      labCoordinator: { name: 'ALS Environmental', role: 'Laboratory Services', phone: '1-800-555-2553' },
+      qaqcReviewer: { name: 'Dr. Robert Kim, P.Eng, Ph.D.', role: 'QA/QC Review', status: 'Pending' }
+    },
+
+    // Budget
+    budget: {
+      contractValue: 145000,
+      spent: 94250,
+      remaining: 50750,
+      variance: 2.4, // % under budget
+      contingency: 14500,
+      billingStatus: 'On Track'
+    },
+
     // Documents
     documents: [
-      { name: 'Initial_Damage_Report.pdf', date: '2024-03-15', size: '2.4 MB', type: 'report' },
-      { name: 'Insurance_Policy.pdf', date: '2024-03-15', size: '1.8 MB', type: 'policy' },
-      { name: 'Property_Photos.zip', date: '2024-03-16', size: '45.2 MB', type: 'photos' },
-      { name: 'Contractor_Estimates.pdf', date: '2024-03-17', size: '3.1 MB', type: 'estimate' },
-      { name: 'Inspection_Photos_Exterior.jpg', date: '2024-03-18', size: '8.2 MB', type: 'photos' },
-      { name: 'Inspection_Photos_Interior.jpg', date: '2024-03-18', size: '12.5 MB', type: 'photos' },
-      { name: 'Structural_Damage_Report.pdf', date: '2024-03-19', size: '5.7 MB', type: 'report' }
+      { name: 'Sampling_Analysis_Plan.pdf', date: '2024-02-15', size: '3.2 MB', type: 'plan' },
+      { name: 'MECP_Notification.pdf', date: '2024-02-20', size: '0.8 MB', type: 'regulatory' },
+      { name: 'Site_Photos_Historical.zip', date: '2024-02-25', size: '45.2 MB', type: 'photos' },
+      { name: 'Borehole_Logs_SB01-SB06.pdf', date: '2024-03-10', size: '5.1 MB', type: 'fieldwork' },
+      { name: 'Lab_Results_Soil_Batch1.pdf', date: '2024-03-18', size: '2.4 MB', type: 'labresults' },
+      { name: 'Lab_Results_Groundwater.pdf', date: '2024-03-20', size: '1.8 MB', type: 'labresults' },
+      { name: 'Field_Photos_Sampling.zip', date: '2024-03-12', size: '38.5 MB', type: 'photos' }
     ],
 
     // Timeline Events
     timeline: [
       {
         id: 1,
-        date: '2024-03-10',
+        date: '2024-01-15',
         time: '09:30 AM',
-        type: 'incident',
-        title: 'Hurricane Damage Occurred',
-        description: 'Category 3 hurricane made landfall causing significant damage to property',
-        user: 'System',
-        icon: CloudRain,
-        color: 'red'
+        type: 'kickoff',
+        title: 'Project Initiated',
+        description: 'Proposal accepted by City of Cambridge for Phase II ESA brownfield site assessment',
+        user: 'Sarah Chen, P.Eng',
+        icon: CheckCircle,
+        color: 'green'
       },
       {
         id: 2,
-        date: '2024-03-11',
+        date: '2024-02-01',
         time: '10:15 AM',
-        type: 'claim',
-        title: 'Initial Claim Filed',
-        description: 'Client submitted initial claim to insurance carrier State Farm',
-        user: 'Michael Johnson',
+        type: 'planning',
+        title: 'Site Access Secured',
+        description: 'Access agreement signed with property owner, site mobilization scheduled',
+        user: 'Sarah Chen, P.Eng',
         icon: FileText,
         color: 'blue'
       },
       {
         id: 3,
-        date: '2024-03-12',
+        date: '2024-02-15',
         time: '02:30 PM',
-        type: 'contact',
-        title: 'Insurance Adjuster Assigned',
-        description: 'Sarah Thompson from State Farm assigned as primary adjuster',
-        user: 'State Farm',
-        icon: User,
-        color: 'gray'
-      },
-      {
-        id: 4,
-        date: '2024-03-15',
-        time: '11:00 AM',
-        type: 'document',
-        title: 'Documents Uploaded',
-        description: 'Initial damage report and insurance policy uploaded to system',
-        user: 'James Rodriguez',
-        documents: ['Initial_Damage_Report.pdf', 'Insurance_Policy.pdf'],
-        icon: Upload,
+        type: 'regulatory',
+        title: 'SAP Approved by MECP',
+        description: 'Sampling & Analysis Plan approved by Ministry of Environment',
+        user: 'MECP',
+        icon: Shield,
         color: 'green'
       },
       {
+        id: 4,
+        date: '2024-02-25',
+        time: '11:00 AM',
+        type: 'document',
+        title: 'Historical Records Reviewed',
+        description: 'Completed review of municipal archives, fire insurance plans, and aerial photographs',
+        user: 'Michael Torres, C.E.T.',
+        documents: ['Historical_Records_Summary.pdf', 'Site_Photos_Historical.zip'],
+        icon: Upload,
+        color: 'gray'
+      },
+      {
         id: 5,
-        date: '2024-03-16',
-        time: '03:45 PM',
-        type: 'inspection',
-        title: 'Property Inspection Scheduled',
-        description: 'Comprehensive inspection scheduled for March 20, 2024',
-        user: 'James Rodriguez',
-        icon: Camera,
+        date: '2024-03-05',
+        time: '08:00 AM',
+        type: 'fieldwork',
+        title: 'Field Work Commenced',
+        description: 'Mobilized to site, installed 6 soil borings (SB-01 to SB-06) and 3 monitoring wells',
+        user: 'Michael Torres, C.E.T.',
+        icon: Target,
         color: 'purple'
       },
       {
         id: 6,
-        date: '2024-03-17',
-        time: '09:00 AM',
-        type: 'estimate',
-        title: 'Initial Offer Received',
-        description: 'Insurance carrier provided initial settlement offer of $195,000',
-        user: 'Sarah Thompson',
-        amount: 195000,
-        icon: DollarSign,
-        color: 'yellow'
+        date: '2024-03-10',
+        time: '04:00 PM',
+        type: 'fieldwork',
+        title: 'Sample Collection Complete',
+        description: '24 samples collected: 18 soil, 6 groundwater. Shipped to ALS Environmental for analysis',
+        user: 'Michael Torres, C.E.T.',
+        icon: CheckCircle,
+        color: 'green'
       },
       {
         id: 7,
         date: '2024-03-18',
         time: '02:15 PM',
         type: 'analysis',
-        title: 'AI Coverage Analysis Completed',
-        description: 'Scotty AI identified additional coverage opportunities worth $90,000',
-        user: 'Scotty AI',
+        title: 'AI Contamination Analysis',
+        description: 'Dillon AI analyzed lab results, identified PHC exceedances and recommended delineation sampling',
+        user: 'Dillon AI',
         icon: Brain,
-        color: 'blue'
+        color: 'blue',
+        highlight: true
       },
       {
         id: 8,
-        date: '2024-03-19',
+        date: '2024-03-20',
         time: '10:30 AM',
-        type: 'negotiation',
-        title: 'Counter-Offer Submitted',
-        description: 'Submitted counter-offer for $347,000 based on comprehensive damage assessment',
-        user: 'James Rodriguez',
-        amount: 347000,
-        icon: TrendingUp,
-        color: 'green'
+        type: 'report',
+        title: 'AI Report Draft Generated',
+        description: 'Phase II ESA report auto-generated in 8 minutes (saved 6.5 hours) - ready for P.Eng review',
+        user: 'Dillon AI',
+        icon: Zap,
+        color: 'green',
+        highlight: true,
+        timeSaved: '6.5 hours',
+        costSavings: '$1,625'
       }
-    ]
+    ],
+
+    // Site Inspection
+    inspection: {
+      status: 'Scheduled',
+      inspector: 'Michael Torres, C.E.T.',
+      type: 'Environmental Site Assessment'
+    }
   }
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: FileText },
+    { id: 'fieldwork', label: 'Field Work', icon: Target },
+    { id: 'ai-report', label: 'AI Report Generator', icon: Brain },
     { id: 'timeline', label: 'Timeline', icon: History },
-    { id: 'documents', label: 'Documents', icon: FileSearch },
-    { id: 'assessment', label: 'Analysis', icon: Shield },
-    { id: 'settlement', label: 'Settlement', icon: DollarSign }
+    { id: 'documents', label: 'Documents', icon: FileSearch }
   ]
 
   const getStatusColor = (status: string) => {
@@ -227,15 +258,15 @@ export default function ClaimDetailPage() {
         {/* Back button and Status on same line */}
         <div className="flex items-center justify-between mb-4">
           <Button
-            onClick={() => router.push('/dashboard/claims')}
+            onClick={() => router.push('/dashboard/projects')}
             variant="ghost"
             className="text-gray-600 hover:text-gray-900 dark:text-gray-100"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span className="text-sm">Back to Claims</span>
+            <span className="text-sm">Back to Projects</span>
           </Button>
-          <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(claim.status)}`}>
-            {claim.status}
+          <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(project.status)}`}>
+            {project.status}
           </span>
         </div>
 
@@ -243,33 +274,33 @@ export default function ClaimDetailPage() {
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
           <div className="flex-1">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
-              Claim #{claim.id}
+              Project {project.projectNumber}
             </h1>
           </div>
         </div>
 
-        {/* Property Image with Address Overlay */}
+        {/* Site Image with Address Overlay */}
         <div className="relative h-48 sm:h-64 bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
-          <img 
-            src={claim.property.imageUrl} 
-            alt={claim.property.address}
+          <img
+            src={project.site.imageUrl}
+            alt={project.site.address}
             className="w-full h-full object-cover"
           />
-          
+
           {/* Dark gradient from bottom */}
           <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0A1628] via-[#0A1628]/60 to-transparent" />
-          
-          {/* Property Address */}
+
+          {/* Site Address */}
           <div className="absolute bottom-0 left-0 right-0 p-4">
             <h3 className="font-bold text-white text-lg sm:text-xl leading-tight drop-shadow-lg">
-              {claim.property.address}
+              {project.site.address}
             </h3>
           </div>
-          
-          {/* Property Type Badge */}
+
+          {/* Site Type Badge */}
           <div className="absolute top-3 left-3">
             <span className="inline-block px-3 py-1.5 rounded-full text-xs font-semibold bg-white dark:bg-gray-900/90 text-gray-800 shadow-lg">
-              {claim.property.type}
+              {project.site.type}
             </span>
           </div>
         </div>
@@ -278,8 +309,8 @@ export default function ClaimDetailPage() {
         <div className="flex items-center gap-3 mt-4">
           <Button
             onClick={() => setIsEditing(!isEditing)}
-            className="bg-scc-red hover:bg-red-600 text-white"
-            title={isEditing ? "Save changes" : "Edit claim information"}
+            className="bg-dillon-green hover:bg-dillon-green-dark text-white"
+            title={isEditing ? "Save changes" : "Edit project information"}
           >
             {isEditing ? (
               <>
@@ -299,35 +330,35 @@ export default function ClaimDetailPage() {
           </Button>
         </div>
 
-        {/* Quick Stats - Changed to 2 columns */}
+        {/* Quick Stats - Project Budget Metrics */}
         <div className="grid grid-cols-2 gap-2 mt-4">
           <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3">
-            <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Estimated Value</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Contract Value</p>
             <p className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
-              ${claim.estimatedValue.toLocaleString()}
+              ${project.budget.contractValue.toLocaleString()}
             </p>
           </div>
           <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3">
-            <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Current Offer</p>
-            <p className="text-lg sm:text-2xl font-bold text-scc-red">
-              ${claim.currentOffer.toLocaleString()}
+            <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Spent to Date</p>
+            <p className="text-lg sm:text-2xl font-bold text-dillon-green">
+              ${project.budget.spent.toLocaleString()}
             </p>
           </div>
           <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3">
-            <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Potential Recovery</p>
-            <p className="text-lg sm:text-2xl font-bold text-green-600">
-              +${(claim.estimatedValue - claim.currentOffer).toLocaleString()}
-            </p>
-          </div>
-          <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
-            <p className="text-xs text-gray-600 dark:text-gray-400 flex items-center gap-1 mb-1">
-              <Clock className="w-3 h-3" />
-              Est. Days to Close
-            </p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Remaining Budget</p>
             <p className="text-lg sm:text-2xl font-bold text-blue-600">
-              14-21 days
+              ${project.budget.remaining.toLocaleString()}
             </p>
-            <p className="text-[10px] text-gray-500 dark:text-gray-400 mt-1">Based on similar cases</p>
+          </div>
+          <div className="bg-green-50 rounded-lg p-3 border border-green-200">
+            <p className="text-xs text-gray-600 dark:text-gray-400 flex items-center gap-1 mb-1">
+              <TrendingDown className="w-3 h-3" />
+              Budget Variance
+            </p>
+            <p className="text-lg sm:text-2xl font-bold text-green-600">
+              {project.budget.variance}% under
+            </p>
+            <p className="text-[10px] text-gray-500 dark:text-gray-400 mt-1">Ahead of forecast</p>
           </div>
         </div>
       </div>
@@ -345,7 +376,7 @@ export default function ClaimDetailPage() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex-1 flex flex-col items-center gap-0.5 py-2.5 px-1 border-b-2 transition-all min-w-0 ${
                     activeTab === tab.id
-                      ? 'border-scc-red text-scc-red bg-red-50 dark:bg-red-900/10'
+                      ? 'border-dillon-green text-dillon-green bg-green-50 dark:bg-green-900/10'
                       : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                   }`}
                 >
@@ -366,7 +397,7 @@ export default function ClaimDetailPage() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex-1 flex flex-col items-center gap-1 py-2.5 px-2 border-b-2 transition-all min-w-0 ${
                     activeTab === tab.id
-                      ? 'border-scc-red text-scc-red bg-red-50 dark:bg-red-900/10'
+                      ? 'border-dillon-green text-dillon-green bg-green-50 dark:bg-green-900/10'
                       : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                   }`}
                 >
@@ -387,7 +418,7 @@ export default function ClaimDetailPage() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex-1 flex items-center gap-2 py-3 px-4 border-b-2 transition-all justify-center ${
                     activeTab === tab.id
-                      ? 'border-scc-red text-scc-red bg-red-50 dark:bg-red-900/10'
+                      ? 'border-dillon-green text-dillon-green bg-green-50 dark:bg-green-900/10'
                       : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'
                   }`}
                 >
@@ -400,7 +431,7 @@ export default function ClaimDetailPage() {
         </div>
 
         <div className="p-4">
-          {/* Overview Tab - Combined Client, Property & Financial Info */}
+          {/* Overview Tab - Combined Client, Site & Project Info */}
           {activeTab === 'overview' && (
             <div className="space-y-6">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -412,214 +443,205 @@ export default function ClaimDetailPage() {
                   </h3>
                   <div className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">Company</span>
-                      <span className="font-medium">{claim.client.name}</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">Organization</span>
+                      <span className="font-medium">{project.client.name}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-500 dark:text-gray-400">Department</span>
+                      <span className="font-medium">{project.client.organization}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-500 dark:text-gray-400">Contact</span>
-                      <span className="font-medium">{claim.client.contact}</span>
+                      <span className="font-medium">{project.client.contact}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-500 dark:text-gray-400">Phone</span>
-                      <span className="font-medium">{claim.client.phone}</span>
+                      <span className="font-medium">{project.client.phone}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-500 dark:text-gray-400">Email</span>
-                      <span className="font-medium text-sm">{claim.client.email}</span>
+                      <span className="font-medium text-sm">{project.client.email}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-500 dark:text-gray-400">Relationship Score</span>
                       <div className="flex items-center gap-1">
                         <Star className="w-4 h-4 text-amber-400 fill-current" />
-                        <span className="font-medium">{claim.client.relationshipScore}</span>
+                        <span className="font-medium">{project.client.relationshipScore}</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Property Details */}
+                {/* Site Details */}
                 <div className="bg-white dark:bg-gray-900 p-6 rounded-lg border">
                   <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                    {claim.property.type === 'Commercial' ? (
-                      <Building2 className="w-5 h-5" />
-                    ) : (
-                      <Home className="w-5 h-5" />
-                    )}
-                    Property Details
+                    <Building2 className="w-5 h-5" />
+                    Site Details
                   </h3>
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-500 dark:text-gray-400">Type</span>
-                      <span className="font-medium">{claim.property.type}</span>
+                      <span className="font-medium">{project.site.type}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-500 dark:text-gray-400">Address</span>
-                      <span className="font-medium text-sm text-right max-w-[200px]">{claim.property.address}</span>
+                      <span className="font-medium text-sm text-right max-w-[200px]">{project.site.address}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">Square Feet</span>
-                      <span className="font-medium">{claim.property.squareFeet.toLocaleString()}</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">Site Area</span>
+                      <span className="font-medium">{project.site.siteArea}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">Year Built</span>
-                      <span className="font-medium">{claim.property.yearBuilt}</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">Historical Use</span>
+                      <span className="font-medium text-sm text-right max-w-[200px]">{project.site.historicalUse}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">Construction</span>
-                      <span className="font-medium">{claim.property.construction}</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">Current Zoning</span>
+                      <span className="font-medium text-sm text-right max-w-[200px]">{project.site.currentZoning}</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Insurance Information */}
+              {/* Scope & Regulatory Compliance */}
               <div className="bg-white dark:bg-gray-900 p-6 rounded-lg border">
                 <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <Briefcase className="w-5 h-5" />
-                  Insurance & Damage Details
-                </h3>
-                <div className="grid grid-cols-2 gap-4">
+                  <Shield className="w-5 h-5" />
+                  Scope & Regulatory Compliance
+                  </h3>
+                <div className="space-y-4">
+                  {/* Objectives */}
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Carrier</p>
-                    <p className="font-medium">{claim.insurance.carrier}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Project Objectives</p>
+                    <ul className="space-y-1">
+                      {project.scope.objectives.map((obj: string, idx: number) => (
+                        <li key={idx} className="text-sm flex items-start gap-2">
+                          <CheckCircle className="w-4 h-4 text-dillon-green mt-0.5 flex-shrink-0" />
+                          <span>{obj}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Policy Number</p>
-                    <p className="font-medium">{claim.insurance.policyNumber}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Coverage Limit</p>
-                    <p className="font-medium">${claim.insurance.coverageLimit.toLocaleString()}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Deductible</p>
-                    <p className="font-medium">${claim.insurance.deductible.toLocaleString()}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Adjuster</p>
-                    <p className="font-medium">{claim.insurance.adjuster}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Adjuster Phone</p>
-                    <p className="font-medium">{claim.insurance.adjusterPhone}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Date of Loss</p>
-                    <p className="font-medium flex items-center gap-1">
-                      <Calendar className="w-4 h-4 text-gray-400" />
-                      {claim.damage.date}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Damage Type</p>
-                    <p className="font-medium">{claim.damage.type}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Severity</p>
-                    <div className="flex items-center gap-2">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        claim.damage.severity === 'Major' ? 'bg-red-100 text-red-800' :
-                        claim.damage.severity === 'Moderate' ? 'bg-yellow-100 text-yellow-800' :
-                        'bg-green-100 text-green-800'
-                      }`}>
-                        {claim.damage.severity}
-                      </span>
+
+                  {/* Regulatory Framework */}
+                  <div className="grid grid-cols-2 gap-4 pt-4 border-t">
+                    <div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Primary Agency</p>
+                      <p className="font-medium text-sm">{project.regulatory.primaryAgency}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">RSC Required</p>
+                      <p className="font-medium">{project.regulatory.rsc}</p>
+                    </div>
+                    <div className="col-span-2">
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Standards</p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.regulatory.standards.map((std: string, idx: number) => (
+                          <span key={idx} className="px-2 py-1 bg-blue-50 text-blue-700 rounded text-xs">
+                            {std}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="col-span-2">
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Permits & Compliance</p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.regulatory.permits.map((permit: string, idx: number) => (
+                          <span key={idx} className="px-2 py-1 bg-green-50 text-green-700 rounded text-xs">
+                            {permit}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Initial Estimate</p>
-                    <p className="font-medium text-green-600">
-                      ${claim.damage.initialEstimate.toLocaleString()}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Adjusted Estimate</p>
-                    <p className="font-bold text-green-600">
-                      ${claim.damage.adjustedEstimate.toLocaleString()}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Potential Increase</p>
-                    <p className="font-medium text-scc-red">
-                      +${(claim.damage.adjustedEstimate - claim.damage.initialEstimate).toLocaleString()}
-                    </p>
+
+                  {/* Deliverables */}
+                  <div className="pt-4 border-t">
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Key Deliverables</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.scope.deliverables.map((deliverable: string, idx: number) => (
+                        <span key={idx} className="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-xs">
+                          {deliverable}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-                
+
                 {/* Dates at the bottom */}
                 <div className="flex justify-between items-center mt-6 pt-4 border-t border-gray-100 dark:border-gray-800">
                   <div className="text-xs text-gray-500 dark:text-gray-400">
-                    <span>Created: {claim.createdDate}</span>
+                    <span>Created: {project.createdDate}</span>
                   </div>
                   <div className="text-xs text-gray-500 dark:text-gray-400">
-                    <span>Updated: {claim.lastUpdated}</span>
+                    <span>Updated: {project.lastUpdated}</span>
                   </div>
                 </div>
               </div>
             </div>
           )}
 
-          {/* Assessment Tab - Comprehensive AI-Powered Analysis */}
-          {activeTab === 'assessment' && (
+          {/* Field Work Tab - Site Investigation & Sampling */}
+          {activeTab === 'fieldwork' && (
             <div className="space-y-6">
-              {/* Assessment Success Dashboard - Simplified colors */}
+              {/* Field Work Status Dashboard */}
               <div className="bg-white dark:bg-gray-900 border border-gray-200 rounded-xl p-4 sm:p-6">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
-                    <Target className="text-scc-red" size={20} />
-                    Claim Assessment Intelligence
+                    <Target className="text-dillon-green" size={20} />
+                    Field Investigation Status
                   </h3>
-                  <span className="px-3 py-1.5 bg-green-50 text-green-700 border border-green-200 rounded-full text-xs sm:text-sm font-medium self-start sm:self-auto">
-                    Analysis Complete
+                  <span className="px-3 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-xs sm:text-sm font-medium self-start sm:self-auto">
+                    {project.fieldWork.status}
                   </span>
                 </div>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
                   <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3 sm:p-4 text-center">
-                    <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-100">97.2%</p>
-                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1">AI Confidence</p>
+                    <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-100">{project.fieldWork.progress}%</p>
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1">Progress</p>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3 sm:p-4 text-center">
-                    <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-scc-red">$385K</p>
-                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1">Max Recovery</p>
+                    <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-dillon-green">{project.fieldWork.samplesCollected}</p>
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1">Samples Collected</p>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3 sm:p-4 text-center">
-                    <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-green-600">+$190K</p>
-                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1">Above Offer</p>
+                    <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-600">{project.fieldWork.samplesAnalyzed}</p>
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1">Lab Results In</p>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3 sm:p-4 text-center">
-                    <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-100">94%</p>
-                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1">Success Rate</p>
+                    <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-100">{project.fieldWork.sampleLocations}</p>
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1">Total Locations</p>
                   </div>
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-semibold text-gray-900 dark:text-gray-100">Recovery Potential Analysis</h4>
-                    <span className="text-sm text-green-600 font-medium">Excellent</span>
+                    <h4 className="font-semibold text-gray-900 dark:text-gray-100">Field Work Completion</h4>
+                    <span className="text-sm text-dillon-green font-medium">On Schedule</span>
                   </div>
                   <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2 mb-2">
-                    <div className="bg-blue-500 h-2 rounded-full" style={{ width: '94%' }}></div>
+                    <div className="bg-dillon-green h-2 rounded-full" style={{ width: `${project.fieldWork.progress}%` }}></div>
                   </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Strong evidence package with multiple recovery opportunities identified</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Soil and groundwater sampling progressing as planned. {project.fieldWork.sampleLocations - project.fieldWork.samplesCollected} locations remaining.</p>
                 </div>
               </div>
 
-              {/* AI Damage Classification */}
+              {/* Cost Analysis Dashboard */}
               <div className="bg-white dark:bg-gray-900 border border-gray-200 rounded-xl p-6">
                 <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
-                  <Brain className="text-scc-red" size={20} />
-                  AI Damage Classification & Analysis
+                  <Calculator className="text-dillon-green" size={20} />
+                  Project Cost Analysis
                 </h3>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {/* Primary Damages */}
+                  {/* Labor & Personnel Costs */}
                   <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Primary Damage Assessment</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Labor & Personnel</h4>
                     <div className="space-y-3">
                       {[
-                        { type: 'Hurricane Wind Damage', severity: 'Major', confidence: 97, amount: '$185,000' },
-                        { type: 'Roof Structural Damage', severity: 'Major', confidence: 94, amount: '$95,000' },
-                        { type: 'Water Intrusion Damage', severity: 'Moderate', confidence: 91, amount: '$45,000' },
-                        { type: 'HVAC System Damage', severity: 'Replace', confidence: 88, amount: '$35,000' }
-                      ].map((damage, index) => (
+                        { category: 'Field Technicians (C.E.T.)', hours: 156, rate: 85, total: 13260, status: 'On Budget' },
+                        { category: 'Project Manager (P.Eng)', hours: 42, rate: 165, total: 6930, status: 'On Budget' },
+                        { category: 'Lab Coordination', hours: 28, rate: 95, total: 2660, status: 'Under Budget' },
+                        { category: 'QA/QC Review (P.Eng)', hours: 18, rate: 175, total: 3150, status: 'Under Budget' }
+                      ].map((item, index) => (
                         <motion.div
                           key={index}
                           initial={{ opacity: 0, x: -20 }}
@@ -629,121 +651,110 @@ export default function ClaimDetailPage() {
                         >
                           <div className="flex justify-between items-start mb-2">
                             <div className="flex-1">
-                              <p className="font-medium text-gray-900 dark:text-gray-100">{damage.type}</p>
-                              <p className={`text-sm ${
-                                damage.severity === 'Major' ? 'text-red-600 font-medium' :
-                                damage.severity === 'Moderate' ? 'text-yellow-600' :
-                                damage.severity === 'Replace' ? 'text-scc-red' :
-                                'text-gray-600'
-                              }`}>
-                                {damage.severity} Damage
+                              <p className="font-medium text-gray-900 dark:text-gray-100">{item.category}</p>
+                              <p className="text-sm text-gray-600 dark:text-gray-400">
+                                {item.hours} hrs @ ${item.rate}/hr
                               </p>
                             </div>
                             <div className="text-right">
-                              <p className="text-lg font-bold text-gray-900 dark:text-gray-100">{damage.amount}</p>
-                              <p className="text-xs text-gray-500 dark:text-gray-400">{damage.confidence}% confidence</p>
+                              <p className="text-lg font-bold text-gray-900 dark:text-gray-100">${item.total.toLocaleString()}</p>
+                              <p className={`text-xs font-medium ${
+                                item.status === 'On Budget' ? 'text-blue-600' :
+                                item.status === 'Under Budget' ? 'text-green-600' :
+                                'text-yellow-600'
+                              }`}>{item.status}</p>
                             </div>
-                          </div>
-                          <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-1.5">
-                            <div
-                              className="bg-blue-500 h-1.5 rounded-full"
-                              style={{ width: `${damage.confidence}%` }}
-                            ></div>
                           </div>
                         </motion.div>
                       ))}
                     </div>
                   </div>
 
-                  {/* Hidden Damages */}
+                  {/* Materials & Equipment */}
                   <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">AI-Detected Hidden Damages</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Materials & Equipment</h4>
                     <div className="space-y-3">
                       {[
-                        { type: 'Foundation Settling', detection: 'High', amount: '$15,000', action: 'Inspect' },
-                        { type: 'Mold in Wall Cavities', detection: 'Medium', amount: '$8,500', action: 'Test' },
-                        { type: 'Electrical Panel Corrosion', detection: 'High', amount: '$3,200', action: 'Document' },
-                        { type: 'Insulation Contamination', detection: 'Medium', amount: '$2,750', action: 'Verify' }
-                      ].map((hidden, index) => (
+                        { item: 'Laboratory Analysis (ALS Environmental)', quantity: '24 samples', cost: 28800, status: 'Invoiced' },
+                        { item: 'Drilling & Sampling Equipment', quantity: '18 locations', cost: 12400, status: 'Paid' },
+                        { item: 'Monitoring Well Installation', quantity: '3 wells', cost: 8950, status: 'Paid' },
+                        { item: 'Site Safety & PPE', quantity: 'Lump sum', cost: 2150, status: 'Paid' }
+                      ].map((expense, index) => (
                         <div key={index} className="bg-white dark:bg-gray-900 border border-gray-200 rounded-lg p-3">
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex-1">
-                              <p className="font-medium text-gray-900 dark:text-gray-100 text-sm">{hidden.type}</p>
-                              <p className={`text-xs ${
-                                hidden.detection === 'High' ? 'text-gray-700 font-medium' : 'text-gray-600'
-                              }`}>
-                                {hidden.detection} Probability
+                              <p className="font-medium text-gray-900 dark:text-gray-100 text-sm">{expense.item}</p>
+                              <p className="text-xs text-gray-600 dark:text-gray-400">
+                                {expense.quantity}
                               </p>
                             </div>
                             <div className="text-right">
-                              <p className="font-bold text-gray-900 dark:text-gray-100">{hidden.amount}</p>
-                              <Button variant="link" className="text-xs text-blue-600 hover:underline font-medium p-0 h-auto">
-                                {hidden.action}
-                              </Button>
+                              <p className="font-bold text-gray-900 dark:text-gray-100">${expense.cost.toLocaleString()}</p>
+                              <span className={`text-xs font-medium ${
+                                expense.status === 'Paid' ? 'text-green-600' : 'text-blue-600'
+                              }`}>{expense.status}</span>
                             </div>
                           </div>
                         </div>
                       ))}
                     </div>
-                    <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200">
-                      <p className="text-sm text-gray-700 dark:text-gray-300">
-                        <strong>Recovery Tip:</strong> Document these hidden damages to add $29,450 to settlement
+                    <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200">
+                      <p className="text-sm text-blue-700 dark:text-blue-300">
+                        <strong>Budget Status:</strong> $50,750 remaining (2.4% under budget for this phase)
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Coverage Intelligence Engine */}
+              {/* AI Regulatory Compliance Checker */}
               <div className="bg-white dark:bg-gray-900 border border-gray-200 rounded-xl p-6">
                 <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
-                  <Shield className="text-gray-600 dark:text-gray-400" size={20} />
-                  Coverage Intelligence & Policy Matching
+                  <Shield className="text-dillon-green" size={20} />
+                  AI Regulatory Compliance Checker
                 </h3>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {/* Coverage Analysis */}
+                  {/* Compliance Status */}
                   <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Automated Coverage Analysis</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Automated Compliance Analysis</h4>
                     <div className="space-y-2">
                       {[
-                        { coverage: 'Building Protection', status: 'Covered', amount: '$185,000', match: 'Confirmed' },
-                        { coverage: 'Other Structures', status: 'Covered', amount: '$45,000', match: 'Confirmed' },
-                        { coverage: 'Ordinance & Law', status: 'Available', amount: '$45,000', match: 'Opportunity' },
-                        { coverage: 'Business Interruption', status: 'Covered', amount: '$32,000', match: 'Applicable' },
-                        { coverage: 'Extra Expense Coverage', status: 'Available', amount: '$18,000', match: 'Eligible' }
-                      ].map((coverage, index) => (
+                        { regulation: 'O. Reg. 153/04 - Record of Site Condition', status: 'Compliant', confidence: 97, flag: 'Verified' },
+                        { regulation: 'MECP Table 3 Standards', status: 'Non-Compliant', confidence: 94, flag: 'Action Required' },
+                        { regulation: 'CCME Soil Quality Guidelines', status: 'Compliant', confidence: 92, flag: 'Verified' },
+                        { regulation: 'ASTM E1527-21 Phase II Standards', status: 'Compliant', confidence: 89, flag: 'Verified' },
+                        { regulation: 'Excess Soil Management (O. Reg. 406/19)', status: 'Pending Review', confidence: 85, flag: 'In Progress' }
+                      ].map((check, index) => (
                         <div key={index} className="bg-white dark:bg-gray-900 rounded-lg p-3 border border-gray-200 hover:border-gray-300 transition-colors">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-3 flex-1">
                               <div className={`flex items-center justify-center w-8 h-8 rounded-full ${
-                                coverage.match === 'Confirmed' ? 'bg-green-50' :
-                                coverage.match === 'Opportunity' ? 'bg-amber-50' :
-                                'bg-blue-50'
+                                check.status === 'Compliant' ? 'bg-green-50' :
+                                check.status === 'Non-Compliant' ? 'bg-red-50' :
+                                'bg-yellow-50'
                               }`}>
-                                {coverage.match === 'Confirmed' ? (
+                                {check.status === 'Compliant' ? (
                                   <CheckCircle className="w-5 h-5 text-green-600" />
-                                ) : coverage.match === 'Opportunity' ? (
-                                  <AlertCircle className="w-5 h-5 text-amber-600" />
+                                ) : check.status === 'Non-Compliant' ? (
+                                  <AlertTriangle className="w-5 h-5 text-red-600" />
                                 ) : (
-                                  <AlertCircle className="w-5 h-5 text-blue-600" />
+                                  <Clock className="w-5 h-5 text-yellow-600" />
                                 )}
                               </div>
                               <div className="flex-1">
-                                <p className="font-medium text-sm text-gray-900 dark:text-gray-100">{coverage.coverage}</p>
+                                <p className="font-medium text-sm text-gray-900 dark:text-gray-100">{check.regulation}</p>
                                 <div className="flex items-center gap-2 mt-0.5">
                                   <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
-                                    coverage.status === 'Covered' ? 'bg-green-100 text-green-700' :
-                                    'bg-gray-100 text-gray-700'
+                                    check.status === 'Compliant' ? 'bg-green-100 text-green-700' :
+                                    check.status === 'Non-Compliant' ? 'bg-red-100 text-red-700' :
+                                    'bg-yellow-100 text-yellow-700'
                                   }`}>
-                                    {coverage.status}
+                                    {check.status}
                                   </span>
                                   <span className="text-xs text-gray-500 dark:text-gray-400">•</span>
-                                  <span className="text-xs text-gray-600 dark:text-gray-400">{coverage.match}</span>
+                                  <span className="text-xs text-gray-600 dark:text-gray-400">{check.confidence}% AI Confidence</span>
                                 </div>
                               </div>
-                            </div>
-                            <div className="text-right">
-                              <p className="font-bold text-gray-900 dark:text-gray-100">{coverage.amount}</p>
                             </div>
                           </div>
                         </div>
@@ -751,37 +762,43 @@ export default function ClaimDetailPage() {
                     </div>
                   </div>
 
-                  {/* Policy Compliance */}
+                  {/* AI Recommendations */}
                   <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Policy Compliance Check</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">AI-Generated Action Items</h4>
                     <div className="space-y-3">
-                      <div className="bg-white dark:bg-gray-900 rounded-lg p-4">
+                      <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-4 border border-red-200">
                         <div className="flex items-center gap-3 mb-2">
-                          <CheckCircle className="text-green-500" size={20} />
-                          <span className="font-medium text-sm">State Regulations</span>
+                          <AlertTriangle className="text-red-600" size={20} />
+                          <span className="font-medium text-sm text-red-900 dark:text-red-100">MECP Table 3 Exceedance</span>
                         </div>
-                        <p className="text-xs text-gray-600 dark:text-gray-400 ml-7">All documentation meets Florida requirements</p>
+                        <p className="text-xs text-red-800 dark:text-red-200 ml-7 mb-2">PHC F2 detected at 850 mg/kg (limit: 260 mg/kg industrial)</p>
+                        <p className="text-xs font-medium text-red-900 dark:text-red-100 ml-7">Next Step: Delineation sampling required per O. Reg. 153/04</p>
                       </div>
-                      <div className="bg-white dark:bg-gray-900 rounded-lg p-4">
+                      <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border border-green-200">
                         <div className="flex items-center gap-3 mb-2">
-                          <CheckCircle className="text-green-500" size={20} />
-                          <span className="font-medium text-sm">Time Limits</span>
+                          <CheckCircle className="text-green-600" size={20} />
+                          <span className="font-medium text-sm text-green-900 dark:text-green-100">RSC Eligibility</span>
                         </div>
-                        <p className="text-xs text-gray-600 dark:text-gray-400 ml-7">Filed within policy time requirements</p>
+                        <p className="text-xs text-green-800 dark:text-green-200 ml-7">Site meets criteria for RSC application after remediation</p>
                       </div>
-                      <div className="bg-white dark:bg-gray-900 rounded-lg p-4">
+                      <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200">
                         <div className="flex items-center gap-3 mb-2">
-                          <AlertTriangle className="text-yellow-500" size={20} />
-                          <span className="font-medium text-sm">Additional Coverage</span>
+                          <Brain className="text-blue-600" size={20} />
+                          <span className="font-medium text-sm text-blue-900 dark:text-blue-100">AI Insight</span>
                         </div>
-                        <p className="text-xs text-gray-600 dark:text-gray-400 ml-7">Ordinance & Law benefits not yet claimed</p>
+                        <p className="text-xs text-blue-800 dark:text-blue-200 ml-7">Based on 12 similar brownfield projects, recommend targeted excavation (est. $45K-$65K)</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+          )}
 
-              {/* Cost Estimation Engine */}
+          {/* AI Report Generator Tab - SHOWCASE FEATURE */}
+          {activeTab === 'ai-report' && (
+            <div className="space-y-6">
+              {/* Coming soon placeholder */}
               <div className="bg-white dark:bg-gray-900 border border-gray-200 rounded-xl p-6">
                 <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                   <Calculator className="text-scc-red" size={20} />
@@ -1058,7 +1075,7 @@ export default function ClaimDetailPage() {
               {/* Timeline Stats */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 text-center">
-                  <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{claim.timeline.length}</p>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{project.timeline.length}</p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">Total Events</p>
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 text-center">
@@ -1080,7 +1097,7 @@ export default function ClaimDetailPage() {
                 <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700"></div>
 
                 <div className="space-y-4">
-                  {claim.timeline.map((event, index) => {
+                  {project.timeline.map((event, index) => {
                     const Icon = event.icon || Calendar
                     const getEventColor = () => {
                       switch(event.color) {
@@ -1458,15 +1475,15 @@ export default function ClaimDetailPage() {
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-600 dark:text-gray-400">Status:</span>
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        claim.inspection.status === 'Scheduled'
+                        project.inspection.status === 'Scheduled'
                           ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
-                          : claim.inspection.status === 'In Progress'
+                          : project.inspection.status === 'In Progress'
                           ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
-                          : claim.inspection.status === 'Completed'
+                          : project.inspection.status === 'Completed'
                           ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
                           : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-400'
                       }`}>
-                        {claim.inspection.status}
+                        {project.inspection.status}
                       </span>
                     </div>
 
@@ -1485,18 +1502,18 @@ export default function ClaimDetailPage() {
                       <div className="flex items-center gap-2 text-sm">
                         <User className="text-gray-500" size={16} />
                         <span className="text-gray-600 dark:text-gray-400">Inspector:</span>
-                        <span className="font-medium text-gray-900 dark:text-gray-100">{claim.inspection.inspector}</span>
+                        <span className="font-medium text-gray-900 dark:text-gray-100">{project.inspection.inspector}</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm">
                         <FileText className="text-gray-500" size={16} />
                         <span className="text-gray-600 dark:text-gray-400">Type:</span>
-                        <span className="font-medium text-gray-900 dark:text-gray-100">{claim.inspection.type}</span>
+                        <span className="font-medium text-gray-900 dark:text-gray-100">{project.inspection.type}</span>
                       </div>
                     </div>
 
                     {/* Action Buttons */}
                     <div className="pt-2 space-y-2">
-                      {claim.inspection.status === 'Scheduled' && (
+                      {project.inspection.status === 'Scheduled' && (
                         <Link
                           href={`/dashboard/inspection/INS-002/start`}
                           className="w-full px-4 py-2 bg-scc-red text-white rounded-lg hover:bg-red-600 transition flex items-center justify-center gap-2 text-sm font-medium"
@@ -1505,7 +1522,7 @@ export default function ClaimDetailPage() {
                           Start Inspection
                         </Link>
                       )}
-                      {claim.inspection.status === 'In Progress' && (
+                      {project.inspection.status === 'In Progress' && (
                         <>
                           <div className="mb-2">
                             <div className="flex items-center justify-between text-sm mb-1">
@@ -1525,7 +1542,7 @@ export default function ClaimDetailPage() {
                           </Link>
                         </>
                       )}
-                      {claim.inspection.status === 'Completed' && (
+                      {project.inspection.status === 'Completed' && (
                         <Link
                           href={`/dashboard/inspection/INS-002/report`}
                           className="w-full px-4 py-2 bg-scc-red text-white rounded-lg hover:bg-red-600 transition flex items-center justify-center gap-2 text-sm font-medium"
@@ -1534,9 +1551,9 @@ export default function ClaimDetailPage() {
                           View Report
                         </Link>
                       )}
-                      {!claim.inspection.status || claim.inspection.status === 'Not Scheduled' && (
+                      {!project.inspection.status || project.inspection.status === 'Not Scheduled' && (
                         <Link
-                          href={`/dashboard/inspection/new?claimId=${claim.id}`}
+                          href={`/dashboard/inspection/new?projectId=${project.id}`}
                           className="w-full px-4 py-2 bg-scc-red text-white rounded-lg hover:bg-red-600 transition flex items-center justify-center gap-2 text-sm font-medium"
                         >
                           <Calendar size={16} />

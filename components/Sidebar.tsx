@@ -24,7 +24,6 @@ import {
   Sun,
   Moon
 } from 'lucide-react'
-import Image from 'next/image'
 import { useTheme } from 'next-themes'
 
 interface SidebarProps {
@@ -46,31 +45,31 @@ export default function Sidebar({ isCollapsed = false, onToggle }: SidebarProps)
       title: 'Dashboard',
       icon: LayoutDashboard,
       href: '/dashboard',
-      description: 'Overview & KPIs'
+      description: 'Overview & Project KPIs'
     },
     {
-      title: 'Claims',
+      title: 'Projects',
       icon: FileSearch,
-      href: '/dashboard/claims',
-      description: 'All claims & details'
+      href: '/dashboard/projects',
+      description: 'Active projects & lifecycle'
     },
     {
-      title: 'Scotty',
+      title: 'Dillon AI',
       icon: Brain,
       href: '/dashboard/assistant',
-      description: 'AI-powered commercial claims expert'
+      description: 'AI-powered consulting assistant'
     },
     {
-      title: 'Schedule',
+      title: 'Assessments',
       icon: CalendarDays,
       href: '/dashboard/inspection',
-      description: 'Schedule and manage inspections'
+      description: 'Schedule and manage assessments'
     },
     {
       title: 'Reports',
       icon: FileCheck,
       href: '/dashboard/reports',
-      description: 'Completed reports'
+      description: 'Technical reports & deliverables'
     }
   ]
 
@@ -82,21 +81,19 @@ export default function Sidebar({ isCollapsed = false, onToggle }: SidebarProps)
       `}
     >
       {/* Logo Section */}
-      <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-scc-gray-dark dark:bg-gray-800 rounded-t-2xl">
+      <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 rounded-t-2xl">
         <div className="flex items-center justify-between">
           <Link href="/dashboard" className="flex items-center gap-3">
             {isCollapsed ? (
-              <div className="w-10 h-10 bg-scc-red rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">S</span>
+              <div className="w-10 h-10 bg-dillon-green rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xl">D</span>
               </div>
             ) : (
-              <Image
-                src="/images/scc_logo.png"
-                alt="Strategic Claim Consultants"
-                width={360}
-                height={100}
+              // Using img tag for SVG to avoid Next.js Image optimization issues
+              <img
+                src="/images/dillon_logo.svg"
+                alt="Dillon Consulting Limited"
                 className="w-auto h-auto max-w-[180px]"
-                priority
               />
             )}
           </Link>
@@ -128,7 +125,7 @@ export default function Sidebar({ isCollapsed = false, onToggle }: SidebarProps)
                   className={`
                     flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all
                     ${isActive
-                      ? 'bg-scc-red text-white shadow-lg'
+                      ? 'bg-dillon-green text-white shadow-lg'
                       : 'hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100'
                     }
                   `}
@@ -173,9 +170,9 @@ export default function Sidebar({ isCollapsed = false, onToggle }: SidebarProps)
         {/* Company Info */}
         {!isCollapsed ? (
           <div className="text-xs text-gray-500 dark:text-gray-400">
-            <p className="font-semibold mb-1">NO RECOVERY, NO FEE</p>
-            <p>Maximizing settlements with AI</p>
-            <p className="mt-2">© 2025 Scotty Adjusting</p>
+            <p className="font-semibold mb-1">MAKING LIFE WORK BETTER</p>
+            <p>AI-powered consulting excellence</p>
+            <p className="mt-2">© 2025 Dillon Consulting</p>
           </div>
         ) : (
           <div className="text-center text-xs text-gray-500 dark:text-gray-400">

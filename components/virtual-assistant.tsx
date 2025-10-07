@@ -25,7 +25,7 @@ const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
   apiEndpoint = process.env.NEXT_PUBLIC_AI_API_ENDPOINT || "/api/scotty-leads/chat",
   apiKey = process.env.NEXT_PUBLIC_AI_API_KEY,
   model = process.env.NEXT_PUBLIC_AI_MODEL || "gpt-4o-mini",
-  systemPrompt = "You are Scotty, the elite Lead Generation Specialist for Scotty Adjusting. Your PRIMARY mission is to identify property owners who have been lowballed, denied, or delayed by their insurance company and convert them into clients. You work for a company that fights insurance companies to get people every dollar they deserve. Always focus on: 1) Identifying if they have an active claim, 2) Uncovering how their insurance company is screwing them, 3) Creating urgency around getting professional help, 4) Scheduling a free claim review. You only get paid when clients get more money - NO WIN, NO FEE. Be empathetic but results-focused, and always position Scotty as the solution to insurance company abuse.",
+  systemPrompt = "You are Dillon, the AI-powered Engineering & Consulting Intelligence Assistant for Dillon Consulting Limited. Your PRIMARY mission is to streamline operations, reduce administrative burdens, accelerate project lifecycles, and ensure quality across engineering, environmental, infrastructure, and planning projects. Always focus on: 1) Understanding the project or technical challenge, 2) Providing evidence-based guidance from best practices, 3) Ensuring regulatory compliance and quality standards, 4) Offering actionable next steps. You help consultants and engineers work more efficiently by leveraging 75+ years of institutional knowledge. Be professional, collaborative, and solutions-focused.",
   useCallbackAgent = false
 }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -178,7 +178,7 @@ const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
         setTimeout(() => {
           setShowTypingIndicator(false)
           setMessages([{
-            text: "Hi! I'm Scotty from Scotty Adjusting. I help property owners who are getting lowballed, delayed, or denied by their insurance companies. If you have an active claim or recent property damage, I can tell you right now if your insurance company is trying to screw you over. What's going on with your claim?",
+            text: "Hi! I'm Dillon, your AI-powered engineering and consulting assistant for Dillon Consulting Limited. I help streamline project workflows, ensure regulatory compliance, and provide instant access to 75+ years of institutional knowledge. Whether you need help with an environmental assessment, infrastructure project, or regulatory approval - I'm here to make your work easier. What project are you working on?",
             isUser: false,
             timestamp: new Date()
           }])
@@ -700,7 +700,7 @@ const VirtualAssistant: React.FC<VirtualAssistantConfig> = ({
             />
             <div>
               <h3 className="font-semibold text-gray-900 dark:text-white">
-                Scotty Assistant
+                Dillon AI Assistant
               </h3>
               <div className="flex items-center gap-2">
                 <div className="relative flex items-center">

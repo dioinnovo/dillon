@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-SCC Intelligence Platform is a Next.js 15.5.2 application for AI-powered insurance claim intelligence. It demonstrates how AI can find overlooked insurance coverage and accelerate claim processing.
+Dillon AI Intelligence Platform is a Next.js 15.5.2 application for AI-powered engineering and consulting project intelligence. It demonstrates how AI can streamline operations, reduce administrative burdens, accelerate project lifecycles, and ensure quality across engineering, environmental, infrastructure, and planning projects.
 
 ## Development Commands
 
@@ -47,7 +47,6 @@ stellar/
 │   └── globals.css        # Global styles
 ├── components/
 │   ├── ui/                # shadcn/ui components
-│   ├── claims/            # Claim processing components
 │   ├── dashboard/         # Dashboard components
 │   └── layout/            # Layout components
 ├── lib/
@@ -75,10 +74,10 @@ stellar/
    - Mock results display
 
 3. **AI Integration** (planned)
-   - Claude Vision for damage analysis
-   - ChromaDB for vector search
-   - OpenAI embeddings for semantic search
-   - Real-time WebSocket updates
+   - Claude AI for technical document analysis and report generation
+   - ChromaDB for vector search and institutional knowledge retrieval
+   - OpenAI embeddings for semantic search across project history
+   - Real-time WebSocket updates for project collaboration
 
 ### Environment Variables
 
@@ -90,11 +89,15 @@ Key environment variables in `.env.local`:
 
 ### Design System
 
-- **Colors**: 
-  - Primary: Stellar Orange (#E74C3C)
-  - Secondary: Stellar Dark (#2C3E50)
+- **Colors**:
+  - Primary: Dillon Green (#08353F) - Forest green/dark teal
+  - Secondary: Professional Gray (#707070)
+  - Success: Green (#00A651)
+- **Brand**: "Making life work better"
+- **Company**: Dillon Consulting Limited (employee-owned since 1946, 1,100+ employees, 25+ offices across Canada)
 - **Components**: Using shadcn/ui with Radix UI primitives
 - **Animations**: Framer Motion for smooth transitions
+- **AI Assistant**: "Dillon" - Engineering & consulting intelligence expert
 
 ### Demo Mode
 

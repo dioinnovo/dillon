@@ -151,7 +151,7 @@ export default function MobileChatInterface({ className }: MobileChatInterfacePr
   // Model options with provider indicators
   const modelOptions = [
     { value: 'quick', label: 'Quick', description: 'Qlik Answers - Fast responses' },
-    { value: 'scotty-pro', label: 'Scotty Pro', description: 'Azure AI - Commercial property expert' }
+    { value: 'dillon-pro', label: 'Dillon Pro', description: 'Azure AI - Engineering & consulting expert' }
   ]
 
   useEffect(() => {
@@ -486,10 +486,10 @@ export default function MobileChatInterface({ className }: MobileChatInterfacePr
               
               <div className="space-y-2">
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  Hi! I'm Scotty
+                  Hi! I'm Dillon
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400 max-w-sm">
-                  I analyze insurance policies comprehensively to uncover every coverage opportunity and maximize settlements for your clients. Upload a policy or select from recently added clients.
+                  I'm your AI-powered engineering and consulting assistant. I help streamline project workflows, ensure regulatory compliance, and provide instant access to 75+ years of Dillon's institutional knowledge. What project can I help you with?
                 </p>
               </div>
 
@@ -683,7 +683,7 @@ export default function MobileChatInterface({ className }: MobileChatInterfacePr
                   handleSend()
                 }
               }}
-              placeholder="Message Scotty"
+              placeholder="Message Dillon"
               disabled={isTyping}
               className="w-full px-3 py-2 bg-transparent text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none resize-none transition-all disabled:opacity-50"
               style={{

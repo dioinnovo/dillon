@@ -236,6 +236,17 @@ export function InspectionAreaCarousel({
       {/* Header */}
       <div className="p-4 bg-white dark:bg-gray-900 border-b border-gray-200 flex-shrink-0">
         <div>
+          {/* Back button */}
+          {inspectionId && (
+            <button
+              onClick={() => router.push(`/dashboard/inspection/${inspectionId}/continue`)}
+              className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition mb-3"
+            >
+              <ArrowLeft size={20} />
+              <span className="text-sm font-medium">Back to Inspection Overview</span>
+            </button>
+          )}
+
           <h2 className="text-2xl sm:text-3xl font-bold text-scc-gray-dark mb-1">Property Inspection Areas</h2>
 
           {/* Instructions */}

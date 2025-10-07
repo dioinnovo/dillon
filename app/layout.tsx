@@ -18,24 +18,25 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'SCC Intelligence Platform',
-  description: 'AI-Powered Commercial Property Claims',
-  keywords: 'insurance, claims, AI, public adjusting, settlement, damage assessment',
-  authors: [{ name: 'Strategic Claim Consultants' }],
+  title: 'Dillon AI Intelligence Platform',
+  description: 'AI-Powered Engineering & Consulting Project Intelligence',
+  keywords: 'engineering, environmental consulting, AI, project management, infrastructure, planning, Phase II ESA',
+  authors: [{ name: 'Dillon Consulting Limited' }],
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: '32x32' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/favicon-192x192.png', sizes: '192x192', type: 'image/png' },
     ],
-    shortcut: '/favicon-32x32.png',
+    shortcut: '/favicon.ico',
     apple: '/apple-touch-icon.png',
   },
   openGraph: {
-    title: 'SCC Intelligence Platform',
-    description: 'Find $80,000+ in Overlooked Coverage in 3 Minutes',
+    title: 'Dillon AI Intelligence Platform',
+    description: 'AI-powered engineering and consulting project intelligence - streamlining operations and accelerating project lifecycles',
     type: 'website',
     locale: 'en_US',
-    siteName: 'SCC Intelligence Platform',
+    siteName: 'Dillon AI Intelligence Platform',
   },
 }
 

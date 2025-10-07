@@ -4,11 +4,11 @@ import { useState } from 'react'
 import { HandshakeIcon, ChevronRight, Plus, Search, Filter } from 'lucide-react'
 import Link from 'next/link'
 import { PageHeader } from '@/components/ui/page-header'
-import { SCC_CASES } from '@/lib/data/scc-cases'
+import { DILLON_PROJECTS } from '@/lib/data/dillon-projects'
 
-export default function ClaimsAnalysisPage() {
-  const [selectedClaim, setSelectedClaim] = useState<any>(null)
-  const [showNewClaimForm, setShowNewClaimForm] = useState(false)
+export default function ProjectsPage() {
+  const [selectedProject, setSelectedProject] = useState<any>(null)
+  const [showNewProjectForm, setShowNewProjectForm] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [activeFilters, setActiveFilters] = useState({
     status: 'all',
@@ -16,63 +16,63 @@ export default function ClaimsAnalysisPage() {
     valueRange: 'all'
   })
 
-  const recentClaims = [
+  const recentProjects = [
     {
-      id: 'SCC-2024-001',
-      client: SCC_CASES[0].clientName, // The Shrimp Boat
-      property: `${SCC_CASES[0].location.city}, ${SCC_CASES[0].location.state}`,
-      type: SCC_CASES[0].damage.type,
-      status: 'Settled',
-      value: SCC_CASES[0].settlement.finalSettlement!,
-      date: '2024-03-15',
-      phase: 'completed',
-      imageUrl: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&h=600&fit=crop&q=80' // Restaurant image
+      id: 'PROJ-2024-001',
+      client: 'City of Cambridge',
+      property: 'Cambridge, Ontario',
+      type: 'Phase II ESA',
+      status: 'Field Work',
+      value: 145000,
+      date: '2024-01-15',
+      phase: 'active',
+      imageUrl: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&h=600&fit=crop&q=80'
     },
     {
-      id: 'SCC-2024-002',
-      client: SCC_CASES[1].clientName, // Cinnamon Shore
-      property: `${SCC_CASES[1].location.city}, ${SCC_CASES[1].location.state}`,
-      type: SCC_CASES[1].damage.type,
-      status: 'Settled',
-      value: SCC_CASES[1].settlement.finalSettlement!,
-      date: '2024-03-14',
-      phase: 'completed',
-      imageUrl: 'https://images.unsplash.com/photo-1561501900-3701fa6a0864?w=800&h=600&fit=crop&q=80' // Resort image
+      id: 'PROJ-2024-002',
+      client: 'Region of Waterloo',
+      property: 'Waterloo, Ontario',
+      type: 'Infrastructure Assessment',
+      status: 'Report Draft',
+      value: 285000,
+      date: '2023-11-20',
+      phase: 'active',
+      imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&q=80'
     },
     {
-      id: 'SCC-2024-003',
-      client: SCC_CASES[2].clientName, // Land's End
-      property: `${SCC_CASES[2].location.city}, ${SCC_CASES[2].location.state}`,
-      type: SCC_CASES[2].damage.type,
-      status: 'Settled',
-      value: SCC_CASES[2].settlement.finalSettlement!,
-      date: '2024-03-13',
+      id: 'PROJ-2024-003',
+      client: 'Developer Corp',
+      property: 'Guelph, Ontario',
+      type: 'Phase I ESA',
+      status: 'Completed',
+      value: 28500,
+      date: '2024-02-01',
       phase: 'completed',
-      imageUrl: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop&q=80' // Condo tower image
+      imageUrl: 'https://images.unsplash.com/photo-1590859808308-3d2d9c515b1a?w=800&h=600&fit=crop&q=80'
     }
   ]
 
-  const filteredClaims = recentClaims.filter(claim => {
+  const filteredProjects = recentProjects.filter(project => {
     const matchesSearch = searchQuery === '' ||
-      claim.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      claim.client.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      claim.property.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      claim.type.toLowerCase().includes(searchQuery.toLowerCase())
+      project.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.client.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.property.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.type.toLowerCase().includes(searchQuery.toLowerCase())
 
-    const matchesStatus = activeFilters.status === 'all' || claim.status === activeFilters.status
-    const matchesType = activeFilters.type === 'all' || claim.type === activeFilters.type
+    const matchesStatus = activeFilters.status === 'all' || project.status === activeFilters.status
+    const matchesType = activeFilters.type === 'all' || project.type === activeFilters.type
 
     let matchesValue = true
     if (activeFilters.valueRange !== 'all') {
       switch (activeFilters.valueRange) {
-        case 'under100k':
-          matchesValue = claim.value < 100000
+        case 'under50k':
+          matchesValue = project.value < 50000
           break
-        case '100k-250k':
-          matchesValue = claim.value >= 100000 && claim.value <= 250000
+        case '50k-250k':
+          matchesValue = project.value >= 50000 && project.value <= 250000
           break
         case 'over250k':
-          matchesValue = claim.value > 250000
+          matchesValue = project.value > 250000
           break
       }
     }
@@ -83,16 +83,16 @@ export default function ClaimsAnalysisPage() {
   return (
     <div className="space-y-4">
       {/* Header */}
-      <PageHeader 
-        title="Claim Analysis Center"
-        description="Complete end-to-end claim processing workflow"
+      <PageHeader
+        title="Contract & Project Management"
+        description="Complete project lifecycle management and contract tracking"
         action={
-          <button 
-            onClick={() => setShowNewClaimForm(true)}
-            className="h-12 px-6 bg-scc-red text-white rounded-full hover:bg-scc-red-dark flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto transition-colors"
+          <button
+            onClick={() => setShowNewProjectForm(true)}
+            className="h-12 px-6 bg-dillon-green text-white rounded-full hover:bg-dillon-green-dark flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto transition-colors"
           >
             <Plus size={20} />
-            <span className="font-medium">New Claim</span>
+            <span className="font-medium">New Project</span>
           </button>
         }
       />
@@ -167,60 +167,61 @@ export default function ClaimsAnalysisPage() {
         </div>
       </div>
 
-      {/* Recent Claims */}
+      {/* Active Projects */}
       <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm p-4 sm:p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">Active Claims</h2>
-          <span className="text-sm text-gray-500 dark:text-gray-400">{filteredClaims.length} results</span>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">Active Projects</h2>
+          <span className="text-sm text-gray-500 dark:text-gray-400">{filteredProjects.length} results</span>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-          {filteredClaims.map((claim) => (
+          {filteredProjects.map((project) => (
             <Link
-              key={claim.id}
-              href={`/dashboard/claims/${claim.id}`}
-              className="block border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:border-scc-red transition cursor-pointer"
+              key={project.id}
+              href={`/dashboard/projects/${project.id}`}
+              className="block border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:border-dillon-green transition cursor-pointer"
             >
-              {/* Property Image with Address Overlay */}
+              {/* Site Image with Location Overlay */}
               <div className="relative h-48 sm:h-56 bg-gray-100 dark:bg-gray-700">
-                <img 
-                  src={claim.imageUrl} 
-                  alt={claim.property}
+                <img
+                  src={project.imageUrl}
+                  alt={project.property}
                   className="w-full h-full object-cover"
                 />
-                
+
                 {/* Dark gradient from bottom */}
                 <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0A1628] via-[#0A1628]/60 to-transparent" />
-                
-                {/* Property Address */}
+
+                {/* Site Location */}
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <h3 className="font-bold text-white text-lg leading-tight drop-shadow-lg">
-                    {claim.property}
+                    {project.property}
                   </h3>
                 </div>
-                
+
                 {/* Status Badge */}
                 <div className="absolute top-3 right-3">
                   <span className={`inline-block px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg ${
-                    claim.status === 'Negotiating' ? 'bg-amber-500 text-white' :
-                    claim.status === 'Under Review' ? 'bg-gray-600 text-white' :
+                    project.status === 'Field Work' ? 'bg-purple-500 text-white' :
+                    project.status === 'Report Draft' ? 'bg-orange-500 text-white' :
+                    project.status === 'Completed' ? 'bg-green-600 text-white' :
                     'bg-blue-600 text-white'
                   }`}>
-                    {claim.status}
+                    {project.status}
                   </span>
                 </div>
               </div>
-              
-              {/* Claim Details */}
+
+              {/* Project Details */}
               <div className="p-3 sm:p-4">
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2 mb-2">
-                      <span className="font-bold text-sm sm:text-base text-gray-900 dark:text-gray-100">{claim.id}</span>
+                      <span className="font-bold text-sm sm:text-base text-gray-900 dark:text-gray-100">{project.id}</span>
                     </div>
-                    <p className="font-medium text-sm sm:text-base text-gray-900 dark:text-gray-100 truncate">{claim.client}</p>
+                    <p className="font-medium text-sm sm:text-base text-gray-900 dark:text-gray-100 truncate">{project.client}</p>
                     <div className="flex flex-wrap items-center gap-2 sm:gap-4 mt-2">
-                      <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{claim.type}</span>
-                      <span className="text-xs sm:text-sm font-semibold text-green-600">${claim.value.toLocaleString()}</span>
+                      <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{project.type}</span>
+                      <span className="text-xs sm:text-sm font-semibold text-dillon-green">${project.value.toLocaleString()}</span>
                     </div>
                   </div>
                   <ChevronRight className="text-gray-400 dark:text-gray-500 flex-shrink-0" size={20} />

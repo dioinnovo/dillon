@@ -22,17 +22,17 @@ export default function MobileBottomNav() {
       href: '/dashboard',
     },
     {
-      title: 'Claims',
+      title: 'Projects',
       icon: FileSearch,
-      href: '/dashboard/claims',
+      href: '/dashboard/projects',
     },
     {
-      title: 'Scotty',
+      title: 'Dillon AI',
       icon: Brain,
       href: '/dashboard/assistant',
     },
     {
-      title: 'Schedule',
+      title: 'Assess',
       icon: CalendarDays,
       href: '/dashboard/inspection',
     },
@@ -72,7 +72,7 @@ export default function MobileBottomNav() {
                   {/* Bubble positioned absolutely within the active item */}
                   {isActive && (
                     <motion.div
-                      className="absolute inset-0 bg-[#9A2824] rounded-full shadow-lg pointer-events-none"
+                      className="absolute inset-0 bg-[#08353F] rounded-full shadow-lg pointer-events-none"
                       layoutId="nav-bubble"
                       initial={false}
                       transition={{
@@ -88,7 +88,7 @@ export default function MobileBottomNav() {
                       relative z-10 flex flex-col items-center justify-center gap-0.5 px-2 py-3 rounded-full transition-all w-full
                       ${isActive
                         ? 'text-white'
-                        : 'text-gray-600 dark:text-gray-300 hover:text-[#9A2824] hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
+                        : 'text-gray-600 dark:text-gray-300 hover:text-[#08353F] hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
                       }
                     `}
                   >

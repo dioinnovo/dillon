@@ -666,11 +666,11 @@ export default function InspectionReportPage() {
           <div className="flex flex-col gap-3">
             {/* Back Navigation */}
             <Link
-              href={claimId ? `/dashboard/claims/${claimId}` : `/dashboard/inspection/${inspectionId}/review`}
+              href={claimId ? `/dashboard/projects/${claimId}` : `/dashboard/inspection/${inspectionId}/review`}
               className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-100 transition-colors w-fit"
             >
               <ArrowLeft size={20} />
-              <span>{claimId ? 'Back to Claim' : 'Back to Review'}</span>
+              <span>{claimId ? 'Back to Project' : 'Back to Review'}</span>
             </Link>
 
             {/* Action Buttons */}

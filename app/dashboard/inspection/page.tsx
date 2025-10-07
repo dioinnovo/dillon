@@ -16,17 +16,17 @@ import { useSidebar } from '@/contexts/SidebarContext'
 // Lazy load inspection data hook to improve initial load
 // import { useInspectionData } from '@/lib/hooks/useInspectionData'
 
-interface Inspection {
+interface Assessment {
   id: string
-  claimId: string
-  propertyAddress: string
-  propertyType: string
+  projectId: string
+  siteAddress: string
+  siteType: string
   status: string
   scheduledDate: string
   scheduledTime: string
-  inspector: string
+  fieldTechnician: string
   clientName: string
-  damageType: string
+  assessmentType: string
   estimatedDuration: string
   completionRate: number
   reportReady?: boolean
@@ -35,7 +35,7 @@ interface Inspection {
   photosCount?: number
   areasInspected?: string[]
   currentArea?: string
-  damageAssessment?: {
+  preliminaryFindings?: {
     severity: string
     description: string
     recommendation: string
@@ -45,15 +45,15 @@ interface Inspection {
     areasCompleted: number
     totalAreas: number
     findings: string[]
-    estimatedRepairCost: number
+    estimatedCost: number
   }
 }
 
-export default function InspectionListPage() {
+export default function AssessmentListPage() {
   const router = useRouter()
   const [filterStatus, setFilterStatus] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
-  const [filterDamageType, setFilterDamageType] = useState('all')
+  const [filterAssessmentType, setFilterAssessmentType] = useState('all')
   const { isCollapsed } = useSidebar()
 
   // Lazy load inspection data to avoid blocking initial render
@@ -75,162 +75,161 @@ export default function InspectionListPage() {
     // loadData()
   }, [])
 
-  // Mock data for inspections with Unsplash images
-  const inspections: Inspection[] = [
-    // ONE Green - Active inspection
+  // Mock data for field assessments
+  const assessments: Assessment[] = [
+    // ONE Green - Active assessment
     {
-      id: 'INS-002',
-      claimId: 'CLM-2024-002',
-      propertyAddress: '5678 Palm Avenue, Coral Gables, FL',
-      propertyType: 'Residential',
+      id: 'ASM-002',
+      projectId: 'PROJ-2024-001',
+      siteAddress: '425 Industrial Drive, Cambridge, ON',
+      siteType: 'Industrial',
       status: 'in_progress',
       scheduledDate: '2024-03-19',
       scheduledTime: '2:00 PM',
-      inspector: 'Maria Garcia',
-      clientName: 'Sarah Thompson',
-      damageType: 'Water Damage',
-      estimatedDuration: '3 hours',
+      fieldTechnician: 'Michael Torres, C.E.T.',
+      clientName: 'City of Cambridge',
+      assessmentType: 'Phase II ESA',
+      estimatedDuration: '6 hours',
       completionRate: 65,
-      imageUrl: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&h=600&fit=crop&q=80',
-      photosCount: realPhotoCount || 51, // Use real count if available
-      currentArea: currentAreaName,
-      areasInspected: realAreasCompleted.length > 0 ? realAreasCompleted : ['Roof & Gutters', 'Siding & Walls', 'Living Room', 'Kitchen', 'HVAC System', 'Bathrooms', 'Master Bedroom', 'Windows & Doors'],
-      damageAssessment: {
+      imageUrl: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&h=600&fit=crop&q=80',
+      photosCount: realPhotoCount || 51,
+      currentArea: currentAreaName || 'Groundwater Sampling',
+      areasInspected: realAreasCompleted.length > 0 ? realAreasCompleted : ['Site Reconnaissance', 'Soil Boring SB-01', 'Soil Boring SB-02', 'Monitoring Well MW-01', 'Groundwater Sampling', 'Soil Vapor Survey', 'Surface Water Sample'],
+      preliminaryFindings: {
         severity: 'Moderate',
-        description: 'Water intrusion through roof causing ceiling damage and potential mold growth in kitchen area',
-        recommendation: 'Immediate roof repair and professional water remediation required'
+        description: 'Former manufacturing facility showing evidence of petroleum hydrocarbon contamination in shallow soils. Soil samples indicate concentrations exceeding Table 3 standards.',
+        recommendation: 'Continue sampling program, establish groundwater monitoring network, and prepare remediation options assessment'
       }
     },
-    // TWO Orange - Scheduled inspections
+    // TWO Orange - Scheduled assessments
     {
-      id: 'INS-001',
-      claimId: 'CLM-2024-001',
-      propertyAddress: '1234 Ocean Drive, Miami Beach, FL',
-      propertyType: 'Commercial',
+      id: 'ASM-001',
+      projectId: 'PROJ-2024-002',
+      siteAddress: 'Grand River Bridge - Fischer-Hallman Road, Waterloo, ON',
+      siteType: 'Infrastructure',
       status: 'scheduled',
       scheduledDate: '2024-03-20',
       scheduledTime: '10:00 AM',
-      inspector: 'James Rodriguez',
-      clientName: 'Johnson Properties LLC',
-      damageType: 'Hurricane',
-      estimatedDuration: '4 hours',
+      fieldTechnician: 'James Rodriguez, P.Eng',
+      clientName: 'Region of Waterloo',
+      assessmentType: 'Infrastructure Assessment',
+      estimatedDuration: '8 hours',
       completionRate: 0,
-      imageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop&q=80',
-      damageAssessment: {
-        severity: 'Severe',
-        description: 'Category 3 hurricane damage to high-rise office building with extensive facade and structural concerns',
-        recommendation: 'Comprehensive structural assessment required before occupancy'
+      imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&q=80',
+      preliminaryFindings: {
+        severity: 'Significant',
+        description: '50-year old concrete bridge showing signs of structural deterioration, spalling concrete, and exposed rebar. Comprehensive structural capacity analysis required.',
+        recommendation: 'Complete visual inspection, core sampling, and load capacity assessment before developing rehabilitation design'
       }
     },
     {
-      id: 'INS-005',
-      claimId: 'CLM-2024-005',
-      propertyAddress: '7890 Collins Avenue, Miami Beach, FL',
-      propertyType: 'Commercial',
+      id: 'ASM-005',
+      projectId: 'PROJ-2024-004',
+      siteAddress: 'Proposed Wastewater Treatment Plant Expansion, London, ON',
+      siteType: 'Institutional',
       status: 'scheduled',
       scheduledDate: '2024-03-21',
       scheduledTime: '9:30 AM',
-      inspector: 'James Rodriguez',
-      clientName: 'Beach Resort Holdings',
-      damageType: 'Flood Damage',
-      estimatedDuration: '6 hours',
+      fieldTechnician: 'Amanda Williams, G.I.T.',
+      clientName: 'Municipal Infrastructure Canada',
+      assessmentType: 'Geotechnical',
+      estimatedDuration: '10 hours',
       completionRate: 0,
-      imageUrl: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&h=600&fit=crop&q=80',
-      damageAssessment: {
-        severity: 'Moderate',
-        description: 'Ground floor flooding affecting lobby, restaurant, and mechanical areas of beachfront resort',
-        recommendation: 'Immediate water extraction and comprehensive mold prevention protocol'
+      imageUrl: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800&h=600&fit=crop&q=80',
+      preliminaryFindings: {
+        severity: 'Standard',
+        description: 'Geotechnical investigation including 5 boreholes (BH-01 to BH-05) and 8 test pits for foundation design recommendations',
+        recommendation: 'Complete borehole drilling, soil sampling, and laboratory testing for bearing capacity and settlement analysis'
       }
     },
-    // ONE Yellow - Needs attention/review
+    // Completed assessments
     {
-      id: 'INS-003',
-      claimId: 'CLM-2024-003',
-      propertyAddress: '9012 Sunset Blvd, Miami, FL',
-      propertyType: 'Commercial',
+      id: 'ASM-003',
+      projectId: 'PROJ-2024-003',
+      siteAddress: '789 Former Gas Station Site, Guelph, ON',
+      siteType: 'Commercial',
       status: 'completed',
       scheduledDate: '2024-03-18',
       scheduledTime: '9:00 AM',
-      inspector: 'James Rodriguez',
-      clientName: 'Miami Retail Group',
-      damageType: 'Wind Damage',
-      estimatedDuration: '5 hours',
+      fieldTechnician: 'Emily Patel, P.Geo',
+      clientName: 'Developer Corp - Brownfield Holdings',
+      assessmentType: 'Phase I ESA',
+      estimatedDuration: '4 hours',
       completionRate: 100,
       reportReady: true,
-      imageUrl: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop&q=80',
+      imageUrl: 'https://images.unsplash.com/photo-1590859808308-3d2d9c515b1a?w=800&h=600&fit=crop&q=80',
       reportDetails: {
         totalPhotos: 89,
         areasCompleted: 8,
         totalAreas: 8,
         findings: [
-          'Significant facade damage on south wall',
-          'Multiple broken windows requiring replacement',
-          'HVAC system damage - commercial unit compromised',
-          'Interior water damage in main retail space',
-          'Electrical panel requires inspection and potential replacement'
+          'Historical records review identified former gas station use from 1965-2002',
+          'Environmental database search found no regulatory violations',
+          'Site reconnaissance revealed underground storage tank (UST) fill ports',
+          'Adjacent properties include automotive repair facility (potential offsite contamination)',
+          'Phase II ESA recommended due to former petroleum storage use'
         ],
-        estimatedRepairCost: 275000
+        estimatedCost: 28500
       }
     },
-    // Black - Report ready (completed)
+    // Report ready (completed)
     {
-      id: 'INS-004',
-      claimId: 'CLM-2024-004',
-      propertyAddress: '3456 Bay Road, Key Biscayne, FL',
-      propertyType: 'Residential',
+      id: 'ASM-004',
+      projectId: 'PROJ-2024-010',
+      siteAddress: 'Proposed Subdivision - North 40 Acres, Oakville, ON',
+      siteType: 'Residential',
       status: 'report_ready',
       scheduledDate: '2024-03-17',
       scheduledTime: '11:00 AM',
-      inspector: 'Maria Garcia',
-      clientName: 'Robert Williams',
-      damageType: 'Roof Damage',
-      estimatedDuration: '2.5 hours',
+      fieldTechnician: 'Rachel Green, P.Eng',
+      clientName: 'Residential Developer Inc.',
+      assessmentType: 'Geotechnical',
+      estimatedDuration: '5 hours',
       completionRate: 100,
       reportReady: true,
-      estimatedValue: 145000,
-      imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop&q=80',
+      estimatedValue: 88000,
+      imageUrl: 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=800&h=600&fit=crop&q=80',
       reportDetails: {
         totalPhotos: 63,
         areasCompleted: 6,
         totalAreas: 6,
         findings: [
-          'Extensive roof tile damage on east and south-facing slopes',
-          'Multiple missing or displaced tiles creating potential water entry points',
-          'Gutter system compromised with several detached sections',
-          'Attic insulation shows signs of water intrusion',
-          'Minor interior ceiling staining in master bedroom'
+          'Soil borings completed to depths of 6-10 meters below grade',
+          'Bearing capacity suitable for standard residential foundation design',
+          'Slope stability analysis shows adequate safety factors for proposed grading',
+          'Seasonal groundwater table identified at 3.5m depth',
+          'Granular fill recommended for pavement subgrade preparation'
         ],
-        estimatedRepairCost: 145000
+        estimatedCost: 88000
       }
     },
     {
-      id: 'INS-006',
-      claimId: 'CLM-2024-006',
-      propertyAddress: '2345 Coral Way, Coral Gables, FL',
-      propertyType: 'Residential',
+      id: 'ASM-006',
+      projectId: 'PROJ-2024-008',
+      siteAddress: 'Lakeshore Road Water Main Replacement, Mississauga, ON',
+      siteType: 'Infrastructure',
       status: 'report_ready',
       scheduledDate: '2024-03-16',
       scheduledTime: '4:00 PM',
-      inspector: 'Maria Garcia',
-      clientName: 'David Martinez',
-      damageType: 'Storm Damage',
-      estimatedDuration: '3.5 hours',
+      fieldTechnician: 'Thomas Anderson, P.Eng',
+      clientName: 'City of Mississauga',
+      assessmentType: 'Infrastructure Assessment',
+      estimatedDuration: '6 hours',
       completionRate: 100,
       reportReady: true,
-      imageUrl: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&h=600&fit=crop&q=80',
+      imageUrl: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&h=600&fit=crop&q=80',
       reportDetails: {
         totalPhotos: 71,
         areasCompleted: 7,
         totalAreas: 7,
         findings: [
-          'Fallen tree caused significant damage to west-facing exterior wall',
-          'Window frames damaged requiring full replacement of 3 units',
-          'Landscaping and outdoor structures severely impacted',
-          'Minor roof damage with several loose shingles',
-          'Electrical outdoor fixtures damaged and need replacement',
-          'Fence and gate system requires complete reconstruction'
+          '2.5km water main showing significant corrosion and reduced capacity',
+          'Internal inspection camera reveals tuberculation reducing pipe diameter by 40%',
+          'Multiple leak repair history indicates end of service life',
+          'Coordination required with gas, hydro, and telecom utilities',
+          'Tender documents and construction specifications prepared for spring 2024 construction'
         ],
-        estimatedRepairCost: 98500
+        estimatedCost: 195000
       }
     }
   ]
@@ -257,16 +256,16 @@ export default function InspectionListPage() {
     }
   }
 
-  // Filter only Active/Scheduled inspections
-  const activeScheduledInspections = inspections.filter(inspection =>
-    inspection.status === 'scheduled' || inspection.status === 'in_progress'
-  ).filter(inspection => {
-    const matchesSearch = inspection.propertyAddress.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          inspection.clientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          inspection.claimId.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesStatus = filterStatus === 'all' || inspection.status === filterStatus
-    const matchesDamageType = filterDamageType === 'all' || inspection.damageType === filterDamageType
-    return matchesSearch && matchesStatus && matchesDamageType
+  // Filter only Active/Scheduled assessments
+  const activeScheduledAssessments = assessments.filter(assessment =>
+    assessment.status === 'scheduled' || assessment.status === 'in_progress'
+  ).filter(assessment => {
+    const matchesSearch = assessment.siteAddress.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          assessment.clientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          assessment.projectId.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesStatus = filterStatus === 'all' || assessment.status === filterStatus
+    const matchesAssessmentType = filterAssessmentType === 'all' || assessment.assessmentType === filterAssessmentType
+    return matchesSearch && matchesStatus && matchesAssessmentType
   }).sort((a, b) => {
     // Sort by date and time (soonest first)
     const dateA = new Date(`${a.scheduledDate} ${a.scheduledTime}`)
@@ -274,23 +273,23 @@ export default function InspectionListPage() {
     return dateA.getTime() - dateB.getTime()
   })
 
-  // Get inspections that need action
-  const scheduledInspections = inspections.filter(i => i.status === 'scheduled')
-  const inProgressInspections = inspections.filter(i => i.status === 'in_progress')
+  // Get assessments that need action
+  const scheduledAssessments = assessments.filter(i => i.status === 'scheduled')
+  const inProgressAssessments = assessments.filter(i => i.status === 'in_progress')
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <PageHeader
-        title="Schedule Inspections"
-        description="AI-powered comprehensive property assessments"
+        title="Schedule Field Assessments"
+        description="AI-powered site assessments and field investigations"
         action={
           <Link
             href="/dashboard/inspection/new"
-            className="h-12 px-6 bg-scc-red text-white rounded-full hover:bg-scc-red-dark flex items-center justify-center gap-2 w-full sm:w-auto transition-colors font-medium"
+            className="h-12 px-6 bg-dillon-green text-white rounded-full hover:bg-dillon-green-dark flex items-center justify-center gap-2 w-full sm:w-auto transition-colors font-medium"
           >
             <Plus size={20} />
-            <span>New Inspection</span>
+            <span>New Assessment</span>
           </Link>
         }
       />
@@ -303,10 +302,10 @@ export default function InspectionListPage() {
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" size={20} />
             <input
               type="text"
-              placeholder="Search by address, client, or claim ID..."
+              placeholder="Search by site address, client, or project ID..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-gray-50/50 dark:bg-gray-800/50 border border-gray-200/60 dark:border-gray-700/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-scc-red/30 focus:bg-white dark:focus:bg-gray-700 transition-all text-sm md:text-base text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
+              className="w-full pl-12 pr-4 py-3 bg-gray-50/50 dark:bg-gray-800/50 border border-gray-200/60 dark:border-gray-700/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-dillon-green/30 focus:bg-white dark:focus:bg-gray-700 transition-all text-sm md:text-base text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
             />
           </div>
 
@@ -316,7 +315,7 @@ export default function InspectionListPage() {
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-4 py-2.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-scc-red/30 focus:border-scc-red/50"
+              className="px-4 py-2.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-dillon-green/30 focus:border-dillon-green/50"
             >
               <option value="all">All Status</option>
               <option value="scheduled">Scheduled</option>
@@ -325,48 +324,48 @@ export default function InspectionListPage() {
               <option value="report_ready">Report Ready</option>
             </select>
 
-            {/* Damage Type Filter */}
+            {/* Assessment Type Filter */}
             <select
-              value={filterDamageType}
-              onChange={(e) => setFilterDamageType(e.target.value)}
-              className="px-4 py-2.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-scc-red/30 focus:border-scc-red/50"
+              value={filterAssessmentType}
+              onChange={(e) => setFilterAssessmentType(e.target.value)}
+              className="px-4 py-2.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-dillon-green/30 focus:border-dillon-green/50"
             >
-              <option value="all">All Damage Types</option>
-              <option value="Hurricane">Hurricane</option>
-              <option value="Water Damage">Water Damage</option>
-              <option value="Wind Damage">Wind Damage</option>
-              <option value="Flood Damage">Flood Damage</option>
-              <option value="Roof Damage">Roof Damage</option>
-              <option value="Storm Damage">Storm Damage</option>
+              <option value="all">All Assessment Types</option>
+              <option value="Phase I ESA">Phase I ESA</option>
+              <option value="Phase II ESA">Phase II ESA</option>
+              <option value="Phase III ESA">Phase III ESA</option>
+              <option value="Geotechnical">Geotechnical</option>
+              <option value="Infrastructure Assessment">Infrastructure Assessment</option>
+              <option value="Planning">Planning</option>
             </select>
           </div>
 
           {/* Active Filters Display */}
-          {(filterStatus !== 'all' || filterDamageType !== 'all') && (
+          {(filterStatus !== 'all' || filterAssessmentType !== 'all') && (
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-sm text-gray-600 dark:text-gray-400">Active filters:</span>
               {filterStatus !== 'all' && (
                 <button
                   onClick={() => setFilterStatus('all')}
-                  className="px-3 py-1 bg-scc-red/10 text-scc-red rounded-full text-sm flex items-center gap-1 hover:bg-scc-red/20 transition-colors"
+                  className="px-3 py-1 bg-dillon-green/10 text-dillon-green rounded-full text-sm flex items-center gap-1 hover:bg-dillon-green/20 transition-colors"
                 >
                   {getStatusLabel(filterStatus)}
-                  <span className="text-scc-red/60">×</span>
+                  <span className="text-dillon-green/60">×</span>
                 </button>
               )}
-              {filterDamageType !== 'all' && (
+              {filterAssessmentType !== 'all' && (
                 <button
-                  onClick={() => setFilterDamageType('all')}
-                  className="px-3 py-1 bg-scc-red/10 text-scc-red rounded-full text-sm flex items-center gap-1 hover:bg-scc-red/20 transition-colors"
+                  onClick={() => setFilterAssessmentType('all')}
+                  className="px-3 py-1 bg-dillon-green/10 text-dillon-green rounded-full text-sm flex items-center gap-1 hover:bg-dillon-green/20 transition-colors"
                 >
-                  {filterDamageType}
-                  <span className="text-scc-red/60">×</span>
+                  {filterAssessmentType}
+                  <span className="text-dillon-green/60">×</span>
                 </button>
               )}
               <button
                 onClick={() => {
                   setFilterStatus('all')
-                  setFilterDamageType('all')
+                  setFilterAssessmentType('all')
                 }}
                 className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 underline"
               >
@@ -377,47 +376,47 @@ export default function InspectionListPage() {
         </div>
       </div>
 
-      {/* Scheduled Inspections Section */}
-      {activeScheduledInspections.length > 0 && (
+      {/* Scheduled Assessments Section */}
+      {activeScheduledAssessments.length > 0 && (
         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200/50 dark:border-gray-700/50 p-4">
           <div className="mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">Scheduled Inspections</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">Scheduled Field Assessments</h2>
             <div className="flex items-center gap-3">
-              {activeScheduledInspections.filter(i => i.status === 'in_progress').length > 0 && (
+              {activeScheduledAssessments.filter(i => i.status === 'in_progress').length > 0 && (
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"/>
-                  {activeScheduledInspections.filter(i => i.status === 'in_progress').length} Active
+                  {activeScheduledAssessments.filter(i => i.status === 'in_progress').length} Active
                 </span>
               )}
               <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
                 <Calendar size={14} />
-                {activeScheduledInspections.filter(i => i.status === 'scheduled').length} Scheduled
+                {activeScheduledAssessments.filter(i => i.status === 'scheduled').length} Scheduled
               </span>
             </div>
           </div>
 
           {/* Scheduled Grid - 1 column on mobile and md screens */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            {activeScheduledInspections.map((inspection) => (
+            {activeScheduledAssessments.map((assessment) => (
               <div
-                key={inspection.id}
+                key={assessment.id}
                 className="bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer group border border-gray-200 dark:border-gray-700 animate-fadeInSlide"
                 onClick={() => {
-                  if (inspection.status === 'in_progress') {
-                    // For in-progress inspections, continue the inspection
-                    router.push(`/dashboard/inspection/${inspection.id}/continue`)
+                  if (assessment.status === 'in_progress') {
+                    // For in-progress assessments, continue the assessment
+                    router.push(`/dashboard/inspection/${assessment.id}/continue`)
                   } else {
-                    // For scheduled inspections, go to start page
-                    router.push(`/dashboard/inspection/${inspection.id}/start`)
+                    // For scheduled assessments, go to start page
+                    router.push(`/dashboard/inspection/${assessment.id}/start`)
                   }
                 }}
               >
                 {/* Image Section */}
                 <div className="relative h-48 bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden">
-                  {inspection.imageUrl ? (
-                    <Image 
-                      src={inspection.imageUrl} 
-                      alt={inspection.propertyAddress}
+                  {assessment.imageUrl ? (
+                    <Image
+                      src={assessment.imageUrl}
+                      alt={assessment.siteAddress}
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -426,7 +425,7 @@ export default function InspectionListPage() {
                   ) : (
                     <div className="absolute inset-0 bg-gray-300">
                       <div className="w-full h-full flex items-center justify-center">
-                        {inspection.propertyType === 'Commercial' ? (
+                        {assessment.siteType === 'Commercial' || assessment.siteType === 'Industrial' || assessment.siteType === 'Infrastructure' ? (
                           <Building2 className="text-gray-400 dark:text-gray-600" size={64} />
                         ) : (
                           <Home className="text-gray-400 dark:text-gray-600" size={64} />
@@ -434,18 +433,18 @@ export default function InspectionListPage() {
                       </div>
                     </div>
                   )}
-                  
+
                   <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0A1628] via-[#0A1628]/60 to-transparent" />
-                  
+
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <h3 className="font-bold text-white text-lg leading-tight drop-shadow-lg">
-                      {inspection.propertyAddress}
+                      {assessment.siteAddress}
                     </h3>
                   </div>
-                  
+
                   {/* Status Badge */}
                   <div className="absolute top-2 right-2">
-                    {inspection.status === 'in_progress' ? (
+                    {assessment.status === 'in_progress' ? (
                       <span className="inline-flex items-center gap-1 px-2 py-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full text-[10px] font-semibold shadow-lg backdrop-blur-sm">
                         <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"/>
                         Active
@@ -457,60 +456,60 @@ export default function InspectionListPage() {
                       </span>
                     )}
                   </div>
-                  
+
                   <div className="absolute top-2 left-2">
                     <span className="inline-block px-2 py-1 rounded-full text-[10px] font-semibold bg-white/90 dark:bg-gray-800/90 text-gray-800 dark:text-gray-200 shadow-lg">
-                      {inspection.propertyType}
+                      {assessment.siteType}
                     </span>
                   </div>
                 </div>
 
                 <div className="p-4 space-y-3">
                   {/* Progress Bar for In Progress */}
-                  {inspection.status === 'in_progress' && (
+                  {assessment.status === 'in_progress' && (
                     <div className="mb-3">
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-xs font-medium text-gray-600">Progress</span>
-                        <span className="text-xs font-bold text-green-600">{inspection.completionRate}%</span>
+                        <span className="text-xs font-bold text-green-600">{assessment.completionRate}%</span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div 
+                        <div
                           className="bg-green-600 h-2 rounded-full transition-all duration-300"
-                          style={{ width: `${inspection.completionRate}%` }}
+                          style={{ width: `${assessment.completionRate}%` }}
                         />
                       </div>
                     </div>
                   )}
 
                   {/* Progress Details for In-Progress */}
-                  {inspection.status === 'in_progress' && inspection.currentArea && inspection.areasInspected && (
+                  {assessment.status === 'in_progress' && assessment.currentArea && assessment.areasInspected && (
                     <div className="bg-green-50 rounded-lg p-3 space-y-2">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3 text-xs">
                           <div className="flex items-center gap-1">
                             <Camera size={12} className="text-blue-600" />
-                            <span className="font-medium text-gray-700">{inspection.photosCount} photos</span>
+                            <span className="font-medium text-gray-700">{assessment.photosCount} photos</span>
                           </div>
                           <div className="flex items-center gap-1">
                             <MapPin size={12} className="text-green-600" />
-                            <span className="font-medium text-gray-700">{inspection.areasInspected.length} areas done</span>
+                            <span className="font-medium text-gray-700">{assessment.areasInspected.length} samples done</span>
                           </div>
                         </div>
                         <div className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium">
                           Active
                         </div>
                       </div>
-                      
+
                       <div>
-                        <p className="text-xs font-semibold text-gray-700 mb-1">Currently inspecting:</p>
-                        <p className="text-xs text-green-600 font-medium">{inspection.currentArea}</p>
+                        <p className="text-xs font-semibold text-gray-700 mb-1">Currently sampling:</p>
+                        <p className="text-xs text-green-600 font-medium">{assessment.currentArea}</p>
                       </div>
-                      
-                      {inspection.damageAssessment && (
+
+                      {assessment.preliminaryFindings && (
                         <div>
-                          <p className="text-xs font-semibold text-gray-700 mb-1">Initial Assessment:</p>
+                          <p className="text-xs font-semibold text-gray-700 mb-1">Preliminary Findings:</p>
                           <p className="text-xs text-gray-600 leading-relaxed">
-                            {inspection.damageAssessment.description}
+                            {assessment.preliminaryFindings.description}
                           </p>
                         </div>
                       )}
@@ -520,38 +519,40 @@ export default function InspectionListPage() {
                   {/* Info Grid */}
                   <div className="grid grid-cols-2 gap-x-3 gap-y-2">
                     <div>
-                      <p className="text-xs text-gray-500">Claim ID</p>
-                      <p className="text-sm font-semibold text-gray-900 truncate">{inspection.claimId}</p>
+                      <p className="text-xs text-gray-500">Project ID</p>
+                      <p className="text-sm font-semibold text-gray-900 truncate">{assessment.projectId}</p>
                     </div>
                     <div>
                       <p className="text-xs text-gray-500">Client</p>
-                      <p className="text-sm font-semibold text-gray-900 truncate">{inspection.clientName}</p>
+                      <p className="text-sm font-semibold text-gray-900 truncate">{assessment.clientName}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500">Inspector</p>
-                      <p className="text-sm font-semibold text-gray-900 truncate">{inspection.inspector}</p>
+                      <p className="text-xs text-gray-500">Field Tech</p>
+                      <p className="text-sm font-semibold text-gray-900 truncate">{assessment.fieldTechnician}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500">Damage</p>
-                      <p className="text-sm font-semibold text-gray-900 truncate">{inspection.damageType}</p>
+                      <p className="text-xs text-gray-500">Assessment Type</p>
+                      <p className="text-sm font-semibold text-gray-900 truncate">{assessment.assessmentType}</p>
                     </div>
                   </div>
 
-                  {/* Preliminary Assessment for Scheduled */}
-                  {inspection.status === 'scheduled' && inspection.damageAssessment && (
-                    <div className="bg-red-50 rounded-lg p-3 space-y-2">
+                  {/* Preliminary Findings for Scheduled */}
+                  {assessment.status === 'scheduled' && assessment.preliminaryFindings && (
+                    <div className="bg-blue-50 rounded-lg p-3 space-y-2">
                       <div className="flex items-center justify-between">
-                        <p className="text-xs font-semibold text-scc-red-dark">Preliminary Report:</p>
+                        <p className="text-xs font-semibold text-dillon-green">Scope Overview:</p>
                         <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                          inspection.damageAssessment.severity === 'Severe' 
-                            ? 'bg-red-100 text-red-700' 
-                            : 'bg-yellow-100 text-yellow-700'
+                          assessment.preliminaryFindings.severity === 'Significant'
+                            ? 'bg-orange-100 text-orange-700'
+                            : assessment.preliminaryFindings.severity === 'Moderate'
+                            ? 'bg-yellow-100 text-yellow-700'
+                            : 'bg-blue-100 text-blue-700'
                         }`}>
-                          {inspection.damageAssessment.severity}
+                          {assessment.preliminaryFindings.severity}
                         </span>
                       </div>
                       <p className="text-xs text-gray-600 leading-relaxed">
-                        {inspection.damageAssessment.description}
+                        {assessment.preliminaryFindings.description}
                       </p>
                     </div>
                   )}
@@ -561,35 +562,35 @@ export default function InspectionListPage() {
                     <div className="flex items-center gap-3 text-xs text-gray-600">
                       <div className="flex items-center gap-1">
                         <Calendar size={12} />
-                        <span>{inspection.scheduledDate}</span>
+                        <span>{assessment.scheduledDate}</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <Clock size={12} />
-                        <span>{inspection.scheduledTime}</span>
+                        <span>{assessment.scheduledTime}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Action Button */}
                   <div className="pt-3">
-                    {inspection.status === 'scheduled' && (
+                    {assessment.status === 'scheduled' && (
                       <Link
-                        href={`/dashboard/inspection/${inspection.id}/start`}
+                        href={`/dashboard/inspection/${assessment.id}/start`}
                         onClick={(e) => e.stopPropagation()}
-                        className="w-full px-4 py-2.5 bg-[#E74C3C] text-white rounded-xl hover:bg-[#D73929] transition-all duration-200 flex items-center justify-center gap-2 text-sm font-semibold shadow-sm"
+                        className="w-full px-4 py-2.5 bg-dillon-green text-white rounded-xl hover:bg-dillon-green-dark transition-all duration-200 flex items-center justify-center gap-2 text-sm font-semibold shadow-sm"
                       >
                         <Camera size={16} />
-                        <span>Start Inspection</span>
+                        <span>Start Assessment</span>
                       </Link>
                     )}
-                    {inspection.status === 'in_progress' && (
+                    {assessment.status === 'in_progress' && (
                       <Link
-                        href={`/dashboard/inspection/${inspection.id}/continue`}
+                        href={`/dashboard/inspection/${assessment.id}/continue`}
                         onClick={(e) => e.stopPropagation()}
                         className="w-full px-4 py-2.5 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-all duration-200 flex items-center justify-center gap-2 text-sm font-semibold shadow-sm"
                       >
                         <ChevronRight size={16} />
-                        <span>Continue Inspection</span>
+                        <span>Continue Assessment</span>
                       </Link>
                     )}
                   </div>
@@ -597,23 +598,23 @@ export default function InspectionListPage() {
               </div>
             ))}
           </div>
-          
-          {activeScheduledInspections.length === 0 && searchTerm && (
+
+          {activeScheduledAssessments.length === 0 && searchTerm && (
             <div className="text-center py-8">
               <AlertCircle className="text-gray-400 mx-auto mb-4" size={48} />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">No active inspections found</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">No active assessments found</h3>
               <p className="text-gray-600">Try adjusting your search criteria</p>
             </div>
           )}
         </div>
       )}
-      
-      {/* Empty State - No inspections at all */}
-      {activeScheduledInspections.length === 0 && !searchTerm && (
+
+      {/* Empty State - No assessments at all */}
+      {activeScheduledAssessments.length === 0 && !searchTerm && (
         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200/50 dark:border-gray-700/50 p-12 text-center">
           <AlertCircle className="text-gray-400 mx-auto mb-4" size={48} />
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No inspections found</h3>
-          <p className="text-gray-600">Get started by creating your first inspection</p>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">No assessments found</h3>
+          <p className="text-gray-600">Get started by scheduling your first field assessment</p>
         </div>
       )}
     </div>

@@ -59,17 +59,18 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // SCC Brand Colors - Strategic Color Usage
-        scc: {
-          // Brand Colors (Use Sparingly - Logo & Primary CTA only)
-          red: "#9A2824", // SCC Deep Red
-          "red-hover": "#7A1F1C", // Darker Red for hover states
+        // Dillon Brand Colors - Professional & Minimalist
+        dillon: {
+          // Primary Brand Colors
+          green: "#08353F", // Primary Dillon Green (dark teal/forest green)
+          "green-dark": "#06252B", // Darker green for hover states
+          "green-light": "#0A4550", // Lighter green for backgrounds
 
           // UI Foundation Colors (Primary Usage)
-          "ui-primary": "#2B2B2B", // Dark Gray - main buttons, headers
+          "ui-primary": "#08353F", // Dillon Green for main UI
           gray: "#707070", // Professional Gray - secondary actions
           "gray-dark": "#2B2B2B", // Dark Gray Text
-          "gray-light": "#F5F5F5", // Light Gray Background
+          "gray-light": "#F9FAFB", // Light Gray Background
 
           // Gray Scale
           "gray-900": "#1A1A1A",
@@ -80,14 +81,37 @@ const config: Config = {
           "gray-400": "#A0A0A0",
           "gray-300": "#D0D0D0",
           "gray-200": "#E0E0E0",
-          "gray-100": "#F5F5F5",
-          "gray-50": "#F9FAFB",
+          "gray-100": "#F9FAFB",
+          "gray-50": "#FCFCFC",
 
           // Semantic Colors
           success: "#00A651", // Green for positive metrics
           warning: "#F59E0B", // Amber for warnings
-          error: "#DC2626", // True Red for errors (not brand red)
+          error: "#DC2626", // Red for errors
           info: "#3B82F6" // Blue for information
+        },
+        // Legacy SCC colors (kept for backwards compatibility during migration)
+        scc: {
+          red: "#08353F", // Redirected to Dillon green
+          "red-hover": "#06252B",
+          "ui-primary": "#08353F",
+          gray: "#707070",
+          "gray-dark": "#2B2B2B",
+          "gray-light": "#F9FAFB",
+          "gray-900": "#1A1A1A",
+          "gray-800": "#2B2B2B",
+          "gray-700": "#404040",
+          "gray-600": "#525252",
+          "gray-500": "#707070",
+          "gray-400": "#A0A0A0",
+          "gray-300": "#D0D0D0",
+          "gray-200": "#E0E0E0",
+          "gray-100": "#F9FAFB",
+          "gray-50": "#FCFCFC",
+          success: "#00A651",
+          warning: "#F59E0B",
+          error: "#DC2626",
+          info: "#3B82F6"
         },
       },
       fontFamily: {
