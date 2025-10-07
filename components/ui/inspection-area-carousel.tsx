@@ -247,11 +247,11 @@ export function InspectionAreaCarousel({
             </button>
           )}
 
-          <h2 className="text-2xl sm:text-3xl font-bold text-scc-gray-dark mb-1">Property Inspection Areas</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-1">Site Assessment Areas</h2>
 
           {/* Instructions */}
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-            Swipe through areas and tap to document damage
+            Swipe through areas and tap to document field observations
           </p>
 
           {/* Area Status Indicators */}
@@ -271,21 +271,21 @@ export function InspectionAreaCarousel({
             ))}
           </div>
 
-          {/* Complete Inspection Button */}
+          {/* Complete Site Assessment Button */}
           <button
             onClick={() => {
-              // Navigate to complete inspection page which triggers animation and report generation
+              // Navigate to complete assessment page which triggers animation and report generation
               if (inspectionId) {
                 router.push(`/dashboard/inspection/${inspectionId}/complete`)
               } else {
-                console.warn('No inspection ID provided for completion')
+                console.warn('No assessment ID provided for completion')
               }
             }}
-            className="w-full py-2.5 px-4 rounded-full font-medium transition-all duration-200 bg-green-600 text-white hover:bg-green-700 shadow-md cursor-pointer"
+            className="w-full py-2.5 px-4 rounded-full font-medium transition-all duration-200 bg-dillon-green text-white hover:bg-dillon-green-dark shadow-md cursor-pointer"
           >
             <span className="flex items-center justify-center gap-2">
               <CheckCircle size={18} />
-              Confirm Inspection
+              Complete Site Assessment
             </span>
           </button>
         </div>
@@ -408,7 +408,7 @@ export function InspectionAreaCarousel({
                         ) : (
                           <div className="w-full h-full flex flex-col items-center justify-center">
                             <Camera className="w-10 h-10 text-gray-400 mb-1" />
-                            <p className="text-xs text-gray-500 dark:text-gray-400">Tap to start inspection</p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400">Tap to document observations</p>
                           </div>
                         )}
                       </div>
@@ -544,10 +544,10 @@ export function InspectionAreaCarousel({
           >
             {/* Category Groups */}
             <div className="space-y-0.5">
-              {['Exterior', 'Interior', 'Systems'].map(category => {
+              {['Site Perimeter', 'Site Areas', 'Environmental', 'Exterior', 'Interior', 'Systems'].map(category => {
                 const categoryAreas = areas.filter(a => a.category === category)
                 if (categoryAreas.length === 0) return null
-                
+
                 const categoryColors = getCategoryColor(category)
                 
                 return (

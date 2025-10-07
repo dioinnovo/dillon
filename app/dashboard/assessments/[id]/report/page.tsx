@@ -192,7 +192,7 @@ export default function InspectionReportPage() {
       }
     } else {
       // For demo purposes, if no report is found in sessionStorage,
-      // assume it's approved (this covers the demo reports and INS-002)
+      // assume it's approved (this covers the demo reports and ASM-002)
       // This is because the mock data in the reports page has approved reports
       // but they might not be in sessionStorage
       setIsApproved(true)

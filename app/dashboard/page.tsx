@@ -122,7 +122,7 @@ export default function DashboardPage() {
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100">Scheduled Site Assessments</h2>
-          <Link href="/dashboard/inspection" className="text-dillon-green text-sm hover:underline">
+          <Link href="/dashboard/assessments" className="text-dillon-green text-sm hover:underline">
             View All
           </Link>
         </div>

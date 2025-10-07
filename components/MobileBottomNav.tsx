@@ -34,7 +34,7 @@ export default function MobileBottomNav() {
     {
       title: 'Assess',
       icon: CalendarDays,
-      href: '/dashboard/inspection',
+      href: '/dashboard/assessments',
     },
     {
       title: 'Reports',

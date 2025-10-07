@@ -323,8 +323,8 @@ export default function InspectionReviewPage() {
       }
     }
 
-    // Demo: Set default claimId for INS-002 for seamless demo workflow
-    if (inspectionId === 'INS-002' && !claimId) {
+    // Demo: Set default claimId for ASM-002 for seamless demo workflow
+    if (inspectionId === 'ASM-002' && !claimId) {
       setClaimId('CLM-2024-002')
     }
   }, [inspectionId])

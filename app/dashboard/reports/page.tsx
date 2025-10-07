@@ -382,11 +382,11 @@ export default function ReportsPage() {
                    if (report.status === 'approved' || report.status === 'sent') {
                      // For approved/sent reports, go to the comprehensive report view
                      const assessmentId = report.assessmentId || 'ASM-002';
-                     router.push(`/dashboard/inspection/${assessmentId}/report`);
+                     router.push(`/dashboard/assessments/${assessmentId}/report`);
                    } else if (report.status === 'in_review') {
                      // For in_review reports, use the assessment review page
                      const assessmentId = report.assessmentId || 'ASM-002';
-                     router.push(`/dashboard/inspection/${assessmentId}/review`);
+                     router.push(`/dashboard/assessments/${assessmentId}/review`);
                    } else {
                      // For pending_approval, go to a review page
                      router.push(`/dashboard/reports/${report.id}/review`);
@@ -525,7 +525,7 @@ export default function ReportsPage() {
                           e.stopPropagation();
                           // Use the assessment review page for pending approval reports
                           const assessmentId = report.assessmentId || 'ASM-002';
-                          router.push(`/dashboard/inspection/${assessmentId}/review`);
+                          router.push(`/dashboard/assessments/${assessmentId}/review`);
                         }}
                         className="col-span-2 flex items-center justify-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition"
                       >
@@ -540,7 +540,7 @@ export default function ReportsPage() {
                           e.stopPropagation();
                           // Use the assessment review page for in-review reports
                           const assessmentId = report.assessmentId || 'ASM-006';
-                          router.push(`/dashboard/inspection/${assessmentId}/review`);
+                          router.push(`/dashboard/assessments/${assessmentId}/review`);
                         }}
                         className="col-span-2 flex items-center justify-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition"
                       >
@@ -555,7 +555,7 @@ export default function ReportsPage() {
                           e.stopPropagation();
                           // View the comprehensive report
                           const assessmentId = report.assessmentId || 'ASM-002';
-                          router.push(`/dashboard/inspection/${assessmentId}/report`);
+                          router.push(`/dashboard/assessments/${assessmentId}/report`);
                         }}
                         className="flex items-center justify-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition"
                       >

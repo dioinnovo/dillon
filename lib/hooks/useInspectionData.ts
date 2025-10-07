@@ -25,17 +25,29 @@ export interface InspectionArea {
   photoCount: number
   notesCount: number
   findings: string
-  damageDescription: string
+  observations: string
+  contaminantConcerns: string
   recommendedActions: string
-  estimatedCost: number
   priority: 'high' | 'medium' | 'low'
   previewImage?: string
   media: MediaFile[]
+  // Legacy field for backwards compatibility
+  damageDescription?: string
+  estimatedCost?: number
 }
 
 export interface InspectionData {
   id: string
-  property: {
+  site: {
+    address: string
+    type: 'industrial' | 'commercial' | 'residential' | 'brownfield'
+    client: string
+    historicalUse?: string
+    projectNumber?: string
+    siteArea?: string
+  }
+  // Legacy field for backwards compatibility
+  property?: {
     address: string
     type: 'residential' | 'commercial'
     owner: string
@@ -48,27 +60,48 @@ export interface InspectionData {
   completionPercentage: number
 }
 
-// Default areas for a new residential inspection
+// Default areas for environmental site assessments (Phase II ESA)
+const DEFAULT_ENVIRONMENTAL_AREAS: Omit<InspectionArea, 'media'>[] = [
+  // Site Perimeter
+  { id: 'perimeter-access', name: 'Site Perimeter & Access', category: 'Site Perimeter', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'low' },
+  { id: 'perimeter-boundaries', name: 'Site Boundaries', category: 'Site Perimeter', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'low' },
+  { id: 'perimeter-drainage', name: 'Stormwater & Drainage', category: 'Site Perimeter', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'low' },
+
+  // Site Areas
+  { id: 'area-manufacturing', name: 'Former Manufacturing Area', category: 'Site Areas', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'high' },
+  { id: 'area-storage', name: 'Storage Areas (Tanks/Drums)', category: 'Site Areas', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'high' },
+  { id: 'area-waste', name: 'Waste Management Area', category: 'Site Areas', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'high' },
+  { id: 'area-loading', name: 'Loading Docks & Transport', category: 'Site Areas', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'medium' },
+  { id: 'area-surface', name: 'Surface Conditions', category: 'Site Areas', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'medium' },
+  { id: 'area-underground', name: 'Underground Storage Tanks', category: 'Site Areas', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'high' },
+
+  // Environmental
+  { id: 'env-soil-sampling', name: 'Soil Sampling Locations', category: 'Environmental', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'high' },
+  { id: 'env-groundwater', name: 'Groundwater Monitoring Wells', category: 'Environmental', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'high' },
+  { id: 'env-air-quality', name: 'Air Quality & Ventilation', category: 'Environmental', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'medium' }
+]
+
+// Legacy residential areas for backwards compatibility
 const DEFAULT_RESIDENTIAL_AREAS: Omit<InspectionArea, 'media'>[] = [
   // Exterior
-  { id: 'exterior-roof', name: 'Roof & Gutters', category: 'Exterior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', damageDescription: '', recommendedActions: '', estimatedCost: 0, priority: 'low' },
-  { id: 'exterior-siding', name: 'Siding & Walls', category: 'Exterior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', damageDescription: '', recommendedActions: '', estimatedCost: 0, priority: 'low' },
-  { id: 'exterior-windows', name: 'Windows & Doors', category: 'Exterior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', damageDescription: '', recommendedActions: '', estimatedCost: 0, priority: 'low' },
-  { id: 'exterior-foundation', name: 'Foundation', category: 'Exterior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', damageDescription: '', recommendedActions: '', estimatedCost: 0, priority: 'low' },
-  { id: 'exterior-landscape', name: 'Landscape & Drainage', category: 'Exterior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', damageDescription: '', recommendedActions: '', estimatedCost: 0, priority: 'low' },
+  { id: 'exterior-roof', name: 'Roof & Gutters', category: 'Exterior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'low', damageDescription: '', estimatedCost: 0 },
+  { id: 'exterior-siding', name: 'Siding & Walls', category: 'Exterior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'low', damageDescription: '', estimatedCost: 0 },
+  { id: 'exterior-windows', name: 'Windows & Doors', category: 'Exterior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'low', damageDescription: '', estimatedCost: 0 },
+  { id: 'exterior-foundation', name: 'Foundation', category: 'Exterior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'low', damageDescription: '', estimatedCost: 0 },
+  { id: 'exterior-landscape', name: 'Landscape & Drainage', category: 'Exterior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'low', damageDescription: '', estimatedCost: 0 },
 
   // Interior
-  { id: 'interior-living', name: 'Living Room', category: 'Interior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', damageDescription: '', recommendedActions: '', estimatedCost: 0, priority: 'low' },
-  { id: 'interior-kitchen', name: 'Kitchen', category: 'Interior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', damageDescription: '', recommendedActions: '', estimatedCost: 0, priority: 'low' },
-  { id: 'interior-master-bed', name: 'Master Bedroom', category: 'Interior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', damageDescription: '', recommendedActions: '', estimatedCost: 0, priority: 'low' },
-  { id: 'interior-bedrooms', name: 'Other Bedrooms', category: 'Interior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', damageDescription: '', recommendedActions: '', estimatedCost: 0, priority: 'low' },
-  { id: 'interior-bathrooms', name: 'Bathrooms', category: 'Interior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', damageDescription: '', recommendedActions: '', estimatedCost: 0, priority: 'low' },
-  { id: 'interior-basement', name: 'Basement/Attic', category: 'Interior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', damageDescription: '', recommendedActions: '', estimatedCost: 0, priority: 'low' },
+  { id: 'interior-living', name: 'Living Room', category: 'Interior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'low', damageDescription: '', estimatedCost: 0 },
+  { id: 'interior-kitchen', name: 'Kitchen', category: 'Interior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'low', damageDescription: '', estimatedCost: 0 },
+  { id: 'interior-master-bed', name: 'Master Bedroom', category: 'Interior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'low', damageDescription: '', estimatedCost: 0 },
+  { id: 'interior-bedrooms', name: 'Other Bedrooms', category: 'Interior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'low', damageDescription: '', estimatedCost: 0 },
+  { id: 'interior-bathrooms', name: 'Bathrooms', category: 'Interior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'low', damageDescription: '', estimatedCost: 0 },
+  { id: 'interior-basement', name: 'Basement/Attic', category: 'Interior', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'low', damageDescription: '', estimatedCost: 0 },
 
   // Systems
-  { id: 'systems-electrical', name: 'Electrical System', category: 'Systems', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', damageDescription: '', recommendedActions: '', estimatedCost: 0, priority: 'low' },
-  { id: 'systems-plumbing', name: 'Plumbing System', category: 'Systems', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', damageDescription: '', recommendedActions: '', estimatedCost: 0, priority: 'low' },
-  { id: 'systems-hvac', name: 'HVAC System', category: 'Systems', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', damageDescription: '', recommendedActions: '', estimatedCost: 0, priority: 'low' }
+  { id: 'systems-electrical', name: 'Electrical System', category: 'Systems', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'low', damageDescription: '', estimatedCost: 0 },
+  { id: 'systems-plumbing', name: 'Plumbing System', category: 'Systems', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'low', damageDescription: '', estimatedCost: 0 },
+  { id: 'systems-hvac', name: 'HVAC System', category: 'Systems', status: 'not_started', photoCount: 0, notesCount: 0, findings: '', observations: '', contaminantConcerns: '', recommendedActions: '', priority: 'low', damageDescription: '', estimatedCost: 0 }
 ]
 
 export function useInspectionData(inspectionId: string) {
@@ -85,8 +118,8 @@ export function useInspectionData(inspectionId: string) {
     }
 
     try {
-      // Special handling for demo inspection INS-002
-      if (inspectionId === 'INS-002') {
+      // Special handling for demo assessment ASM-002
+      if (inspectionId === 'ASM-002') {
         // Define correct order based on DEFAULT_RESIDENTIAL_AREAS
         const correctOrder = [
           'exterior-roof',
@@ -132,15 +165,23 @@ export function useInspectionData(inspectionId: string) {
 
         const demoData: InspectionData = {
           id: inspectionId,
+          site: {
+            address: '425 Industrial Drive, Cambridge, ON',
+            type: 'brownfield',
+            client: 'City of Cambridge',
+            historicalUse: 'Metal Fabrication (1965-2010)',
+            projectNumber: 'DL-2024-ENV-001',
+            siteArea: '2.5 hectares'
+          },
           property: {
-            address: '4827 Oakwood Drive',
-            type: 'residential',
-            owner: 'Michael Chen',
-            yearBuilt: '1998',
-            policyNumber: 'HO-2024-78234'
+            address: '425 Industrial Drive, Cambridge, ON',
+            type: 'commercial',
+            owner: 'City of Cambridge',
+            yearBuilt: '1965',
+            policyNumber: 'DL-2024-ENV-001'
           },
           areas: demoAreas,
-          createdAt: '2024-03-15T10:30:00Z',
+          createdAt: '2024-01-15T10:30:00Z',
           updatedAt: new Date().toISOString(),
           completionPercentage
         }
@@ -161,14 +202,22 @@ export function useInspectionData(inspectionId: string) {
           const basic = JSON.parse(basicInfo)
           const newData: InspectionData = {
             id: inspectionId,
+            site: {
+              address: basic.address || basic.siteAddress || '',
+              type: basic.siteType || 'industrial',
+              client: basic.clientName || basic.ownerName || '',
+              historicalUse: basic.historicalUse,
+              projectNumber: basic.projectNumber || basic.policyNumber,
+              siteArea: basic.siteArea
+            },
             property: {
               address: basic.address || '',
-              type: basic.propertyType || 'residential',
+              type: basic.propertyType || 'commercial',
               owner: basic.ownerName || '',
               yearBuilt: basic.yearBuilt,
               policyNumber: basic.policyNumber
             },
-            areas: DEFAULT_RESIDENTIAL_AREAS.map(area => ({ ...area, media: [] })),
+            areas: DEFAULT_ENVIRONMENTAL_AREAS.map(area => ({ ...area, media: [] })),
             createdAt: basic.createdAt || new Date().toISOString(),
             updatedAt: new Date().toISOString(),
             completionPercentage: 0
@@ -177,7 +226,7 @@ export function useInspectionData(inspectionId: string) {
           // Save the initialized data
           localStorage.setItem(`inspection-${inspectionId}-data`, JSON.stringify(newData))
         } else {
-          setError(`No inspection found with ID: ${inspectionId}`)
+          setError(`No assessment found with ID: ${inspectionId}`)
         }
       }
       }

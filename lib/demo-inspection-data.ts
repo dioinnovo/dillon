@@ -1,4 +1,4 @@
-// Complete demo inspection data for INS-002
+// Complete demo assessment data for ASM-002
 // Total: 41 photos across 5 completed areas
 
 export const demoInspectionAreas = {

@@ -31,7 +31,7 @@ export interface AreaInspectionData {
   }
 }
 
-// Complete inspection data for INS-002 - 8 completed areas with 51 photos and 12 audio notes
+// Complete assessment data for ASM-002 - 8 completed areas with 51 photos and 12 audio notes
 export const inspectionMediaData: AreaInspectionData[] = [
   // 1. ROOF & GUTTERS
   {
@@ -900,7 +900,7 @@ export const inspectionMediaData: AreaInspectionData[] = [
 
 // Inspection Summary Data
 export const inspectionSummary = {
-  inspectionId: 'INS-002',
+  inspectionId: 'ASM-002',
   claimNumber: 'CLM-2024-002',
   propertyAddress: '5678 Palm Avenue, Coral Gables, FL',
   clientName: 'Sarah Thompson',

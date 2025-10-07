@@ -62,7 +62,7 @@ export default function Sidebar({ isCollapsed = false, onToggle }: SidebarProps)
     {
       title: 'Assessments',
       icon: CalendarDays,
-      href: '/dashboard/inspection',
+      href: '/dashboard/assessments',
       description: 'Schedule and manage assessments'
     },
     {

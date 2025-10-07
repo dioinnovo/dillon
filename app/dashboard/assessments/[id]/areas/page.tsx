@@ -4,10 +4,29 @@ import { useState, useEffect } from 'react'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import { InspectionAreaCarousel } from '@/components/ui/inspection-area-carousel'
 import { useInspectionData } from '@/lib/hooks/useInspectionData'
-import { Home, Building2, Wrench } from 'lucide-react'
+import { Home, Building2, Wrench, MapPin, Factory, Droplets, FlaskConical, Wind, Layers } from 'lucide-react'
 
-// Icon mapping for areas
+// Icon mapping for environmental site assessment areas
 const AREA_ICONS: Record<string, any> = {
+  // Site Perimeter
+  'perimeter-access': MapPin,
+  'perimeter-boundaries': MapPin,
+  'perimeter-drainage': Droplets,
+
+  // Site Areas
+  'area-manufacturing': Factory,
+  'area-storage': Building2,
+  'area-waste': Building2,
+  'area-loading': Building2,
+  'area-surface': Layers,
+  'area-underground': Layers,
+
+  // Environmental
+  'env-soil-sampling': FlaskConical,
+  'env-groundwater': Droplets,
+  'env-air-quality': Wind,
+
+  // Legacy residential areas
   'exterior-roof': Home,
   'exterior-siding': Home,
   'exterior-windows': Home,
@@ -24,7 +43,7 @@ const AREA_ICONS: Record<string, any> = {
   'systems-hvac': Wrench
 }
 
-export default function PropertyInspectionAreasPage() {
+export default function SiteAssessmentAreasPage() {
   const params = useParams()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -106,8 +125,8 @@ export default function PropertyInspectionAreasPage() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-scc-red mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Loading inspection areas...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-dillon-green mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">Loading site assessment areas...</p>
         </div>
       </div>
     )
@@ -117,12 +136,12 @@ export default function PropertyInspectionAreasPage() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <p className="text-red-600 mb-4">{error || 'Failed to load inspection data'}</p>
+          <p className="text-red-600 mb-4">{error || 'Failed to load assessment data'}</p>
           <button
             onClick={() => router.push('/dashboard/inspection')}
-            className="px-4 py-2 bg-scc-red text-white rounded-lg hover:bg-scc-red-dark"
+            className="px-4 py-2 bg-dillon-green text-white rounded-lg hover:bg-dillon-green-dark"
           >
-            Back to Inspections
+            Back to Assessments
           </button>
         </div>
       </div>
@@ -132,8 +151,11 @@ export default function PropertyInspectionAreasPage() {
   // Add icon info to each area
   const enhancedAreas = inspectionData.areas.map(area => ({
     ...area,
-    icon: AREA_ICONS[area.id] || Home
+    icon: AREA_ICONS[area.id] || MapPin
   }))
+
+  // Determine site type for carousel display
+  const siteType = (inspectionData.site?.type || inspectionData.property?.type || 'commercial') as 'residential' | 'commercial'
 
   return (
     <InspectionAreaCarousel
@@ -143,7 +165,7 @@ export default function PropertyInspectionAreasPage() {
       onAreaSkip={handleSkip}
       onAreaSelect={handleAreaSelect}
       inspectionId={inspectionId}
-      propertyType="residential"
+      propertyType={siteType}
     />
   )
 }

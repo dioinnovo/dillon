@@ -197,9 +197,9 @@ export default function AreaInspectionPage() {
       setNavigationMode('form')
       setExpandedAreaId(areaId)
 
-      // For demo inspection INS-002, the demo data loading is handled by a separate useEffect
-      // Here we only handle non-demo inspections
-      if (inspectionId !== 'INS-002') {
+      // For demo assessment ASM-002, the demo data loading is handled by a separate useEffect
+      // Here we only handle non-demo assessments
+      if (inspectionId !== 'ASM-002') {
         // Not demo inspection, use localStorage data
         const savedStatus = areasStatus[areaId]
         if (savedStatus) {
@@ -232,10 +232,10 @@ export default function AreaInspectionPage() {
       inspectionId,
       areaId,
       hasInspectionData: !!inspectionData,
-      isDemo: inspectionId === 'INS-002'
+      isDemo: inspectionId === 'ASM-002'
     })
 
-    if (inspectionId === 'INS-002' && inspectionData && areaId) {
+    if (inspectionId === 'ASM-002' && inspectionData && areaId) {
       console.log('🔥 Loading demo data for area:', areaId)
       const demoArea = inspectionData.areas.find(area => area.id === areaId)
 
@@ -335,8 +335,8 @@ export default function AreaInspectionPage() {
   const actionsRef = useRef<HTMLTextAreaElement>(null)
 
   // Get current area position and navigation
-  // For demo inspection, use data from inspectionData; otherwise use static areas
-  const allAreas = (inspectionId === 'INS-002' && inspectionData?.areas)
+  // For demo assessment, use data from inspectionData; otherwise use static areas
+  const allAreas = (inspectionId === 'ASM-002' && inspectionData?.areas)
     ? inspectionData.areas
     : INSPECTION_AREAS[propertyType]
 
@@ -348,8 +348,8 @@ export default function AreaInspectionPage() {
 
   // Enhance areas with their status
   const enhancedAreas = React.useMemo(() => {
-    // For demo inspection, use the data directly from inspectionData
-    if (inspectionId === 'INS-002' && inspectionData?.areas) {
+    // For demo assessment, use the data directly from inspectionData
+    if (inspectionId === 'ASM-002' && inspectionData?.areas) {
       return inspectionData.areas.map(area => ({
         ...area,
         photoCount: area.id === areaId ? areaData.mediaFiles.filter(f => f.type === 'photo').length : (area.photoCount || 0),

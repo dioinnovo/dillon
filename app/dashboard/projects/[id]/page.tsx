@@ -225,8 +225,8 @@ export default function ProjectDetailPage() {
       }
     ],
 
-    // Site Inspection
-    inspection: {
+    // Site Assessment
+    assessment: {
       status: 'Scheduled',
       inspector: 'Michael Torres, C.E.T.',
       type: 'Environmental Site Assessment'
@@ -798,256 +798,104 @@ export default function ProjectDetailPage() {
           {/* AI Report Generator Tab - SHOWCASE FEATURE */}
           {activeTab === 'ai-report' && (
             <div className="space-y-6">
-              {/* Coming soon placeholder */}
-              <div className="bg-white dark:bg-gray-900 border border-gray-200 rounded-xl p-6">
-                <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
-                  <Calculator className="text-scc-red" size={20} />
-                  Intelligent Cost Estimation Engine
-                </h3>
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  {/* Estimate Breakdown */}
-                  <div className="lg:col-span-2">
-                    <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Detailed Repair Estimate</h4>
-                    <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
-                      <div className="space-y-2">
-                        {[
-                          { item: 'Roof Structural Repair', code: 'RSR-240', quantity: '45 SQ', unit: '$185 per SQ', total: '$95,000' },
-                          { item: 'Hurricane Window Replacement', code: 'HWR-110', quantity: '12 EA', unit: '$2,850 per EA', total: '$34,200' },
-                          { item: 'HVAC System Replacement', code: 'HSR-320', quantity: '1 System', unit: '$35,000', total: '$35,000' },
-                          { item: 'Water Damage Restoration', code: 'WDR-450', quantity: '850 SF', unit: '$45 per SF', total: '$38,250' },
-                          { item: 'Electrical Panel Upgrade', code: 'EPU-100', quantity: '1 Panel', unit: '$8,500', total: '$8,500' },
-                          { item: 'Ordinance & Law Upgrades', code: 'OLU-200', quantity: '1 LS', unit: '$45,000', total: '$45,000' }
-                        ].map((line, index) => (
-                          <div key={index} className="bg-white dark:bg-gray-900 rounded-lg p-3">
-                            <div className="grid grid-cols-6 gap-2 text-sm">
-                              <div className="col-span-2">
-                                <p className="font-medium text-gray-900 dark:text-gray-100">{line.item}</p>
-                                <p className="text-xs text-gray-500 dark:text-gray-400">{line.code}</p>
-                              </div>
-                              <div className="text-center text-gray-600 dark:text-gray-400">{line.quantity}</div>
-                              <div className="text-center text-gray-600 dark:text-gray-400">{line.unit}</div>
-                              <div className="text-right font-semibold text-scc-red col-span-2">{line.total}</div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                        <div className="space-y-2">
-                          <div className="flex justify-between text-sm">
-                            <span className="text-gray-600 dark:text-gray-400">Subtotal</span>
-                            <span className="font-medium">$255,950</span>
-                          </div>
-                          <div className="flex justify-between text-sm">
-                            <span className="text-gray-600 dark:text-gray-400">Overhead & Profit (20%)</span>
-                            <span className="font-medium">$51,190</span>
-                          </div>
-                          <div className="flex justify-between text-sm">
-                            <span className="text-gray-600 dark:text-gray-400">Tax (7%)</span>
-                            <span className="font-medium">$21,490</span>
-                          </div>
-                          <div className="flex justify-between text-sm">
-                            <span className="text-gray-600 dark:text-gray-400">Depreciation Recovery</span>
-                            <span className="font-medium text-green-600">$13,000</span>
-                          </div>
-                          <div className="flex justify-between text-lg sm:text-xl font-bold pt-2 border-t border-gray-300 dark:border-gray-600">
-                            <span className="text-gray-900 dark:text-gray-100">Total Maximum Recovery</span>
-                            <span className="text-scc-red">$385,450</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Pricing Intelligence */}
+              {/* Time Savings Highlight */}
+              <div className="bg-gradient-to-br from-dillon-green/10 to-blue-50 dark:from-dillon-green/5 dark:to-blue-900/20 border-2 border-dillon-green rounded-xl p-6">
+                <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Pricing Intelligence</h4>
-                    <div className="space-y-3">
-                      <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
-                        <h5 className="font-medium text-gray-900 dark:text-gray-100 mb-2">Data Sources</h5>
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 text-sm">
-                            <CheckCircle className="text-green-500" size={16} />
-                            <span>RSMeans Pricing Database</span>
-                          </div>
-                          <div className="flex items-center gap-2 text-sm">
-                            <CheckCircle className="text-green-500" size={16} />
-                            <span>Miami-Dade Market Rates</span>
-                          </div>
-                          <div className="flex items-center gap-2 text-sm">
-                            <CheckCircle className="text-green-500" size={16} />
-                            <span>Contractor Network Pricing</span>
-                          </div>
-                          <div className="flex items-center gap-2 text-sm">
-                            <CheckCircle className="text-green-500" size={16} />
-                            <span>Updated Daily</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
-                        <h5 className="font-medium text-gray-900 dark:text-gray-100 mb-2">Market Analysis</h5>
-                        <div className="space-y-2 text-sm">
-                          <div className="flex justify-between">
-                            <span className="text-gray-600 dark:text-gray-400">Local Market Position:</span>
-                            <span className="font-semibold text-gray-700 dark:text-gray-300">Above Average</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-gray-600 dark:text-gray-400">Pricing Confidence:</span>
-                            <span className="font-semibold text-green-600">94.7%</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-gray-600 dark:text-gray-400">Contractor Availability:</span>
-                            <span className="font-semibold text-scc-red">Limited</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
-                        <h5 className="font-medium text-gray-900 dark:text-gray-100 mb-2">Action Items</h5>
-                        <div className="space-y-2">
-                          <Button className="w-full bg-scc-red hover:bg-red-600" size="sm">
-                            Generate Detailed Estimate
-                          </Button>
-                          <Button className="w-full border-scc-red text-scc-red hover:bg-scc-red/10" variant="outline" size="sm">
-                            Export to PDF
-                          </Button>
-                          <Button className="w-full" variant="outline" size="sm">
-                            Share with Team
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-3 mb-2">
+                      <Zap className="text-dillon-green" size={32} />
+                      AI-Powered Report Generation
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400">Transform 8 hours of manual work into 8 minutes</p>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-4xl font-bold text-dillon-green">$1,625</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">Saved per report</div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-4 mt-6">
+                  <div className="bg-white dark:bg-gray-800 rounded-lg p-4 text-center">
+                    <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">6.5 hrs</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Time Saved</div>
+                  </div>
+                  <div className="bg-white dark:bg-gray-800 rounded-lg p-4 text-center">
+                    <div className="text-3xl font-bold text-dillon-green">94%</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Accuracy Rate</div>
+                  </div>
+                  <div className="bg-white dark:bg-gray-800 rounded-lg p-4 text-center">
+                    <div className="text-3xl font-bold text-blue-600">75 yrs</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Knowledge Base</div>
                   </div>
                 </div>
               </div>
 
-              {/* Settlement Strategy & Evidence Analyzer */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Settlement Strategy */}
-                <div className="bg-white dark:bg-gray-900 border border-gray-200 rounded-xl p-6">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
-                    <Target className="text-gray-600 dark:text-gray-400" size={20} />
-                    Settlement Strategy Module
-                  </h3>
-                  <div className="space-y-4">
-                    <div className="bg-white dark:bg-gray-900 rounded-lg p-4">
-                      <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">AI Recommendations</h4>
-                      <div className="space-y-2 text-sm">
-                        <div className="flex items-start gap-2">
-                          <CheckCircle className="text-green-500 mt-0.5" size={16} />
-                          <span>Open with demand of $385,450 (100% of analysis)</span>
-                        </div>
-                        <div className="flex items-start gap-2">
-                          <CheckCircle className="text-green-500 mt-0.5" size={16} />
-                          <span>Settlement floor: $325,000 (acceptable minimum)</span>
-                        </div>
-                        <div className="flex items-start gap-2">
-                          <AlertTriangle className="text-yellow-500 mt-0.5" size={16} />
-                          <span>Emphasize ordinance & law coverage ($45K)</span>
-                        </div>
-                        <div className="flex items-start gap-2">
-                          <TrendingUp className="text-blue-500 mt-0.5" size={16} />
-                          <span>Leverage: 12 comparable settlements avg. $375K</span>
-                        </div>
+              {/* Report Generation Status */}
+              <div className="bg-white dark:bg-gray-900 border border-gray-200 rounded-xl p-6">
+                <h4 className="text-lg font-semibold mb-4">Phase II ESA Report - Auto-Generation Complete</h4>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <CheckCircle className="text-green-600" size={24} />
+                      <div>
+                        <p className="font-medium">Executive Summary</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Generated in 45 seconds</p>
                       </div>
                     </div>
-                    
-                    <div className="bg-white dark:bg-gray-900 rounded-lg p-4">
-                      <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Success Indicators</h4>
-                      <div className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                          <span className="text-gray-600 dark:text-gray-400">Negotiation Success:</span>
-                          <span className="font-semibold text-green-600">94%</span>
-                        </div>
-                        <div className="flex justify-between text-sm">
-                          <span className="text-gray-600 dark:text-gray-400">Expected Settlement:</span>
-                          <span className="font-semibold text-gray-900 dark:text-gray-100">$340K - $365K</span>
-                        </div>
-                        <div className="flex justify-between text-sm">
-                          <span className="text-gray-600 dark:text-gray-400">Time to Settlement:</span>
-                          <span className="font-semibold text-blue-600">12-18 days</span>
-                        </div>
-                      </div>
-                    </div>
+                    <span className="text-sm font-medium text-green-600">AI Confidence: 96%</span>
                   </div>
-                </div>
-
-                {/* Evidence Strength Analyzer */}
-                <div className="bg-white dark:bg-gray-900 border border-gray-200 rounded-xl p-6">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
-                    <FileSearch className="text-gray-600 dark:text-gray-400" size={20} />
-                    Evidence Strength Analyzer
-                  </h3>
-                  <div className="space-y-4">
-                    <div className="bg-white dark:bg-gray-900 rounded-lg p-4">
-                      <div className="flex items-center justify-between mb-3">
-                        <h4 className="font-semibold text-gray-900 dark:text-gray-100">Documentation Score</h4>
-                        <span className="text-xl sm:text-2xl font-bold text-green-600">87%</span>
+                  <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <CheckCircle className="text-green-600" size={24} />
+                      <div>
+                        <p className="font-medium">Site Background & History</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">RAG: Referenced 12 similar brownfield projects</p>
                       </div>
-                      <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2 mb-2">
-                        <div className="bg-blue-500 h-2 rounded-full" style={{ width: '87%' }}></div>
+                    </div>
+                    <span className="text-sm font-medium text-green-600">AI Confidence: 92%</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <CheckCircle className="text-green-600" size={24} />
+                      <div>
+                        <p className="font-medium">Contamination Analysis</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Auto-interpreted lab results vs MECP Table 3</p>
                       </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Strong evidence package with room for improvement</p>
                     </div>
-
-                    <div className="space-y-2">
-                      {[
-                        { item: 'Photo Documentation', status: 'Complete', score: 95 },
-                        { item: 'Professional Inspection', status: 'Complete', score: 92 },
-                        { item: 'Repair Estimates', status: 'Complete', score: 88 },
-                        { item: 'Weather Report', status: 'Missing', score: 0 },
-                        { item: 'Comparable Claims', status: 'Partial', score: 60 }
-                      ].map((evidence, index) => (
-                        <div key={index} className="bg-white dark:bg-gray-900 rounded-lg p-3">
-                          <div className="flex items-center justify-between">
-                            <div className="flex-1">
-                              <p className="font-medium text-sm text-gray-900 dark:text-gray-100">{evidence.item}</p>
-                              <p className={`text-xs ${
-                                evidence.status === 'Complete' ? 'text-green-600' :
-                                evidence.status === 'Partial' ? 'text-yellow-600' :
-                                'text-red-600'
-                              }`}>
-                                {evidence.status}
-                              </p>
-                            </div>
-                            <div className="text-right">
-                              <span className={`text-sm font-bold ${
-                                evidence.score >= 80 ? 'text-green-600' :
-                                evidence.score >= 50 ? 'text-yellow-600' :
-                                'text-red-600'
-                              }`}>
-                                {evidence.score}%
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
+                    <span className="text-sm font-medium text-green-600">AI Confidence: 89%</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200">
+                    <div className="flex items-center gap-3">
+                      <AlertCircle className="text-yellow-600" size={24} />
+                      <div>
+                        <p className="font-medium">Regulatory Compliance Statement</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Flagged for P.Eng review - regulatory interpretation</p>
+                      </div>
                     </div>
-
-                    <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3 border border-gray-200">
-                      <p className="text-sm text-gray-700 dark:text-gray-300">
-                        <strong>Improvement Tip:</strong> Add weather report (+8%) and complete comparables (+5%) to reach 95% documentation score
-                      </p>
-                    </div>
+                    <span className="text-sm font-medium text-yellow-600">Human QA Required</span>
                   </div>
                 </div>
               </div>
 
-              {/* Quick Actions */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <Button className="w-full justify-between bg-scc-red hover:bg-red-600" size="lg">
-                  <span className="font-medium">Generate Demand Package</span>
-                  <Send className="w-4 h-4" />
-                </Button>
-                <Button className="w-full justify-between" variant="outline" size="lg">
-                  <span className="font-medium">Export Full Report</span>
-                  <Download className="w-4 h-4" />
-                </Button>
-                <Button className="w-full justify-between" variant="outline" size="lg">
-                  <span className="font-medium">Schedule Re-inspection</span>
-                  <Calendar className="w-4 h-4" />
-                </Button>
+              {/* RAG Knowledge Base */}
+              <div className="bg-white dark:bg-gray-900 border border-gray-200 rounded-xl p-6">
+                <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                  <Brain className="text-blue-600" size={20} />
+                  AI Knowledge Base - Cross-Project Insights
+                </h4>
+                <div className="space-y-3">
+                  <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
+                    <p className="text-sm font-medium text-blue-900 dark:text-blue-100 mb-2">Referenced Similar Projects (12 found)</p>
+                    <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
+                      <li>• PROJ-2018-045: Cambridge brownfield - similar metal fabrication history</li>
+                      <li>• PROJ-2020-112: Guelph industrial - PHC remediation approach applied</li>
+                      <li>• PROJ-2019-087: Waterloo manufacturing - delineation sampling protocol</li>
+                    </ul>
+                  </div>
+                  <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
+                    <p className="text-sm font-medium text-green-900 dark:text-green-100 mb-2">Best Practice Recommendations</p>
+                    <p className="text-sm text-green-800 dark:text-green-200">Based on historical success: Recommend targeted excavation over in-situ treatment (cost savings: $25K-$40K, timeline reduction: 3-4 weeks)</p>
+                  </div>
+                </div>
               </div>
             </div>
           )}
@@ -1056,13 +904,13 @@ export default function ProjectDetailPage() {
           {activeTab === 'timeline' && (
             <div className="space-y-6">
               <SectionHeader
-                title="Claim Timeline"
-                description="Complete activity history and claim progress"
+                title="Project Timeline"
+                description="Complete activity history and project milestones"
                 actions={[
                   {
                     label: "Add Event",
                     icon: Plus,
-                    className: "bg-scc-red hover:bg-red-600 text-white"
+                    className: "bg-dillon-green hover:bg-dillon-green-dark text-white"
                   },
                   {
                     label: "Generate Report",
@@ -1206,7 +1054,7 @@ export default function ProjectDetailPage() {
                 <p className="text-sm text-green-800">Great progress! Photos and core documents are complete.</p>
               </div>
 
-              {/* Documents Grid - 5 Cards including Inspection Status */}
+              {/* Documents Grid - 5 Cards including Assessment Status */}
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
                 {/* Damage Documentation Card */}
                 <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-5">
@@ -1464,26 +1312,26 @@ export default function ProjectDetailPage() {
                   </div>
                 </div>
 
-                {/* Inspection Status Card */}
+                {/* Assessment Status Card */}
                 <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-5">
                   <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                     <Camera className="text-gray-600" size={20} />
-                    Inspection Status
+                    Assessment Status
                   </h4>
                   <div className="space-y-4">
                     {/* Status Badge */}
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-600 dark:text-gray-400">Status:</span>
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        project.inspection.status === 'Scheduled'
+                        project.assessment.status === 'Scheduled'
                           ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
-                          : project.inspection.status === 'In Progress'
+                          : project.assessment.status === 'In Progress'
                           ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
-                          : project.inspection.status === 'Completed'
+                          : project.assessment.status === 'Completed'
                           ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
                           : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-400'
                       }`}>
-                        {project.inspection.status}
+                        {project.assessment.status}
                       </span>
                     </div>
 
@@ -1502,27 +1350,27 @@ export default function ProjectDetailPage() {
                       <div className="flex items-center gap-2 text-sm">
                         <User className="text-gray-500" size={16} />
                         <span className="text-gray-600 dark:text-gray-400">Inspector:</span>
-                        <span className="font-medium text-gray-900 dark:text-gray-100">{project.inspection.inspector}</span>
+                        <span className="font-medium text-gray-900 dark:text-gray-100">{project.assessment.inspector}</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm">
                         <FileText className="text-gray-500" size={16} />
                         <span className="text-gray-600 dark:text-gray-400">Type:</span>
-                        <span className="font-medium text-gray-900 dark:text-gray-100">{project.inspection.type}</span>
+                        <span className="font-medium text-gray-900 dark:text-gray-100">{project.assessment.type}</span>
                       </div>
                     </div>
 
                     {/* Action Buttons */}
                     <div className="pt-2 space-y-2">
-                      {project.inspection.status === 'Scheduled' && (
+                      {project.assessment.status === 'Scheduled' && (
                         <Link
-                          href={`/dashboard/inspection/INS-002/start`}
+                          href={`/dashboard/assessments/ASM-002/start`}
                           className="w-full px-4 py-2 bg-scc-red text-white rounded-lg hover:bg-red-600 transition flex items-center justify-center gap-2 text-sm font-medium"
                         >
                           <Camera size={16} />
-                          Start Inspection
+                          Start Assessment
                         </Link>
                       )}
-                      {project.inspection.status === 'In Progress' && (
+                      {project.assessment.status === 'In Progress' && (
                         <>
                           <div className="mb-2">
                             <div className="flex items-center justify-between text-sm mb-1">
@@ -1534,24 +1382,24 @@ export default function ProjectDetailPage() {
                             </div>
                           </div>
                           <Link
-                            href={`/dashboard/inspection/INS-002/continue`}
+                            href={`/dashboard/assessments/ASM-002/continue`}
                             className="w-full px-4 py-2 bg-scc-red text-white rounded-lg hover:bg-red-600 transition flex items-center justify-center gap-2 text-sm font-medium"
                           >
                             <Camera size={16} />
-                            Continue Inspection
+                            Continue Assessment
                           </Link>
                         </>
                       )}
-                      {project.inspection.status === 'Completed' && (
+                      {project.assessment.status === 'Completed' && (
                         <Link
-                          href={`/dashboard/inspection/INS-002/report`}
+                          href={`/dashboard/assessments/ASM-002/report`}
                           className="w-full px-4 py-2 bg-scc-red text-white rounded-lg hover:bg-red-600 transition flex items-center justify-center gap-2 text-sm font-medium"
                         >
                           <FileText size={16} />
                           View Report
                         </Link>
                       )}
-                      {!project.inspection.status || project.inspection.status === 'Not Scheduled' && (
+                      {!project.assessment.status || project.assessment.status === 'Not Scheduled' && (
                         <Link
                           href={`/dashboard/inspection/new?projectId=${project.id}`}
                           className="w-full px-4 py-2 bg-scc-red text-white rounded-lg hover:bg-red-600 transition flex items-center justify-center gap-2 text-sm font-medium"
@@ -1573,269 +1421,6 @@ export default function ProjectDetailPage() {
                 <Button className="bg-scc-red hover:bg-red-600 text-white">
                   Download All as ZIP
                 </Button>
-              </div>
-            </div>
-          )}
-
-          {/* Settlement Negotiation Tab */}
-          {activeTab === 'settlement' && (
-            <div className="space-y-6">
-              {/* Success Metrics Dashboard */}
-              <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 rounded-lg p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Settlement Success Indicators</h3>
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">High Probability</span>
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-                  <div className="text-center p-3 bg-white dark:bg-gray-900 rounded-lg">
-                    <p className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-100">94%</p>
-                    <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-1">Win Probability</p>
-                  </div>
-                  <div className="text-center p-3 bg-white dark:bg-gray-900 rounded-lg">
-                    <p className="text-xl md:text-2xl lg:text-3xl font-bold text-scc-red">$385K</p>
-                    <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-1">Optimal Demand</p>
-                  </div>
-                  <div className="text-center p-3 bg-white dark:bg-gray-900 rounded-lg">
-                    <div className="flex flex-col">
-                      <span className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900 dark:text-gray-100">$340K-</span>
-                      <span className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900 dark:text-gray-100 -mt-1">$365K</span>
-                    </div>
-                    <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-1">Expected Range</p>
-                  </div>
-                  <div className="text-center p-3 bg-white dark:bg-gray-900 rounded-lg">
-                    <p className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-100">+$170K</p>
-                    <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-1">Above Initial Offer</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Power Negotiation Arsenal */}
-              <div className="bg-white dark:bg-gray-900 border border-gray-200 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
-                  <Target className="text-scc-red" size={20} />
-                  Power Negotiation Arsenal
-                </h3>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <div className="space-y-4">
-                    <div className="bg-white dark:bg-gray-900 p-4 rounded-lg border border-gray-200">
-                      <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center flex-shrink-0">
-                          <TrendingUp className="text-gray-600 dark:text-gray-400" size={16} />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="font-semibold text-gray-900 dark:text-gray-100">Market Data Leverage</h4>
-                          <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">12 comparable settlements in 2-mile radius</p>
-                          <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
-                            <li>• Average settlement: $375K (similar damage)</li>
-                            <li>• Highest: $420K (Miami Beach, 2023)</li>
-                            <li>• Your demand is 8% below market average</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-white dark:bg-gray-900 p-4 rounded-lg border border-gray-200">
-                      <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center flex-shrink-0">
-                          <Building2 className="text-gray-600 dark:text-gray-400" size={16} />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="font-semibold text-gray-900 dark:text-gray-100">Code Upgrade Goldmine</h4>
-                          <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">Building code violations = forced upgrades</p>
-                          <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
-                            <li>• Ordinance & Law Coverage: $45K available</li>
-                            <li>• 2023 wind load requirements not met</li>
-                            <li>• Electrical panel must be upgraded</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-white dark:bg-gray-900 p-4 rounded-lg border border-gray-200">
-                      <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center flex-shrink-0">
-                          <Briefcase className="text-gray-600 dark:text-gray-400" size={16} />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="font-semibold text-gray-900 dark:text-gray-100">Business Interruption Ace</h4>
-                          <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">Lost revenue documentation is airtight</p>
-                          <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
-                            <li>• $45K per month documented loss</li>
-                            <li>• 3-month closure minimum</li>
-                            <li>• Additional living expenses covered</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="bg-white dark:bg-gray-900 p-4 rounded-lg border border-gray-200">
-                      <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center flex-shrink-0">
-                          <History className="text-gray-600 dark:text-gray-400" size={16} />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="font-semibold text-gray-900 dark:text-gray-100">Insurer Track Record</h4>
-                          <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">State Farm's settlement patterns</p>
-                          <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
-                            <li>• Average 2.3 rounds to settle</li>
-                            <li>• Typically counters at 70% of demand</li>
-                            <li>• Weakest on ordinance & law coverage</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-white dark:bg-gray-900 p-4 rounded-lg border border-gray-200">
-                      <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center flex-shrink-0">
-                          <AlertTriangle className="text-gray-600 dark:text-gray-400" size={16} />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="font-semibold text-gray-900 dark:text-gray-100">Pressure Points</h4>
-                          <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">Time-sensitive leverage factors</p>
-                          <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
-                            <li>• Adjuster Sarah Thompson: 89% approval rate</li>
-                            <li>• Q1 settlement quota pressure</li>
-                            <li>• Hurricane season approaching</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-white dark:bg-gray-900 p-4 rounded-lg border border-gray-200">
-                      <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center flex-shrink-0">
-                          <Shield className="text-gray-600 dark:text-gray-400" size={16} />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="font-semibold text-gray-900 dark:text-gray-100">Legal Threat Level</h4>
-                          <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">Litigation readiness assessment</p>
-                          <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
-                            <li>• Bad faith potential: Medium-High</li>
-                            <li>• Statute limitations: 18 months left</li>
-                            <li>• Attorney fees recoverable</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Tactical Negotiation Playbook */}
-              <div className="bg-scc-red/10 border border-scc-red/30 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
-                  <Zap className="text-scc-red" size={20} />
-                  Tactical Negotiation Playbook
-                </h3>
-                <div className="space-y-4">
-                  <div className="bg-white dark:bg-gray-900 rounded-lg p-4 border-l-4 border-scc-red">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="font-semibold text-gray-900 dark:text-gray-100">Phase 1: Opening Move Strategy</h4>
-                      <span className="px-2 py-1 bg-scc-red text-white rounded text-xs font-medium">Start Strong</span>
-                    </div>
-                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">Lead with strength - establish credibility and set high anchor</p>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                      <div className="bg-gray-50 dark:bg-gray-900 p-3 rounded border border-gray-200">
-                        <p className="text-xs font-medium text-gray-900 dark:text-gray-100 mb-1">Key Message</p>
-                        <p className="text-xs text-gray-700 dark:text-gray-300">"12 comparable settlements average $375K"</p>
-                      </div>
-                      <div className="bg-gray-50 dark:bg-gray-900 p-3 rounded border border-gray-200">
-                        <p className="text-xs font-medium text-gray-900 dark:text-gray-100 mb-1">Evidence Lead</p>
-                        <p className="text-xs text-gray-700 dark:text-gray-300">"Code violations require $45K upgrades"</p>
-                      </div>
-                      <div className="bg-gray-50 dark:bg-gray-900 p-3 rounded border border-gray-200">
-                        <p className="text-xs font-medium text-gray-900 dark:text-gray-100 mb-1">Urgency Factor</p>
-                        <p className="text-xs text-gray-700 dark:text-gray-300">"Business losing $45K per month"</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-white dark:bg-gray-900 rounded-lg p-4 border-l-4 border-scc-red">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="font-semibold text-gray-900 dark:text-gray-100">Phase 2: Counter-Attack Responses</h4>
-                      <span className="px-2 py-1 bg-scc-red text-white rounded text-xs font-medium">Defend & Counter</span>
-                    </div>
-                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">Anticipated objections and killer responses</p>
-                    <div className="space-y-2">
-                      <div className="flex items-start gap-3 bg-gray-50 dark:bg-gray-900 p-3 rounded border">
-                        <div className="text-xs font-medium text-gray-900 dark:text-gray-100 min-w-[80px]">If they say:</div>
-                        <div className="text-xs text-gray-700 dark:text-gray-300 flex-1">"Policy limits don't cover code upgrades"</div>
-                        <div className="text-xs font-medium text-scc-red min-w-[80px]">You respond:</div>
-                        <div className="text-xs text-gray-700 dark:text-gray-300 flex-1">"Ordinance & Law endorsement clearly states..."</div>
-                      </div>
-                      <div className="flex items-start gap-3 bg-gray-50 dark:bg-gray-900 p-3 rounded border">
-                        <div className="text-xs font-medium text-gray-900 dark:text-gray-100 min-w-[80px]">If they say:</div>
-                        <div className="text-xs text-gray-700 dark:text-gray-300 flex-1">"Market comparables are too high"</div>
-                        <div className="text-xs font-medium text-scc-red min-w-[80px]">You respond:</div>
-                        <div className="text-xs text-gray-700 dark:text-gray-300 flex-1">"Here's identical property on Ocean Drive..."</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-white dark:bg-gray-900 rounded-lg p-4 border-l-4 border-scc-red">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="font-semibold text-gray-900 dark:text-gray-100">Phase 3: Closing Techniques</h4>
-                      <span className="px-2 py-1 bg-scc-red text-white rounded text-xs font-medium">Close Deal</span>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="bg-gray-50 dark:bg-gray-900 p-3 rounded border">
-                        <p className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Scarcity Close</p>
-                        <p className="text-xs text-gray-600 dark:text-gray-400">"Hurricane season starts in 6 weeks - contractor availability will disappear"</p>
-                      </div>
-                      <div className="bg-gray-50 dark:bg-gray-900 p-3 rounded border">
-                        <p className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Authority Close</p>
-                        <p className="text-xs text-gray-600 dark:text-gray-400">"State regulations require we notify DOI if settlement under $340K"</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Action Center */}
-              <div className="bg-white dark:bg-gray-900 border rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Negotiation Command Center</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-3">Ready to Execute</h4>
-                    <div className="space-y-2">
-                      <Button className="w-full justify-between bg-scc-red hover:bg-red-600" size="lg">
-                        Send Demand Letter
-                        <Send className="w-4 h-4" />
-                      </Button>
-                      <Button className="w-full justify-between" variant="secondary" size="lg">
-                        Schedule Settlement Conference
-                        <Calendar className="w-4 h-4" />
-                      </Button>
-                      <Button className="w-full justify-between" variant="secondary" size="lg">
-                        Generate Negotiation Script
-                        <FileText className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-3">Timeline Status</h4>
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3">
-                        <CheckCircle className="text-scc-red" size={16} />
-                        <span className="text-sm">Demand sent (Mar 12)</span>
-                        <span className="text-xs text-gray-500 dark:text-gray-400 ml-auto">✓ Complete</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Clock className="text-gray-500 dark:text-gray-400" size={16} />
-                        <span className="text-sm">Response due (Mar 19)</span>
-                        <span className="text-xs text-gray-600 dark:text-gray-400 ml-auto">5 days left</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Calendar className="text-gray-400" size={16} />
-                        <span className="text-sm text-gray-400">Conference TBD</span>
-                        <span className="text-xs text-gray-400 ml-auto">Pending</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           )}

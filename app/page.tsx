@@ -9,7 +9,7 @@ export default function Home() {
   useEffect(() => {
     // Use replace instead of push to prevent back button issues
     // and add immediate navigation
-    router.replace('/dashboard/inspection')
+    router.replace('/dashboard/assessments')
   }, [])
 
   // Show a simple loading message while redirecting
