@@ -203,7 +203,7 @@ export default function ContinueInspectionPage() {
             <div className="flex items-center justify-between mb-3">
               <div>
                 <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  Continue Inspection
+                  Continue Assessment
                 </h1>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                   {inspectionSummary?.propertyAddress || 'Loading...'}

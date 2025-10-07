@@ -259,7 +259,7 @@ export default function InspectionStartPage() {
             </Link>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 dark:text-gray-100">
-                Inspection Setup
+                Assessment Setup
               </h1>
               <div className="flex items-center gap-2 flex-shrink-0">
               {!isEditMode ? (
@@ -527,13 +527,13 @@ export default function InspectionStartPage() {
                   </div>
                 </div>
 
-                {/* Inspection Setup */}
+                {/* Assessment Setup */}
                 <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 p-6">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="p-3 bg-scc-red/10 rounded-lg">
                       <Camera className="text-scc-red" size={24} />
                     </div>
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Inspection Setup</h2>
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Assessment Setup</h2>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-8">
