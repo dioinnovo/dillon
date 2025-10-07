@@ -646,7 +646,7 @@ export default function InspectionReportPage() {
             Please complete the approval process to view the final report.
           </p>
           <Link
-            href={`/dashboard/inspection/${inspectionId}/review`}
+            href={`/dashboard/assessments/${inspectionId}/review`}
             className="inline-flex items-center gap-2 px-6 py-3 bg-scc-red text-white rounded-lg hover:bg-scc-red-dark transition-colors"
           >
             <ArrowLeft size={20} />
@@ -666,7 +666,7 @@ export default function InspectionReportPage() {
           <div className="flex flex-col gap-3">
             {/* Back Navigation */}
             <Link
-              href={claimId ? `/dashboard/projects/${claimId}` : `/dashboard/inspection/${inspectionId}/review`}
+              href={claimId ? `/dashboard/projects/${claimId}` : `/dashboard/assessments/${inspectionId}/review`}
               className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-100 transition-colors w-fit"
             >
               <ArrowLeft size={20} />

@@ -77,7 +77,7 @@ export default function SiteAssessmentAreasPage() {
       if (area.status === 'not_started') {
         markAreaInProgress(area.id)
       }
-      router.push(`/dashboard/inspection/${inspectionId}/area/${area.id}`)
+      router.push(`/dashboard/assessments/${inspectionId}/area/${area.id}`)
     }
   }
 
@@ -92,10 +92,10 @@ export default function SiteAssessmentAreasPage() {
     if (nextIndex < inspectionData.areas.length) {
       setCurrentIndex(nextIndex)
       const nextArea = inspectionData.areas[nextIndex]
-      router.push(`/dashboard/inspection/${inspectionId}/area/${nextArea.id}`)
+      router.push(`/dashboard/assessments/${inspectionId}/area/${nextArea.id}`)
     } else {
       // All areas done, go to review
-      router.push(`/dashboard/inspection/${inspectionId}/review`)
+      router.push(`/dashboard/assessments/${inspectionId}/review`)
     }
   }
 
@@ -110,15 +110,15 @@ export default function SiteAssessmentAreasPage() {
     if (nextIndex < inspectionData.areas.length) {
       setCurrentIndex(nextIndex)
       const nextArea = inspectionData.areas[nextIndex]
-      router.push(`/dashboard/inspection/${inspectionId}/area/${nextArea.id}`)
+      router.push(`/dashboard/assessments/${inspectionId}/area/${nextArea.id}`)
     } else {
       // All areas done, go to review
-      router.push(`/dashboard/inspection/${inspectionId}/review`)
+      router.push(`/dashboard/assessments/${inspectionId}/review`)
     }
   }
 
   const handleConfirmInspection = () => {
-    router.push(`/dashboard/inspection/${inspectionId}/review`)
+    router.push(`/dashboard/assessments/${inspectionId}/review`)
   }
 
   if (loading) {
@@ -138,7 +138,7 @@ export default function SiteAssessmentAreasPage() {
         <div className="text-center">
           <p className="text-red-600 mb-4">{error || 'Failed to load assessment data'}</p>
           <button
-            onClick={() => router.push('/dashboard/inspection')}
+            onClick={() => router.push('/dashboard/assessments')}
             className="px-4 py-2 bg-dillon-green text-white rounded-lg hover:bg-dillon-green-dark"
           >
             Back to Assessments

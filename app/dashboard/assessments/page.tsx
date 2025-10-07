@@ -285,7 +285,7 @@ export default function AssessmentListPage() {
         description="AI-powered site assessments and field investigations"
         action={
           <Link
-            href="/dashboard/inspection/new"
+            href="/dashboard/assessments/new"
             className="h-12 px-6 bg-dillon-green text-white rounded-full hover:bg-dillon-green-dark flex items-center justify-center gap-2 w-full sm:w-auto transition-colors font-medium"
           >
             <Plus size={20} />
@@ -404,10 +404,10 @@ export default function AssessmentListPage() {
                 onClick={() => {
                   if (assessment.status === 'in_progress') {
                     // For in-progress assessments, continue the assessment
-                    router.push(`/dashboard/inspection/${assessment.id}/continue`)
+                    router.push(`/dashboard/assessments/${assessment.id}/continue`)
                   } else {
                     // For scheduled assessments, go to start page
-                    router.push(`/dashboard/inspection/${assessment.id}/start`)
+                    router.push(`/dashboard/assessments/${assessment.id}/start`)
                   }
                 }}
               >
@@ -575,7 +575,7 @@ export default function AssessmentListPage() {
                   <div className="pt-3">
                     {assessment.status === 'scheduled' && (
                       <Link
-                        href={`/dashboard/inspection/${assessment.id}/start`}
+                        href={`/dashboard/assessments/${assessment.id}/start`}
                         onClick={(e) => e.stopPropagation()}
                         className="w-full px-4 py-2.5 bg-dillon-green text-white rounded-xl hover:bg-dillon-green-dark transition-all duration-200 flex items-center justify-center gap-2 text-sm font-semibold shadow-sm"
                       >
@@ -585,7 +585,7 @@ export default function AssessmentListPage() {
                     )}
                     {assessment.status === 'in_progress' && (
                       <Link
-                        href={`/dashboard/inspection/${assessment.id}/continue`}
+                        href={`/dashboard/assessments/${assessment.id}/continue`}
                         onClick={(e) => e.stopPropagation()}
                         className="w-full px-4 py-2.5 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-all duration-200 flex items-center justify-center gap-2 text-sm font-semibold shadow-sm"
                       >

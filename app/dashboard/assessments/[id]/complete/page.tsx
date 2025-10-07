@@ -76,7 +76,7 @@ export default function CompleteInspectionPage() {
     sessionStorage.setItem('inspection_reports', JSON.stringify(existingReports))
 
     // Navigate to the review page for approval workflow
-    router.push(`/dashboard/inspection/${inspectionId}/review`)
+    router.push(`/dashboard/assessments/${inspectionId}/review`)
   }
 
   useEffect(() => {

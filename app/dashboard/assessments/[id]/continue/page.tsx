@@ -129,11 +129,11 @@ export default function ContinueInspectionPage() {
 
   const handleResumeInspection = () => {
     // Navigate to the Property Inspection Areas overview page
-    router.push(`/dashboard/inspection/${inspectionId}/areas`)
+    router.push(`/dashboard/assessments/${inspectionId}/areas`)
   }
 
   const handleGeneratePreliminaryReport = () => {
-    router.push(`/dashboard/inspection/${inspectionId}/report?preliminary=true`)
+    router.push(`/dashboard/assessments/${inspectionId}/report?preliminary=true`)
   }
 
   // Create inspection summary from dynamic data
@@ -177,10 +177,10 @@ export default function ContinueInspectionPage() {
         <div className="text-center">
           <p className="text-red-600 mb-4">{error || 'Failed to load inspection data'}</p>
           <button
-            onClick={() => router.push('/dashboard/inspection')}
+            onClick={() => router.push('/dashboard/assessments')}
             className="px-4 py-2 bg-scc-red text-white rounded-lg hover:bg-scc-red-dark cursor-pointer"
           >
-            Back to Inspections
+            Back to Assessments
           </button>
         </div>
       </div>
@@ -194,11 +194,11 @@ export default function ContinueInspectionPage() {
         <div className="max-w-7xl mx-auto py-4 px-4">
           <div>
             <Link
-              href="/dashboard/inspection"
+              href="/dashboard/assessments"
               className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-100 transition-colors mb-3"
             >
               <ArrowLeft size={20} />
-              <span>Back to Inspections</span>
+              <span>Back to Assessments</span>
             </Link>
             <div className="flex items-center justify-between mb-3">
               <div>
@@ -244,7 +244,7 @@ export default function ContinueInspectionPage() {
             {/* Finish Inspection Button - Moved to header */}
             {progress.percentage >= 50 && (
               <button
-                onClick={() => router.push(`/dashboard/inspection/${inspectionId}/complete`)}
+                onClick={() => router.push(`/dashboard/assessments/${inspectionId}/complete`)}
                 className="w-full px-6 py-2.5 bg-scc-red text-white rounded-full hover:bg-scc-red-dark transition-all flex items-center justify-center gap-2 font-semibold shadow-lg cursor-pointer"
               >
                 <CheckCircle size={18} />
@@ -545,7 +545,7 @@ export default function ContinueInspectionPage() {
                         className={`border rounded-xl p-4 cursor-pointer transition-all hover:shadow-md ${
                           area.status === 'completed' ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200'
                         }`}
-                        onClick={() => router.push(`/dashboard/inspection/${inspectionId}/area/${area.id}`)}
+                        onClick={() => router.push(`/dashboard/assessments/${inspectionId}/area/${area.id}`)}
                       >
                         <div className="flex items-start justify-between mb-2">
                           <div>
@@ -794,7 +794,7 @@ export default function ContinueInspectionPage() {
                               </span>
                             </div>
                             <button
-                              onClick={() => router.push(`/dashboard/inspection/${inspectionId}/area/${area.id}`)}
+                              onClick={() => router.push(`/dashboard/assessments/${inspectionId}/area/${area.id}`)}
                               className="text-sm text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1 group cursor-pointer"
                             >
                               View Details

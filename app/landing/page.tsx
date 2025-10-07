@@ -77,7 +77,7 @@ export default function LandingPage() {
               <Link href="#features" className="text-gray-600 hover:text-gray-900 dark:text-gray-100">Features</Link>
               <Link href="#testimonials" className="text-gray-600 hover:text-gray-900 dark:text-gray-100">Testimonials</Link>
               <Link href="/pricing" className="text-gray-600 hover:text-gray-900 dark:text-gray-100">Pricing</Link>
-              <Link href="/dashboard/inspection" className="bg-scc-red text-white px-4 py-2 rounded-lg hover:bg-scc-red-dark transition">
+              <Link href="/dashboard/assessments" className="bg-scc-red text-white px-4 py-2 rounded-lg hover:bg-scc-red-dark transition">
                 Get Started
               </Link>
             </div>
@@ -103,7 +103,7 @@ export default function LandingPage() {
                 accelerates processing, and increases settlement values by 20-30%.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/dashboard/inspection" className="inline-flex items-center justify-center gap-2 bg-scc-red text-white px-6 py-3 rounded-lg hover:bg-scc-red-dark transition font-semibold">
+                <Link href="/dashboard/assessments" className="inline-flex items-center justify-center gap-2 bg-scc-red text-white px-6 py-3 rounded-lg hover:bg-scc-red-dark transition font-semibold">
                   Start Free Trial
                   <ArrowRight className="h-5 w-5" />
                 </Link>
@@ -297,7 +297,7 @@ export default function LandingPage() {
             Join thousands of adjusters who are settling claims faster and for higher amounts with SCC Intelligence.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/dashboard/inspection" className="inline-flex items-center justify-center gap-2 bg-white dark:bg-gray-900 text-scc-red px-8 py-4 rounded-lg hover:bg-red-50 transition font-semibold">
+            <Link href="/dashboard/assessments" className="inline-flex items-center justify-center gap-2 bg-white dark:bg-gray-900 text-scc-red px-8 py-4 rounded-lg hover:bg-red-50 transition font-semibold">
               Start Free Trial
               <ArrowRight className="h-5 w-5" />
             </Link>

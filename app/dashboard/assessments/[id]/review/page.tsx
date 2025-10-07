@@ -502,7 +502,7 @@ export default function InspectionReviewPage() {
     setIsGeneratingReport(false)
 
     // Navigate to report page
-    router.push(`/dashboard/inspection/${inspectionId}/report`)
+    router.push(`/dashboard/assessments/${inspectionId}/report`)
   }
 
   const handleApproveReport = async () => {
@@ -554,7 +554,7 @@ export default function InspectionReviewPage() {
     setIsGeneratingReport(false)
 
     // Navigate to approved report page
-    router.push(`/dashboard/inspection/${inspectionId}/report`)
+    router.push(`/dashboard/assessments/${inspectionId}/report`)
   }
 
   const handleDownloadReport = async () => {
@@ -646,11 +646,11 @@ export default function InspectionReviewPage() {
           <div className="flex flex-col gap-2">
             {/* Back Navigation */}
             <Link 
-              href={`/dashboard/inspection`}
+              href={`/dashboard/assessments`}
               className="flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-100 cursor-pointer w-fit"
             >
               <ArrowLeft size={20} />
-              Back to Inspections
+              Back to Assessments
             </Link>
             
             {/* Title Section */}
@@ -684,7 +684,7 @@ export default function InspectionReviewPage() {
               {/* Action Buttons Row - Below Title */}
               <div className="hidden md:flex items-center gap-3">
                 <Link
-                  href={`/dashboard/inspection/${inspectionId}/areas`}
+                  href={`/dashboard/assessments/${inspectionId}/areas`}
                   className="flex items-center gap-2 text-gray-700 hover:text-gray-900 dark:text-gray-100 cursor-pointer"
                 >
                   <Edit3 size={18} />
@@ -846,7 +846,7 @@ export default function InspectionReviewPage() {
           <div className="block md:hidden border-b border-gray-200 dark:border-gray-700 px-3 py-3 space-y-2">
             <div className="grid grid-cols-2 gap-2">
               <Link
-                href={`/dashboard/inspection/${inspectionId}/areas`}
+                href={`/dashboard/assessments/${inspectionId}/areas`}
                 className="flex items-center justify-center gap-2 py-2 px-2 bg-gray-100 dark:bg-gray-800 text-gray-700 hover:text-gray-900 rounded-lg cursor-pointer text-sm"
               >
                 <Edit3 size={16} />

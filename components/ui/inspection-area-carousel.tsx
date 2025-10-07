@@ -239,7 +239,7 @@ export function InspectionAreaCarousel({
           {/* Back button */}
           {inspectionId && (
             <button
-              onClick={() => router.push(`/dashboard/inspection/${inspectionId}/continue`)}
+              onClick={() => router.push(`/dashboard/assessments/${inspectionId}/continue`)}
               className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition mb-3"
             >
               <ArrowLeft size={20} />
@@ -276,7 +276,7 @@ export function InspectionAreaCarousel({
             onClick={() => {
               // Navigate to complete assessment page which triggers animation and report generation
               if (inspectionId) {
-                router.push(`/dashboard/inspection/${inspectionId}/complete`)
+                router.push(`/dashboard/assessments/${inspectionId}/complete`)
               } else {
                 console.warn('No assessment ID provided for completion')
               }

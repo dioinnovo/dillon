@@ -240,7 +240,7 @@ export default function ReportReviewPage() {
           </button>
 
           <button
-            onClick={() => router.push(`/dashboard/inspection/${report.id}/report`)}
+            onClick={() => router.push(`/dashboard/assessments/${report.id}/report`)}
             className="flex items-center justify-center gap-2 px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition"
           >
             <Eye className="w-5 h-5" />

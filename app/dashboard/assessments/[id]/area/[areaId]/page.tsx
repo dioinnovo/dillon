@@ -533,9 +533,9 @@ export default function AreaInspectionPage() {
     }
 
     if (nextArea) {
-      router.push(`/dashboard/inspection/${inspectionId}/area/${nextArea.id}`)
+      router.push(`/dashboard/assessments/${inspectionId}/area/${nextArea.id}`)
     } else {
-      router.push(`/dashboard/inspection/${inspectionId}/review`)
+      router.push(`/dashboard/assessments/${inspectionId}/review`)
     }
   }
 
@@ -554,9 +554,9 @@ export default function AreaInspectionPage() {
     }
     
     if (nextArea) {
-      router.push(`/dashboard/inspection/${inspectionId}/area/${nextArea.id}`)
+      router.push(`/dashboard/assessments/${inspectionId}/area/${nextArea.id}`)
     } else {
-      router.push(`/dashboard/inspection/${inspectionId}/review`)
+      router.push(`/dashboard/assessments/${inspectionId}/review`)
     }
   }
 
@@ -574,7 +574,7 @@ export default function AreaInspectionPage() {
       setExpandedAreaId(area.id)
     } else {
       // Navigate to the specific area inspection page when a different card is clicked
-      router.push(`/dashboard/inspection/${inspectionId}/area/${area.id}`)
+      router.push(`/dashboard/assessments/${inspectionId}/area/${area.id}`)
       // The navigation will be handled by the useEffect when the URL changes
     }
   }
@@ -582,7 +582,7 @@ export default function AreaInspectionPage() {
   // Handle navigate back to cards
   const handleNavigateBack = () => {
     // Navigate to the areas overview page with current area as query parameter
-    router.push(`/dashboard/inspection/${inspectionId}/areas?area=${areaId}`)
+    router.push(`/dashboard/assessments/${inspectionId}/areas?area=${areaId}`)
   }
 
   return (

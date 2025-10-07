@@ -239,7 +239,7 @@ export default function InspectionStartPage() {
     const firstArea = claimData?.property.type === 'residential' 
       ? 'exterior-roof' 
       : 'exterior-building'
-    router.push(`/dashboard/inspection/${inspectionId}/area/${firstArea}`)
+    router.push(`/dashboard/assessments/${inspectionId}/area/${firstArea}`)
   }
 
   const isFormValid = claimData && inspectionSetup.scheduledDate && inspectionSetup.scheduledTime
@@ -251,11 +251,11 @@ export default function InspectionStartPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
           <div className="space-y-4">
             <Link
-              href="/dashboard/inspection"
+              href="/dashboard/assessments"
               className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-100 transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
-              <span className="text-sm sm:text-base">Back to Inspections</span>
+              <span className="text-sm sm:text-base">Back to Assessments</span>
             </Link>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 dark:text-gray-100">

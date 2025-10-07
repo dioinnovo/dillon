@@ -1401,7 +1401,7 @@ export default function ProjectDetailPage() {
                       )}
                       {!project.assessment.status || project.assessment.status === 'Not Scheduled' && (
                         <Link
-                          href={`/dashboard/inspection/new?projectId=${project.id}`}
+                          href={`/dashboard/assessments/new?projectId=${project.id}`}
                           className="w-full px-4 py-2 bg-scc-red text-white rounded-lg hover:bg-red-600 transition flex items-center justify-center gap-2 text-sm font-medium"
                         >
                           <Calendar size={16} />
